@@ -80,7 +80,7 @@
         <button class="pvh-desktop pv-allbtn pv-allbtn-light" onClick="{{ toggleLang }}" style="border-radius:30px;">
           <span class="pv-allbtn-in" style="justify-content:center;padding:10px 24px;color:#fff;font-size:13.5px;font-weight:600;line-height:1;">{{ otherLangLabel }}</span>
         </button>
-        <a class="pvh-cta pvh-desktop" href="Contact.dc.html" onClick="{{ openDemo }}" aria-haspopup="dialog" style="display:inline-flex;align-items:center;gap:8px;box-sizing:border-box;background:#fff;color:#0a0a0a;border:none;padding-block:10px;padding-inline-start:24px;padding-inline-end:20px;border-radius:30px;font-size:13.5px;font-weight:600;white-space:nowrap;line-height:1;" style-hover="background:#e6e6e6;"><span style="line-height:1;">{{ t.demo }}</span><svg class="pv-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg></a>
+        <a class="pvh-cta pvh-desktop" href="contact" onClick="{{ openDemo }}" aria-haspopup="dialog" style="display:inline-flex;align-items:center;gap:8px;box-sizing:border-box;background:#fff;color:#0a0a0a;border:none;padding-block:10px;padding-inline-start:24px;padding-inline-end:20px;border-radius:30px;font-size:13.5px;font-weight:600;white-space:nowrap;line-height:1;" style-hover="background:#e6e6e6;"><span style="line-height:1;">{{ t.demo }}</span><svg class="pv-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg></a>
         <div class="pvh-iconbtn pvh-burger" onClick="{{ openMobile }}" style="display:none;align-items:center;justify-content:center;width:40px;height:40px;flex-direction:column;gap:5px;color:#fff;">
           <span style="display:block;width:22px;height:2px;background:currentColor;"></span>
           <span style="display:block;width:22px;height:2px;background:currentColor;"></span>
@@ -149,7 +149,7 @@
           </sc-for>
         </div>
         <div style="padding:18px 22px 36px;display:flex;flex-direction:column;gap:14px;">
-          <a class="pvh-cta" href="Contact.dc.html" onClick="{{ openDemo }}" aria-haspopup="dialog" style="background:#F50115;color:#fff;text-align:center;padding:14px;border-radius:40px;font-size:15px;font-weight:600;">{{ t.demo }}</a>
+          <a class="pvh-cta" href="contact" onClick="{{ openDemo }}" aria-haspopup="dialog" style="background:#F50115;color:#fff;text-align:center;padding:14px;border-radius:40px;font-size:15px;font-weight:600;">{{ t.demo }}</a>
           <button onClick="{{ toggleLang }}" style="background:none;border:1px solid #ccc;color:#333;font-family:'Readex Pro',sans-serif;font-size:14px;font-weight:500;padding:13px;border-radius:40px;cursor:pointer;">{{ otherLangLabel }}</button>
         </div>
       </div>
@@ -311,57 +311,57 @@ class Component extends DCLogic {
       utility: 'Trusted across 500+ facilities in the Kingdom.', demo: 'Request a Demo',
       searchLabel: 'Search', searchPh: 'Search products, platform, news…',
       nav: {
-        solutions: { label: 'Solutions', href: 'Solutions.dc.html', kicker: 'The View Family', title: 'One line that sees what matters', blurb: 'Five systems, one purpose: awareness on every site.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
-          { label: 'The View Family', tag: 'All solutions', href: 'Solutions.dc.html', desc: 'One connected family of safety systems' },
-          { label: 'ProxView', tag: 'PWAS', href: 'ProxView.dc.html', desc: 'Proximity warning around moving equipment' },
-          { label: 'FleetView', tag: 'IVMS', href: 'FleetView.dc.html', desc: 'Vehicle & driver monitoring' },
-          { label: 'TrackView', tag: 'GPS', href: 'TrackView.dc.html', desc: 'GPS vehicle positioning & tracking' },
-          { label: 'AirView', tag: 'AQMS', href: 'AirView.dc.html', desc: 'Air quality monitoring' },
-          { label: 'LiftView', tag: 'LMI', href: 'LiftView.dc.html', desc: 'Load monitoring for cranes' } ] },
-        fleetic: { label: 'Fleetic', href: 'Fleetic.dc.html', mega: false, kicker: 'Powered by Fleetic', title: 'Every Journey, Under Control', blurb: 'The intelligence layer that turns devices into decisions.', img: 'assets/fleetic/brand/fleetic-menu-thumbnail.webp', links: [
-          { label: 'Overview', tag: '', href: 'Fleetic.dc.html', desc: 'The connected platform' },
-          { label: 'Powered by Fleetic', tag: '', href: 'Fleetic.dc.html', desc: 'The branding programme' },
-          { label: 'Login', tag: '', href: 'Fleetic.dc.html', desc: 'Access your dashboard' } ] },
-        newsroom: { label: 'Newsroom', href: 'Newsroom.dc.html', mega: false, kicker: 'Newsroom', title: 'Deployments, insights & updates', blurb: 'The latest from across our network.', img: 'assets/photos/perfect-vision-photo-excavator.webp', links: [
-          { label: 'The Blog', tag: '', href: 'Newsroom.dc.html#pr-news', desc: 'News, announcements & insights' },
-          { label: 'Photo Gallery', tag: '', href: 'Newsroom.dc.html#pr-gallery', desc: 'Deployments in the field' } ] },
-        about: { label: 'About', href: 'About.dc.html', mega: false, kicker: 'About', title: 'Founded in Dammam', blurb: 'A trusted authority in industrial safety technology.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
-          { label: 'Company story', tag: '', href: 'About.dc.html', desc: 'Our origin and mission' },
-          { label: 'Vision 2030', tag: '', href: 'About.dc.html', desc: 'An active national partner' },
-          { label: 'Brand values', tag: '', href: 'About.dc.html', desc: 'Precision \u00b7 Protection \u00b7 Performance' },
-          { label: 'Careers', tag: '', href: 'Careers.dc.html', desc: 'Join the team' } ] },
-        careers: { label: 'Careers', href: 'Careers.dc.html', mega: false },
-        contact: { label: 'Contact', href: 'Contact.dc.html', mega: false }
+        solutions: { label: 'Solutions', href: 'solutions', kicker: 'The View Family', title: 'One line that sees what matters', blurb: 'Five systems, one purpose: awareness on every site.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'The View Family', tag: 'All solutions', href: 'solutions', desc: 'One connected family of safety systems' },
+          { label: 'ProxView', tag: 'PWAS', href: 'proxview', desc: 'Proximity warning around moving equipment' },
+          { label: 'FleetView', tag: 'IVMS', href: 'fleetview', desc: 'Vehicle & driver monitoring' },
+          { label: 'TrackView', tag: 'GPS', href: 'trackview', desc: 'GPS vehicle positioning & tracking' },
+          { label: 'AirView', tag: 'AQMS', href: 'airview', desc: 'Air quality monitoring' },
+          { label: 'LiftView', tag: 'LMI', href: 'liftview', desc: 'Load monitoring for cranes' } ] },
+        fleetic: { label: 'Fleetic', href: 'fleetic', mega: false, kicker: 'Powered by Fleetic', title: 'Every Journey, Under Control', blurb: 'The intelligence layer that turns devices into decisions.', img: 'assets/fleetic/brand/fleetic-menu-thumbnail.webp', links: [
+          { label: 'Overview', tag: '', href: 'fleetic', desc: 'The connected platform' },
+          { label: 'Powered by Fleetic', tag: '', href: 'fleetic', desc: 'The branding programme' },
+          { label: 'Login', tag: '', href: 'fleetic', desc: 'Access your dashboard' } ] },
+        newsroom: { label: 'Newsroom', href: 'newsroom', mega: false, kicker: 'Newsroom', title: 'Deployments, insights & updates', blurb: 'The latest from across our network.', img: 'assets/photos/perfect-vision-photo-excavator.webp', links: [
+          { label: 'The Blog', tag: '', href: 'newsroom#pr-news', desc: 'News, announcements & insights' },
+          { label: 'Photo Gallery', tag: '', href: 'newsroom#pr-gallery', desc: 'Deployments in the field' } ] },
+        about: { label: 'About', href: 'about', mega: false, kicker: 'About', title: 'Founded in Dammam', blurb: 'A trusted authority in industrial safety technology.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'Company story', tag: '', href: 'about', desc: 'Our origin and mission' },
+          { label: 'Vision 2030', tag: '', href: 'about', desc: 'An active national partner' },
+          { label: 'Brand values', tag: '', href: 'about', desc: 'Precision \u00b7 Protection \u00b7 Performance' },
+          { label: 'Careers', tag: '', href: 'careers', desc: 'Join the team' } ] },
+        careers: { label: 'Careers', href: 'careers', mega: false },
+        contact: { label: 'Contact', href: 'contact', mega: false }
       },
-      searchSuggest: [ { label: 'ProxView', href: 'ProxView.dc.html' }, { label: 'Fleetic platform', href: 'Fleetic.dc.html' }, { label: 'Base Line', href: 'Solutions.dc.html' }, { label: 'NEOM', href: 'Industries.dc.html' }, { label: 'Newsroom', href: 'Newsroom.dc.html' } ]
+      searchSuggest: [ { label: 'ProxView', href: 'proxview' }, { label: 'Fleetic platform', href: 'fleetic' }, { label: 'Base Line', href: 'solutions' }, { label: 'NEOM', href: 'industries' }, { label: 'Newsroom', href: 'newsroom' } ]
     };
     const ar = {
       utility: 'محل ثقة أكثر من 500 منشأة في المملكة.', demo: 'اطلب عرضًا',
       searchLabel: 'بحث', searchPh: 'ابحث عن المنتجات والمنصة والأخبار…',
       nav: {
-        solutions: { label: 'الحلول', href: 'Solutions.dc.html', kicker: 'عائلة View', title: 'منظومة واحدة ترى ما يهم', blurb: 'خمسة أنظمة، هدف واحد: الوعي بالخطر في كل موقع.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
-          { label: 'The View Family', tag: 'كل الحلول', href: 'Solutions.dc.html', desc: 'عائلة متكاملة من أنظمة السلامة' },
-          { label: 'ProxView', tag: 'PWAS', href: 'ProxView.dc.html', desc: 'التحذير من الاقتراب' },
-          { label: 'FleetView', tag: 'IVMS', href: 'FleetView.dc.html', desc: 'مراقبة المركبات والسائقين' },
-          { label: 'TrackView', tag: 'GPS', href: 'TrackView.dc.html', desc: 'تتبع مواقع المركبات عبر GPS' },
-          { label: 'AirView', tag: 'AQMS', href: 'AirView.dc.html', desc: 'مراقبة جودة الهواء' },
-          { label: 'LiftView', tag: 'LMI', href: 'LiftView.dc.html', desc: 'مؤشر عزم الحمولة للرافعات' } ] },
-        fleetic: { label: 'Fleetic', href: 'Fleetic.dc.html', mega: false, kicker: 'Powered by Fleetic', title: 'كل رحلة، تحت السيطرة', blurb: 'طبقة الذكاء التي تحوّل بيانات الأجهزة إلى قرارات.', img: 'assets/fleetic/brand/fleetic-menu-thumbnail.webp', links: [
-          { label: 'Overview', tag: '', href: 'Fleetic.dc.html', desc: 'المنصة المتصلة' },
-          { label: 'Powered by Fleetic', tag: '', href: 'Fleetic.dc.html', desc: 'الأجهزة المتصلة بالمنصة' },
-          { label: 'Login', tag: '', href: 'Fleetic.dc.html', desc: 'ادخل إلى لوحة التحكم' } ] },
-        newsroom: { label: 'الأخبار', href: 'Newsroom.dc.html', mega: false, kicker: 'الأخبار', title: 'المشاريع والمقالات', blurb: 'آخر أخبارنا من الميدان.', img: 'assets/photos/perfect-vision-photo-excavator.webp', links: [
-          { label: 'المدونة', tag: '', href: 'Newsroom.dc.html#pr-news', desc: 'الأخبار والمقالات' },
-          { label: 'معرض الصور', tag: '', href: 'Newsroom.dc.html#pr-gallery', desc: 'لقطات من الميدان' } ] },
-        about: { label: 'من نحن', href: 'About.dc.html', mega: false, kicker: 'من نحن', title: 'تأسست في الدمام', blurb: 'مرجع موثوق في تقنيات السلامة الصناعية.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
-          { label: 'قصة الشركة', tag: '', href: 'About.dc.html', desc: 'بدايتنا ورسالتنا' },
-          { label: 'رؤية 2030', tag: '', href: 'About.dc.html', desc: 'شريك وطني فاعل' },
-          { label: 'قيمنا', tag: '', href: 'About.dc.html', desc: 'الدقة \u00b7 الحماية \u00b7 الأداء' },
-          { label: 'الوظائف', tag: '', href: 'Careers.dc.html', desc: 'انضم إلى الفريق' } ] },
-        careers: { label: 'الوظائف', href: 'Careers.dc.html', mega: false },
-        contact: { label: 'تواصل', href: 'Contact.dc.html', mega: false }
+        solutions: { label: 'الحلول', href: 'solutions', kicker: 'عائلة View', title: 'منظومة واحدة ترى ما يهم', blurb: 'خمسة أنظمة، هدف واحد: الوعي بالخطر في كل موقع.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'The View Family', tag: 'كل الحلول', href: 'solutions', desc: 'عائلة متكاملة من أنظمة السلامة' },
+          { label: 'ProxView', tag: 'PWAS', href: 'proxview', desc: 'التحذير من الاقتراب' },
+          { label: 'FleetView', tag: 'IVMS', href: 'fleetview', desc: 'مراقبة المركبات والسائقين' },
+          { label: 'TrackView', tag: 'GPS', href: 'trackview', desc: 'تتبع مواقع المركبات عبر GPS' },
+          { label: 'AirView', tag: 'AQMS', href: 'airview', desc: 'مراقبة جودة الهواء' },
+          { label: 'LiftView', tag: 'LMI', href: 'liftview', desc: 'مؤشر عزم الحمولة للرافعات' } ] },
+        fleetic: { label: 'Fleetic', href: 'fleetic', mega: false, kicker: 'Powered by Fleetic', title: 'كل رحلة، تحت السيطرة', blurb: 'طبقة الذكاء التي تحوّل بيانات الأجهزة إلى قرارات.', img: 'assets/fleetic/brand/fleetic-menu-thumbnail.webp', links: [
+          { label: 'Overview', tag: '', href: 'fleetic', desc: 'المنصة المتصلة' },
+          { label: 'Powered by Fleetic', tag: '', href: 'fleetic', desc: 'الأجهزة المتصلة بالمنصة' },
+          { label: 'Login', tag: '', href: 'fleetic', desc: 'ادخل إلى لوحة التحكم' } ] },
+        newsroom: { label: 'الأخبار', href: 'newsroom', mega: false, kicker: 'الأخبار', title: 'المشاريع والمقالات', blurb: 'آخر أخبارنا من الميدان.', img: 'assets/photos/perfect-vision-photo-excavator.webp', links: [
+          { label: 'المدونة', tag: '', href: 'newsroom#pr-news', desc: 'الأخبار والمقالات' },
+          { label: 'معرض الصور', tag: '', href: 'newsroom#pr-gallery', desc: 'لقطات من الميدان' } ] },
+        about: { label: 'من نحن', href: 'about', mega: false, kicker: 'من نحن', title: 'تأسست في الدمام', blurb: 'مرجع موثوق في تقنيات السلامة الصناعية.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'قصة الشركة', tag: '', href: 'about', desc: 'بدايتنا ورسالتنا' },
+          { label: 'رؤية 2030', tag: '', href: 'about', desc: 'شريك وطني فاعل' },
+          { label: 'قيمنا', tag: '', href: 'about', desc: 'الدقة \u00b7 الحماية \u00b7 الأداء' },
+          { label: 'الوظائف', tag: '', href: 'careers', desc: 'انضم إلى الفريق' } ] },
+        careers: { label: 'الوظائف', href: 'careers', mega: false },
+        contact: { label: 'تواصل', href: 'contact', mega: false }
       },
-      searchSuggest: [ { label: 'ProxView', href: 'ProxView.dc.html' }, { label: 'Fleetic', href: 'Fleetic.dc.html' }, { label: 'Base Line', href: 'Solutions.dc.html' }, { label: 'نيوم', href: 'Industries.dc.html' }, { label: 'الأخبار', href: 'Newsroom.dc.html' } ]
+      searchSuggest: [ { label: 'ProxView', href: 'proxview' }, { label: 'Fleetic', href: 'fleetic' }, { label: 'Base Line', href: 'solutions' }, { label: 'نيوم', href: 'industries' }, { label: 'الأخبار', href: 'newsroom' } ]
     };
     return this.state.lang === 'ar' ? ar : en;
   }

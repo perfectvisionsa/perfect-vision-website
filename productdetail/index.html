@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Readex Pro',sans-serif;background:#fff;color:#0a0a0a;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1);}
+  .pv-cta{transition:background .35s ease,color .35s ease,border-color .35s ease,transform .25s ease;}
+  .liquid-glass{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-rel{transition:transform .4s ease,box-shadow .4s ease;}
+  .pv-rel:hover{transform:translateY(-5px);box-shadow:0 24px 46px -24px rgba(0,0,0,.3);}
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}[data-reveal]{opacity:1 !important;transform:none !important;}}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;">
+
+  <dc-import name="SiteHeader" active="solutions" hint-size="100%,80px"></dc-import>
+
+  <!-- HERO -->
+  <section style="position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;padding:140px clamp(20px,6vw,80px) 80px;color:#fff;">
+    <img src="{{ p.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(115deg,rgba(145,12,7,.92),rgba(245,1,21,.5) 55%,rgba(10,4,4,.7));"></div>
+    <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;">
+      <a href="solutions" data-reveal style="display:inline-flex;align-items:center;gap:8px;font-family:'Readex Pro',sans-serif;font-size:12px;color:rgba(255,255,255,.8);">{{ backArrow }} {{ t.allSolutions }}</a>
+      <div data-reveal style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:24px;">
+        <span style="font-family:'Readex Pro',sans-serif;font-size:13px;background:rgba(255,255,255,.16);padding:6px 14px;border-radius:30px;">{{ p.tag }}</span>
+        <span style="font-size:15px;font-weight:500;color:#F50115;">{{ p.system }}</span>
+      </div>
+      <h1 data-reveal style="font-size:clamp(48px,9vw,128px);font-weight:700;line-height:.96;margin-top:18px;">{{ p.name }}</h1>
+      <p data-reveal style="margin-top:24px;font-size:clamp(18px,1.8vw,26px);font-weight:300;line-height:1.45;color:rgba(255,255,255,.92);text-wrap:balance;">{{ p.outcome }}</p>
+      <div data-reveal style="display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;">
+        <sc-for list="{{ p.lines }}" as="ln" hint-placeholder-count="2">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-family:'Readex Pro',sans-serif;font-size:13px;padding:9px 16px;border-radius:30px;background:{{ ln.bg }};color:{{ ln.fg }};border:1px solid {{ ln.border }};"><span style="width:8px;height:8px;border-radius:50%;background:{{ ln.dot }};"></span>{{ ln.label }}</span>
+        </sc-for>
+      </div>
+      <a class="pv-cta" href="contact" data-reveal style="display:inline-block;margin-top:34px;background:#fff;color:#910C07;padding:16px 36px;border-radius:46px;font-size:16px;font-weight:600;border:1px solid #fff;" style-hover="background:transparent;color:#fff;">{{ t.demo }}</a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="background:#fff;padding:clamp(80px,10vw,150px) clamp(20px,6vw,80px);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div data-reveal style="font-family:'Readex Pro',sans-serif;font-size:12px;color:#F50115;">{{ t.howKicker }}</div>
+      <h2 data-reveal style="font-size:clamp(28px,4vw,54px);font-weight:700;margin-top:14px;line-height:1.06;text-wrap:balance;">{{ p.howTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(40px,5vw,72px);">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div data-reveal data-reveal-delay="{{ s.delay }}" style="border-top:2px solid #F50115;padding-top:24px;">
+            <div style="font-family:'Readex Pro',sans-serif;font-size:13px;color:#910C07;">{{ s.num }}</div>
+            <h3 style="font-size:clamp(21px,2.2vw,28px);font-weight:600;margin-top:14px;">{{ s.title }}</h3>
+            <p style="margin-top:12px;font-size:15.5px;font-weight:300;line-height:1.65;color:#555;">{{ s.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section style="background:#0a0a0a;color:#fff;padding:clamp(80px,10vw,140px) clamp(20px,6vw,80px);">
+    <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,5vw,80px);">
+      <div data-reveal>
+        <div style="font-family:'Readex Pro',sans-serif;font-size:12px;color:#F50115;">{{ t.specsKicker }}</div>
+        <h2 style="font-size:clamp(28px,3.6vw,48px);font-weight:700;margin-top:14px;line-height:1.08;text-wrap:balance;">{{ t.specsTitle }}</h2>
+        <p style="margin-top:18px;max-width:380px;font-size:15.5px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.7);">{{ t.specsNote }}</p>
+      </div>
+      <div data-reveal data-reveal-delay="100">
+        <sc-for list="{{ p.specs }}" as="sp" hint-placeholder-count="5">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid #1f1f1f;">
+            <span style="font-size:15px;font-weight:300;color:#aaa;">{{ sp.k }}</span>
+            <span style="font-family:'Readex Pro',sans-serif;font-size:15px;font-weight:500;text-align:{{ specAlign }};" dir="ltr">{{ sp.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED -->
+  <section style="background:#F0F0F0;padding:clamp(70px,9vw,130px) clamp(20px,6vw,80px);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <h2 data-reveal style="font-size:clamp(24px,3vw,40px);font-weight:700;">{{ t.related }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-top:36px;">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+          <a class="pv-rel" href="{{ r.href }}" data-reveal data-reveal-delay="{{ r.delay }}" style="background:#fff;border-radius:16px;padding:26px;display:block;">
+            <span style="font-family:'Readex Pro',sans-serif;font-size:11px;color:#F50115;">{{ r.tag }}</span>
+            <h3 style="font-size:22px;font-weight:700;margin-top:12px;">{{ r.name }}</h3>
+            <div style="font-size:13px;color:#888;margin-top:4px;">{{ r.system }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+
+  <dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;slug&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;proxview&quot;,&quot;liftview&quot;,&quot;fleetview&quot;,&quot;airview&quot;,&quot;trackview&quot;],&quot;default&quot;:&quot;proxview&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang };
+  }
+  componentDidMount() {
+    this._onLang = (e) => this.setState({ lang: e.detail });
+    window.addEventListener('pv-langchange', this._onLang);
+    if (window.scrollY) window.scrollTo(0, 0);
+    this.initReveal();
+  }
+  componentDidUpdate() { this.initReveal(); }
+  componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); if (this._io) this._io.disconnect(); }
+  initReveal() {
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    if (!this._io) this._io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { const d = parseInt(e.target.getAttribute('data-reveal-delay') || '0', 10); e.target.style.transitionDelay = d + 'ms'; e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; this._io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => { if (!el._o) { el._o = true; this._io.observe(el); } });
+  }
+  catalog() {
+    const P = 'assets/photos/perfect-vision-photo-truck-dust.webp', P2 = 'assets/photos/perfect-vision-photo-fleet-row.webp', P3 = 'assets/photos/perfect-vision-photo-excavator.webp';
+    const meta = {
+      proxview: { name: 'ProxView', tag: 'PWAS', img: P, sys: ['Proximity Warning', 'التحذير من الاقتراب'], lines: ['base', 'blue'],
+        outcome: ['The worker is warned the instant they enter a danger zone around moving equipment, before contact is ever possible.', 'يُنبَّه العامل لحظة دخوله منطقة الخطر حول المعدات المتحركة، قبل أن يصبح الاحتكاك ممكنًا.'],
+        howTitle: ['Detection that acts before a person ever does.', 'رصد يسبق رد فعل الإنسان.'],
+        steps: [ [['Sense', 'Radar and AI vision map a live exclusion zone around the machine.'], ['Warn', 'Operator and worker are alerted at the same moment, in-cab and on-body.'], ['Record', 'Every near-miss is logged for the safety team and Fleetic.']], [['رصد', 'كاميرات ذكية ترسم منطقة خطر حية حول المعدة.'], ['تنبيه', 'يُنبَّه المشغّل والعامل في اللحظة نفسها، داخل الكابينة وفي الموقع.'], ['تسجيل', 'يُسجَّل كل حادث وشيك لفريق السلامة وعلى Fleetic.']] ],
+        specs: [['Detection range', '0.5 – 30 m'], ['Alert latency', '< 0.3 s'], ['Zones', 'Up to 3 configurable'], ['Ingress rating', 'IP69K'], ['Operating temp', '\u221220 – 70 \u00b0C'], ['Power', '9 – 36 V DC']],
+        related: ['liftview', 'fleetview', 'airview'] },
+      liftview: { name: 'LiftView', tag: 'LMI', img: P3, sys: ['Load Monitoring \u00b7 Cranes', 'مراقبة الأحمال \u00b7 الرافعات'], lines: ['base', 'blue'],
+        outcome: ['Every lift stays inside its safe load envelope. The operator knows the limit before the crane reaches it.', 'تبقى كل عملية رفع ضمن حدودها الآمنة، ويعرف المشغّل الحد قبل أن تصل إليه الرافعة.'],
+        howTitle: ['Load awareness, moment by moment.', 'متابعة الحمل، لحظة بلحظة.'],
+        steps: [ [['Measure', 'Load, angle and radius are sampled continuously across the lift.'], ['Predict', 'The system projects the safe envelope and flags the approach to limit.'], ['Stop', 'Audible and motion cut-off triggers before an overload occurs.']], [['قياس', 'يُقاس الحمل والزاوية ونصف القطر باستمرار طوال عملية الرفع.'], ['توقّع', 'يحسب النظام الحد الآمن وينبّه عند الاقتراب منه.'], ['إيقاف', 'إنذار صوتي وإيقاف للحركة قبل حدوث التحميل الزائد.']] ],
+        specs: [['Load accuracy', '\u00b1 2 % FS'], ['Sensors', 'Load pin + angle'], ['Display', '7" in-cab'], ['Ingress rating', 'IP67'], ['Operating temp', '\u221220 – 65 \u00b0C'], ['Logging', 'Onboard + Fleetic']],
+        related: ['proxview', 'fleetview', 'trackview'] },
+      fleetview: { name: 'FleetView', tag: 'IVMS', img: P2, sys: ['Vehicle Monitoring', 'مراقبة المركبات والسائقين'], lines: ['blue'],
+        outcome: ['Driver behaviour, location and vehicle health stream live, so risk is visible before it becomes an incident.', 'سلوك السائق وموقع المركبة وحالتها تُبث مباشرة، فترى الخطر قبل أن يتحول إلى حادث.'],
+        howTitle: ['Every vehicle, on the same live map.', 'كل مركبة، على الخريطة الحية نفسها.'],
+        steps: [ [['Track', 'GPS, telematics and driver scoring stream from every vehicle.'], ['Understand', 'Fleetic turns raw signals into driver and fleet risk profiles.'], ['Coach', 'Safety teams intervene early, guided by data instead of guesswork.']], [['تتبع', 'تُبث بيانات GPS وبيانات المركبة وتقييم السائق من كل مركبة.'], ['فهم', 'يحوّل Fleetic البيانات الخام إلى تقييم لمخاطر السائق والأسطول.'], ['توجيه', 'تتدخل فرق السلامة مبكرًا استنادًا إلى البيانات لا التخمين.']] ],
+        specs: [['Connectivity', '4G + GPS'], ['Telematics', 'CAN bus'], ['Driver ID', 'RFID'], ['Camera', 'Optional dual'], ['Ingress rating', 'IP65'], ['Platform', 'Fleetic native']],
+        related: ['proxview', 'trackview', 'liftview'] },
+      airview: { name: 'AirView', tag: 'AQMS', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', sys: ['Air Quality Monitoring', 'مراقبة جودة الهواء'], lines: ['base', 'blue'],
+        outcome: ['Gas, dust and air-quality risk detected in real time, before it reaches the lungs.', 'رصد فوري للغازات والغبار ومخاطر جودة الهواء، قبل أن تصل إلى العاملين.'],
+        howTitle: ['Clean air, continuously verified.', 'هواء نقي، بقياس مستمر.'],
+        steps: [ [['Sample', 'Multi-gas and particulate sensors monitor the work area.'], ['Threshold', 'Limits trigger staged visual and audible warnings.'], ['Report', 'Trends and exposure history flow to the control room.']], [['قياس', 'حساسات الغازات والغبار تراقب منطقة العمل باستمرار.'], ['تنبيه', 'عند تجاوز الحدود تصدر تحذيرات ضوئية وصوتية متدرجة.'], ['تقرير', 'الاتجاهات وسجل التعرّض تصل إلى غرفة التحكم.']] ],
+        specs: [['Gases', 'H₂S \u00b7 CO \u00b7 O₂ \u00b7 LEL'], ['Particulate', 'PM2.5 / PM10'], ['Sampling', 'Continuous'], ['Ingress rating', 'IP66'], ['Operating temp', '\u221220 – 55 \u00b0C'], ['Logging', 'Onboard + Fleetic']],
+        related: ['fleetview', 'proxview', 'trackview'] },
+      trackview: { name: 'TrackView', tag: 'GPS', img: P2, sys: ['Vehicle Positioning & Tracking', 'تحديد مواقع المركبات وتتبعها'], lines: ['blue'],
+        outcome: ['Every vehicle located, routed and fuel-audited in real time, with the whole fleet on one live map.', 'موقع كل مركبة ومسارها واستهلاكها للوقود لحظيًا، والأسطول كله على خريطة واحدة مباشرة.'],
+        howTitle: ['Positions that become decisions.', 'مواقع تتحول إلى قرارات.'],
+        steps: [ [['Locate', 'Four-constellation GNSS fixes every vehicle, down to −165 dBm.'], ['Stream', '4G LTE Cat 1 sends positions, routes and events to Fleetic live.'], ['Act', 'Geofences, immobilizer and fuel scenarios trigger on the device itself.']], [['تحديد', 'استقبال من أربع منظومات أقمار يحدد موقع كل مركبة بدقة حتى ‎−165 dBm.'], ['إرسال', 'يرسل 4G LTE المواقع والمسارات والأحداث إلى Fleetic مباشرة.'], ['تنفيذ', 'النطاقات الجغرافية وإيقاف المحرك وسيناريوهات الوقود تعمل على الجهاز نفسه.']] ],
+        specs: [['Connectivity', '4G LTE Cat 1 + fallback'], ['GNSS', 'GPS · GLONASS · Galileo · BeiDou'], ['Bluetooth', '4.0 + LE'], ['Backup battery', '170 mAh Li-Ion'], ['Operating temp', '\u221240 – 85 \u00b0C'], ['Power', '10 – 30 V DC']],
+        related: ['fleetview', 'proxview', 'liftview'] }
+    };
+    return meta;
+  }
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const i = isAr ? 1 : 0;
+    const slug = (this.props.slug || 'proxview').toLowerCase();
+    const meta = this.catalog();
+    const m = meta[slug] || meta.proxview;
+    const lineMap = {
+      base: { label: 'Base Line', bg: '#f0f0f0', fg: '#333', border: '#e2e2e2', dot: '#9aa0a6' },
+      blue: { label: 'Blue Line', bg: 'rgba(41,62,220,.14)', fg: '#fff', border: 'rgba(205,238,255,.4)', dot: '#CDEEFF' }
+    };
+    const t = isAr ? {
+      allSolutions: 'كل الحلول', demo: 'اطلب عرضًا', howKicker: 'كيف يعمل', specsKicker: 'المواصفات', specsTitle: 'مصمم للميدان.', specsNote: 'مواصفات إرشادية، تختلف حسب الإعداد والموقع.', related: 'منتجات ذات صلة', ctaHead: 'شاهد هذا النظام يعمل في موقعك.'
+    } : {
+      allSolutions: 'All solutions', demo: 'Request a Demo', howKicker: 'How it works', specsKicker: 'Specifications', specsTitle: 'Built for the field.', specsNote: 'Indicative specifications; final figures vary by configuration and site.', related: 'Related products', ctaHead: 'See this system on your site.'
+    };
+    const steps = m.steps[i].map((s, idx) => ({ num: '0' + (idx + 1), title: s[0], desc: s[1], delay: idx * 100 }));
+    const allMeta = this.catalog();
+    const related = m.related.map((rs, idx) => ({ name: allMeta[rs].name, tag: allMeta[rs].tag, system: allMeta[rs].sys[i], href: allMeta[rs].name.replace(/ /g, '').toLowerCase(), delay: idx * 80 }));
+    return {
+      dir: isAr ? 'rtl' : 'ltr', t,
+      backArrow: isAr ? '\u2192' : '\u2190',
+      specAlign: isAr ? 'left' : 'right',
+      p: {
+        name: m.name, tag: m.tag, img: m.img, system: m.sys[i],
+        outcome: m.outcome[i], howTitle: m.howTitle[i], specs: m.specs.map(s => ({ k: s[0], v: s[1] })),
+        lines: m.lines.map(l => lineMap[l])
+      },
+      steps, related
+    };
+  }
+}
+</script>
+</body>
+</html>

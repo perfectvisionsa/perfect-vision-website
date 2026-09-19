@@ -147,7 +147,7 @@ assets/
 `liftview/`, `helmview/`, `firesuppression/` فارغة (فيها `.gitkeep` فقط). أضف الصور بنفس النمط: `perfect-vision-liftview-<subject>.webp`.
 
 ## fleetic/ — منصة Fleetic
-**brand/**: `fleetic-logo-full-white.svg`, `fleetic-logo-color.webp`, `fleetic-logo-white.webp`, `fleetic-mark-blue.svg`, `fleetic-mark.svg` (احتياطي، غير مستخدم حاليًا), `fleetic-menu-thumbnail.webp` (صورة القائمة في الهيدر).
+**brand/**: `fleetic-logo-full-white.svg`, `fleetic-logo-color.webp`, `fleetic-logo-white.webp`, `fleetic-mark-blue.svg`, `fleetic-mark.svg` (احتياطي، غير مستخدم حاليًا), `fleetic-menu-thumbnail.webp` (صورة القائمة في الهيدر), `fleetic-profile.pdf` (الملف التعريفي لـ Fleetic — Fleetic، زر "{{ t.heroCta }}").
 
 **hero/**: `fleetic-hero-fleet-silhouette.webp` (غلاف صفحة Fleetic), `fleetic-hero-truck-silhouette-blue.webp` (Home, Newsroom).
 

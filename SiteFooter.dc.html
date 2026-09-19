@@ -166,7 +166,7 @@
     <div class="cf-bg"></div>
 
     <!-- CTA capsule -->
-    <a class="pvf-democta" href="Contact.dc.html" onClick="{{ openDemo }}" aria-haspopup="dialog" aria-label="{{ t.ctaTitle }}">
+    <a class="pvf-democta" href="contact" onClick="{{ openDemo }}" aria-haspopup="dialog" aria-label="{{ t.ctaTitle }}">
       <img src="assets/brand/perfect-vision-mark-red.webp" alt="" style="flex:0 0 auto;width:clamp(44px,4.6vw,64px);height:clamp(44px,4.6vw,64px);object-fit:contain;">
       <span style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px;">
         <span style="font-size:clamp(24px,2.8vw,40px);font-weight:700;line-height:1.1;color:#0a0a0a;">{{ t.ctaTitle }}</span>
@@ -502,12 +502,12 @@ class Component extends DCLogic {
       nlKicker: 'Newsletter', nlTitle: 'Subscribe to our newsletter', nlPh: 'Your email', nlBtn: 'Subscribe',
       nlNote: 'A quarterly letter on industrial safety. Unsubscribe anytime.', nlThanks: 'You\u2019re subscribed. Thank you.',
       pages: [
-        { label: 'The View Family', href: 'Solutions.dc.html' },
-        { label: 'Fleetic', href: 'Fleetic.dc.html' },
-        { label: 'Newsroom', href: 'Newsroom.dc.html' },
-        { label: 'About', href: 'About.dc.html' },
-        { label: 'Careers', href: 'Careers.dc.html' },
-        { label: 'Contact', href: 'Contact.dc.html' }
+        { label: 'The View Family', href: 'solutions' },
+        { label: 'Fleetic', href: 'fleetic' },
+        { label: 'Newsroom', href: 'newsroom' },
+        { label: 'About', href: 'about' },
+        { label: 'Careers', href: 'careers' },
+        { label: 'Contact', href: 'contact' }
       ]
     };
     const ar = {
@@ -516,12 +516,12 @@ class Component extends DCLogic {
       nlKicker: '\u0627\u0644\u0646\u0634\u0631\u0629', nlTitle: 'اشترك في نشرتنا', nlPh: 'بريدك الإلكتروني', nlBtn: '\u0627\u0634\u062a\u0631\u0627\u0643',
       nlNote: 'نشرة ربع سنوية عن السلامة الصناعية، ويمكنك إلغاء الاشتراك متى شئت.', nlThanks: 'تم اشتراكك، شكرًا لك.',
       pages: [
-        { label: 'The View Family', href: 'Solutions.dc.html' },
-        { label: 'Fleetic', href: 'Fleetic.dc.html' },
-        { label: 'غرفة الأخبار', href: 'Newsroom.dc.html' },
-        { label: 'من نحن', href: 'About.dc.html' },
-        { label: 'الوظائف', href: 'Careers.dc.html' },
-        { label: 'تواصل', href: 'Contact.dc.html' }
+        { label: 'The View Family', href: 'solutions' },
+        { label: 'Fleetic', href: 'fleetic' },
+        { label: 'غرفة الأخبار', href: 'newsroom' },
+        { label: 'من نحن', href: 'about' },
+        { label: 'الوظائف', href: 'careers' },
+        { label: 'تواصل', href: 'contact' }
       ]
     };
     const t = isAr ? ar : en;

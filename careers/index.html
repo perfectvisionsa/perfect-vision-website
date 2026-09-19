@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Readex Pro',sans-serif;background:#fff;color:#0a0a0a;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1);}
+  .liquid-glass-dark{background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);position:relative;overflow:hidden;}
+  .liquid-glass-dark::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-chipbar{scrollbar-width:none;}
+  .pv-chipbar::-webkit-scrollbar{display:none;}
+  .pv-chip{transition:background .3s ease,color .3s ease;cursor:pointer;white-space:nowrap;position:relative;z-index:2;}
+  .pv-chip:hover{color:#0a0a0a;}
+  .pv-job-title{transition:color .2s ease;}
+  .pv-job:hover .pv-job-title{color:#F50115 !important;}
+  .pv-icon{transition:transform .2s ease,color .2s ease,background .2s ease;cursor:pointer;}
+  .pv-arr{transition:transform .3s ease;}
+  .pv-job:hover .pv-icon{color:#F50115 !important;}
+  .pv-job:hover .pv-arr{transform:translateX(4px);}
+  [dir="rtl"] .pv-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pv-job:hover .pv-arr{transform:scaleX(-1) translateX(4px);}
+    /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}[data-reveal]{opacity:1 !important;transform:none !important;}}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;">
+
+  <dc-import name="SiteHeader" active="careers" bar-mode="solid" hint-size="100%,80px"></dc-import>
+
+  <!-- HERO -->
+  <section style="position:relative;min-height:52vh;display:flex;align-items:flex-end;overflow:hidden;padding:150px clamp(20px,6vw,80px) 56px;color:#fff;">
+    <img src="assets/heroes/perfect-vision-hero-contact.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;" />
+    <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;">
+      <h1 data-reveal style="font-size:clamp(30px,4.6vw,72px);font-weight:700;line-height:1.05;margin-top:14px;text-wrap:balance;">{{ t.heroHead }}</h1>
+    </div>
+  </section>
+
+  <!-- LISTING -->
+  <section style="background:#fff;padding:clamp(40px,5vw,72px) clamp(20px,6vw,80px) clamp(70px,9vw,120px);">
+    <div style="max-width:1240px;margin:0 auto;">
+
+      <!-- categories + sort -->
+      <div data-reveal style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid #e8e8e8;">
+        <div style="font-size:14px;color:#6b6b6b;">{{ count }} {{ t.results }}</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:14px;color:#6b6b6b;">{{ t.sortBy }}</span>
+          <div class="liquid-glass-dark" style="display:inline-flex;gap:4px;padding:5px;border-radius:999px;">
+            <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="2">
+              <div class="pv-chip" onClick="{{ s.go }}" role="button" tabindex="0" style="font-size:13.5px;font-weight:{{ s.weight }};padding:7px 16px;border-radius:999px;background:{{ s.bg }};color:{{ s.color }};">{{ s.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- job rows -->
+      <div style="margin-top:14px;">
+        <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="5">
+          <div class="pv-job" data-reveal style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding:26px 16px;border-bottom:1px solid #eee;border-radius:12px;">
+            <a href="{{ j.href }}" style="flex:1 1 280px;min-width:0;">
+              <div class="pv-job-title" style="font-size:clamp(19px,2vw,24px);font-weight:600;color:#5B5B5B;">{{ j.title }}</div>
+              <div style="margin-top:7px;font-size:15px;color:#1a1a1a;">{{ j.team }}</div>
+              <div style="margin-top:3px;font-size:13.5px;color:#6b6b6b;">{{ j.date }}</div>
+            </a>
+            <div style="flex:0 1 280px;font-size:15px;color:#1a1a1a;">{{ j.location }}</div>
+            <a href="{{ j.href }}" class="pv-icon" aria-label="Open" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#888;">
+              <svg class="pv-arr" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </sc-for>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:60px 0;color:#6b6b6b;font-size:14px;">{{ t.emptyMsg }}</div>
+        </sc-if>
+      </div>
+
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+  <template id="__bundler_thumbnail" data-bg-color="#910C07">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#910C07"/>
+      <path d="M600 300 L640 380 L720 400 L640 420 L600 500 L560 420 L480 400 L560 380 Z" fill="#ffffff"/>
+      <text x="600" y="600" font-family="sans-serif" font-size="60" font-weight="700" fill="#ffffff" text-anchor="middle">Careers</text>
+    </svg>
+  </template>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang, dept: 'All', sort: 'new' };
+  }
+  componentDidMount() { this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang); this.initReveal(); }
+  componentDidUpdate() { this.initReveal(); }
+  componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); if (this._io) this._io.disconnect(); }
+  initReveal() {
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    if (!this._io) this._io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; this._io.unobserve(e.target); } }), { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => { if (!el._o) { el._o = true; this._io.observe(el); } });
+  }
+  setDept = (k) => () => this.setState({ dept: k });
+  setSort = (k) => () => this.setState({ sort: k });
+
+  jobsData() {
+    return [
+      { id: 1, title: 'Senior Java & IoT Back-end Developer', team: 'Fleetic Platform', location: 'Dammam, Eastern Province', date: 'Sep 01, 2026', sortKey: 20260901 },
+      { id: 2, title: 'Embedded Systems Engineer', team: 'Engineering', location: 'Dammam, Eastern Province', date: 'Sep 01, 2026', sortKey: 20260901 },
+      { id: 3, title: 'IoT Engineer', team: 'Fleetic Platform', location: 'Dammam, Eastern Province', date: 'Sep 01, 2026', sortKey: 20260901 },
+      { id: 4, title: 'Senior Accountant', team: 'Finance', location: 'Dammam, Eastern Province', date: 'Sep 01, 2026', sortKey: 20260901 },
+      { id: 5, title: 'Key Account Manager', team: 'Commercial', location: 'Dammam, Eastern Province', date: 'Sep 01, 2026', sortKey: 20260901 }
+    ];
+  }
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const t = isAr ? {
+      kicker: 'الوظائف', heroHead: 'انضم إلى فريق يصنع السلامة.',
+      filters: 'تصفية', results: 'وظيفة متاحة', sortBy: 'ترتيب حسب', emptyMsg: 'لا توجد وظائف في هذا القسم حاليًا.',
+      sortNew: 'الأحدث', sortAZ: 'أبجديًا', all: 'الكل'
+    } : {
+      kicker: 'Careers', heroHead: 'Join the team that builds safety.',
+      filters: 'Filters', results: 'open roles', sortBy: 'Sort by', emptyMsg: 'No roles in this team right now.',
+      sortNew: 'Newest', sortAZ: 'A–Z', all: 'All'
+    };
+    const all = this.jobsData();
+    const teamKeys = ['All', 'Engineering', 'Fleetic Platform', 'Commercial', 'Finance'];
+    let list = this.state.dept === 'All' ? all.slice() : all.filter(j => j.team === this.state.dept);
+    if (this.state.sort === 'az') list.sort((a, b) => a.title.localeCompare(b.title));
+    else list.sort((a, b) => b.sortKey - a.sortKey);
+    const jobs = list.map(j => ({
+      title: j.title, team: j.team, location: j.location, date: j.date,
+      href: 'jobdetail?id=' + j.id
+    }));
+    const teams = teamKeys.map(k => {
+      const active = this.state.dept === k;
+      return { label: k === 'All' ? t.all : k, go: this.setDept(k), weight: active ? 600 : 400, bg: active ? '#F50115' : 'transparent', color: active ? '#fff' : '#555' };
+    });
+    const sorts = [ { k: 'new', label: t.sortNew }, { k: 'az', label: t.sortAZ } ].map(s => {
+      const active = this.state.sort === s.k;
+      return { label: s.label, go: this.setSort(s.k), weight: active ? 600 : 400, bg: active ? '#5B5B5B' : 'transparent', color: active ? '#fff' : '#555' };
+    });
+    return { dir: isAr ? 'rtl' : 'ltr', t, teams, sorts, jobs, count: jobs.length, empty: jobs.length === 0 };
+  }
+}
+</script>
+</body>
+</html>
