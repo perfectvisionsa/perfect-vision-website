@@ -56,6 +56,7 @@ assets/
 | `perfect-vision-mark-red.webp` | النجمة (Mark) حمراء | SiteFooter |
 | `perfect-vision-mark-white.webp` | النجمة بيضاء | Header, Articles, Footer |
 | `perfect-vision-badge.svg` | شارة العلامة | CTA Trail Demo |
+| `perfect-vision-company-profile-2026.pdf` | الملف التعريفي للشركة (PDF) | About — زر "تحميل الملف التعريفي" |
 
 ## heroes/ — أغلفة الصفحات
 | الملف | الوصف | الاستخدام |
