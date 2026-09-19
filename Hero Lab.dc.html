@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-v2/layer-3-vehicles.webp" fetchpriority="high">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  body{font-family:'Readex Pro',sans-serif;background:#fff;color:#fff;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  /* Hero choreography. Layers are held at their start pose until [data-hero-ready] lands (vehicles decoded). */
+  .pv-hero-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;will-change:transform,opacity,filter;}
+  .pv-hero-veil{position:absolute;inset:0;background:#fff;pointer-events:none;z-index:4;}
+  .pv-hero-sky{opacity:0;}
+  .pv-hero-name{opacity:0;transform:translateY(40px);filter:blur(14px);}
+  .pv-hero-header{opacity:0;}
+  [data-hero-ready] .pv-hero-veil{animation:pvSkyVeil 1.8s cubic-bezier(.22,1,.36,1) .2s both;}
+  [data-hero-ready] .pv-hero-sky{animation:pvSkyIn 1.8s cubic-bezier(.22,1,.36,1) .2s both;}
+  [data-hero-ready] .pv-hero-name{animation:pvNameIn 2.2s cubic-bezier(.16,1,.3,1) .9s both;}
+  [data-hero-ready] .pv-hero-header{animation:pvHeaderIn .8s cubic-bezier(.22,1,.36,1) 2s both;}
+  @keyframes pvSkyVeil{from{opacity:1}to{opacity:0}}
+  @keyframes pvSkyIn{from{opacity:0}to{opacity:1}}
+  @keyframes pvNameIn{from{opacity:0;transform:translateY(40px);filter:blur(14px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+  @keyframes pvHeaderIn{from{opacity:0}to{opacity:1}}
+  .pv-hero-say{opacity:0;}
+  [data-hero-ready] .pv-hero-say{animation:pvSayIn 2.2s cubic-bezier(.16,1,.3,1) .9s both;}
+  @keyframes pvSayIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  .pv-cta{transition:background .35s ease,color .35s ease,border-color .35s ease,transform .25s ease;}
+  .liquid-glass{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  @media (prefers-reduced-motion: reduce){
+    .pv-hero-sky,.pv-hero-name,.pv-hero-header,.pv-hero-say{opacity:1;transform:none;filter:none;}
+    .pv-hero-veil{display:none;}
+    [data-hero-ready] .pv-hero-sky,[data-hero-ready] .pv-hero-name,[data-hero-ready] .pv-hero-header,[data-hero-ready] .pv-hero-say{animation:none;}
+  }
+</style>
+</helmet>
+<div dir="{{ dir }}" ref="{{ rootRef }}" style="font-family:'Readex Pro',sans-serif;">
+  <div class="pv-hero-header" style="position:relative;z-index:5;">
+    <dc-import name="SiteHeader" active="" hint-size="100%,80px"></dc-import>
+  </div>
+  <section data-screen-label="Hero" style="position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;background:#fff;">
+    <div class="pv-hero-stage" style="position:absolute;inset:0;">
+      <img class="pv-hero-layer pv-hero-sky" data-hero-layer="1" src="assets/hero-v2/layer-1-sky.webp" loading="eager" decoding="async" alt="" style="z-index:1;">
+      <img class="pv-hero-layer pv-hero-name" data-hero-layer="2" src="assets/hero-v2/layer-2-wordmark.webp" loading="eager" decoding="async" alt="Perfect Vision" style="z-index:2;">
+      <img class="pv-hero-layer" data-hero-layer="3" ref="{{ vehiclesRef }}" src="assets/hero-v2/layer-3-vehicles.webp" loading="eager" fetchpriority="high" decoding="sync" alt="" style="z-index:3;">
+      <div class="pv-hero-veil"></div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:40%;z-index:3;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.72) 100%);pointer-events:none;"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:27%;z-index:4;display:flex;align-items:center;justify-content:center;padding:0 clamp(20px,6vw,80px);">
+      <div class="pv-hero-say" style="flex:0 1 860px;max-width:860px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(16px,2vw,24px);text-align:center;color:#fff;">
+        <p style="margin:0;font-size:clamp(16px,1.35vw,19px);font-weight:300;line-height:1.55;color:rgba(255,255,255,.95);text-wrap:balance;text-shadow:0 1px 18px rgba(0,0,0,.4);">{{ t.heroPara }}</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:13px;">
+          <a class="liquid-glass pv-cta" href="Solutions.dc.html" style="display:inline-flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:13px 28px;border-radius:46px;font-size:14.5px;font-weight:600;white-space:nowrap;" style-hover="background:rgba(255,255,255,.14);">{{ t.heroCta }}</a>
+          <a class="liquid-glass pv-cta" href="Fleetic.dc.html" style="display:inline-flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:13px 28px;border-radius:46px;font-size:14.5px;font-weight:600;white-space:nowrap;" style-hover="background:rgba(255,255,255,.14);">{{ t.heroCta2 }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang };
+  }
+  componentDidMount() {
+    this._onLang = (e) => this.setState({ lang: e.detail });
+    window.addEventListener('pv-langchange', this._onLang);
+    this._armWhenVehiclesReady();
+  }
+  componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); clearTimeout(this._fallback); }
+  _armWhenVehiclesReady() {
+    const img = this._vehicles, root = this._root;
+    if (!img || !root) return;
+    const go = () => { if (this._armed) return; this._armed = true; root.setAttribute('data-hero-ready', ''); };
+    const ready = img.complete && img.naturalWidth > 0;
+    const p = ready ? Promise.resolve() : new Promise(r => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
+    p.then(() => (img.decode ? img.decode().catch(() => {}) : Promise.resolve())).then(go);
+    this._fallback = setTimeout(go, 4000);
+  }
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const en = { heroPara: 'Perfect Vision builds AI and IoT safety systems for heavy machinery. They fit onto the trucks, cranes and loaders you already run, and warn people before danger reaches them.', heroCta: 'Download Company Profile', heroCta2: 'Discover Fleetic' };
+    const ar = { heroPara: 'Perfect Vision تطوّر أنظمة سلامة بالذكاء الاصطناعي وإنترنت الأشياء للمعدات الثقيلة. تُركَّب على الشاحنات والرافعات والمعدات التي تعمل بها اليوم، وتنبّه العاملين قبل أن يصل الخطر إليهم.', heroCta: 'تحميل الملف التعريفي للشركة', heroCta2: 'اكتشف Fleetic' };
+    return {
+      dir: isAr ? 'rtl' : 'ltr', t: isAr ? ar : en,
+      rootRef: (el) => { this._root = el; },
+      vehiclesRef: (el) => { this._vehicles = el; if (el && this._root && !this._armed) this._armWhenVehiclesReady(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

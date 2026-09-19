@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  .pvh *{box-sizing:border-box;}
+  .pvh a{text-decoration:none;color:inherit;}
+  @keyframes pvhFade{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pvhDrawer{from{transform:translateX(var(--pvh-from))}to{transform:translateX(0)}}
+  @keyframes pvhOvIn{from{opacity:0}to{opacity:1}}
+  @keyframes pvhFlyIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pvhFlyOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-6px)}}
+  .pvh-fly-open{animation:pvhFlyIn .2s cubic-bezier(.16,1,.3,1) both;}
+  .pvh-fly-closing{animation:pvhFlyOut .14s ease-in forwards;}
+  @keyframes pvhOvOut{from{opacity:1}to{opacity:0}}
+  @media (prefers-reduced-motion: reduce){ #pvh-bar,#pvh-megawrap,#pvh-megacontent{transition:none !important;} .pvh-ov-open,.pvh-ov-closing,.pvh-fly-open,.pvh-fly-closing{animation:none !important;} }
+  .pvh-ov-open{animation:pvhOvIn .22s ease-out both;}
+  .pvh-ov-closing{animation:pvhOvOut .15s ease-in forwards;}
+  .liquid-glass{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  #pvh-header{transition:transform .6s cubic-bezier(.2,0,0,1),opacity .45s ease,filter .45s ease;will-change:transform;}
+  #pvh-header.pvh-hidden{transform:translateY(calc(-100% - 26px));opacity:0;filter:blur(6px);pointer-events:none;}
+  @media (prefers-reduced-motion: reduce){ #pvh-header{transition:none !important;filter:none !important;} }
+  .pvh-link{position:relative;transition:background .3s ease,color .3s ease;flex:0 0 auto;}
+  .pvh-link:hover,.pvh-link:focus-visible{color:#fff !important;}
+  .pvh-chev{transition:transform .3s cubic-bezier(.2,0,0,1);}
+  .pvh-link[aria-expanded="true"] .pvh-chev{transform:rotate(180deg);}
+  .pvh-mega-item{transition:background .2s ease;}
+  .pvh-mega-item:hover{background:rgba(255,255,255,.07);}
+  .pv-allbtn{position:relative;border-radius:44px;background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);overflow:hidden;transition:background .3s ease;border:none;cursor:pointer;font-family:'Readex Pro',sans-serif;}
+  .pv-allbtn::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-allbtn:hover{background:rgba(10,10,10,0.08);}
+  .pv-allbtn-in{display:inline-flex;align-items:center;gap:10px;border-radius:inherit;background:transparent;}
+  .pv-allbtn-light{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);}
+  .pv-allbtn-light::before{background:linear-gradient(180deg,rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.5) 100%);}
+  .pv-allbtn-light:hover{background:rgba(255,255,255,0.18);}
+  .pvh-cta{transition:background .3s ease,color .3s ease,border-color .3s ease;}
+  .pv-arr{transition:transform .3s ease;}
+  .pvh-cta:hover .pv-arr{transform:translate(2px,-2px);}
+  [dir="rtl"] .pv-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pvh-cta:hover .pv-arr{transform:scaleX(-1) translate(2px,-2px);}
+    .pvh-iconbtn{transition:opacity .25s ease;opacity:.85;cursor:pointer;}
+  .pvh-iconbtn:hover{opacity:1;}
+  @media (max-width:1180px){ .pvh-desktop{display:none !important;} .pvh-burger{display:flex !important;} }
+  @media (min-width:1181px){ .pvh-burger{display:none !important;} }
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div class="pvh" dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;">
+
+  <!-- FLOATING NAV BAR -->
+  <header id="pvh-header" style="position:fixed;top:18px;left:0;right:0;z-index:98;padding:0 clamp(12px,2.4vw,28px);">
+    <div id="pvh-bar" class="liquid-glass" onMouseEnter="{{ barEnter }}" onMouseLeave="{{ barLeave }}" style="max-width:1460px;margin:0 auto;border-radius:{{ barRadius }};color:#fff;transition:background .35s ease,box-shadow .35s ease,border-radius .38s cubic-bezier(.16,1,.3,1);">
+      <div style="display:flex;align-items:center;gap:clamp(16px,2vw,34px);padding-block:8px;padding-inline-start:22px;padding-inline-end:8px;">
+
+      <a href="index.html" style="flex:0 0 auto;display:flex;align-items:center;gap:9px;">
+        <img src="assets/brand/perfect-vision-mark-white.webp" alt="Perfect Vision" style="width:26px;height:26px;object-fit:contain;" />
+        <span style="font-size:17px;line-height:1;white-space:nowrap;color:#fff;"><span style="font-weight:300;">Perfect</span> <span style="font-weight:700;">Vision</span></span>
+      </a>
+
+      <nav class="pvh-desktop" style="flex:1 1 0;min-width:0;display:flex;align-items:center;gap:6px;font-size:13.5px;justify-content:center;">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+          <a class="pvh-link {{ n.pillCls }}" href="{{ n.href }}" onClick="{{ n.onClick }}" onMouseEnter="{{ n.onEnter }}" onKeyDown="{{ n.onKey }}" aria-haspopup="{{ n.haspopup }}" aria-expanded="{{ n.expanded }}" aria-controls="pvh-mega" style="display:inline-flex;align-items:center;gap:6px;padding-block:10px;padding-inline-start:24px;padding-inline-end:{{ n.padEnd }};box-sizing:border-box;border-radius:30px;border:{{ n.border }};white-space:nowrap;cursor:pointer;line-height:1;font-weight:{{ n.weight }};background:{{ n.bg }};color:{{ n.txt }};box-shadow:{{ n.shadow }};" style-hover="color:#fff;"><span style="line-height:1;">{{ n.label }}</span><svg class="pvh-chev" width="11" height="11" viewBox="4 0 16 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:{{ n.caretDisplay }};opacity:.55;flex:none;"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        </sc-for>
+      </nav>
+
+      <div style="flex:0 0 auto;display:flex;align-items:center;gap:clamp(8px,1vw,14px);justify-content:flex-end;">
+        <button class="pvh-desktop pv-allbtn pv-allbtn-light" onClick="{{ toggleLang }}" style="border-radius:30px;">
+          <span class="pv-allbtn-in" style="justify-content:center;padding:10px 24px;color:#fff;font-size:13.5px;font-weight:600;line-height:1;">{{ otherLangLabel }}</span>
+        </button>
+        <a class="pvh-cta pvh-desktop" href="Contact.dc.html" onClick="{{ openDemo }}" aria-haspopup="dialog" style="display:inline-flex;align-items:center;gap:8px;box-sizing:border-box;background:#fff;color:#0a0a0a;border:none;padding-block:10px;padding-inline-start:24px;padding-inline-end:20px;border-radius:30px;font-size:13.5px;font-weight:600;white-space:nowrap;line-height:1;" style-hover="background:#e6e6e6;"><span style="line-height:1;">{{ t.demo }}</span><svg class="pv-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg></a>
+        <div class="pvh-iconbtn pvh-burger" onClick="{{ openMobile }}" style="display:none;align-items:center;justify-content:center;width:40px;height:40px;flex-direction:column;gap:5px;color:#fff;">
+          <span style="display:block;width:22px;height:2px;background:currentColor;"></span>
+          <span style="display:block;width:22px;height:2px;background:currentColor;"></span>
+          <span style="display:block;width:22px;height:2px;background:currentColor;"></span>
+        </div>
+      </div>
+      </div>
+      <div id="pvh-megawrap" class="pvh-desktop" onTransitionEnd="{{ onWrapEnd }}" style="height:{{ megaH }};overflow:hidden;transition:height .38s cubic-bezier(.16,1,.3,1);">
+        <div id="pvh-megacontent" role="region" class="{{ megaContentCls }}" aria-label="{{ activePanel.title }}" style="opacity:{{ megaOpacity }};transform:{{ megaShift }};transition:{{ megaCtTransition }};">
+          <sc-if value="{{ hasPanel }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:0 24px;border-top:1px solid rgba(255,255,255,.10);"></div>
+            <div style="padding:18px 24px 22px;">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px 20px;align-content:start;">
+                <sc-for list="{{ activePanel.links }}" as="l" hint-placeholder-count="6">
+                  <a class="pvh-mega-item" href="{{ l.href }}" onMouseEnter="{{ l.onEnter }}" onMouseLeave="{{ l.onLeave }}" onFocus="{{ l.onEnter }}" onClick="{{ l.onClick }}" style="display:block;padding:12px 14px;border-radius:10px;">
+                    <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:16px;font-weight:600;color:#fff;">{{ l.label }}</span><span style="font-family:'Readex Pro',sans-serif;font-size:16px;font-weight:300;color:#fff;">{{ l.tagDash }}</span><span style="margin-inline-start:auto;font-size:12px;color:rgba(255,255,255,.5);">{{ l.chevron }}</span></div>
+                    <div style="margin-top:3px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.45;">{{ l.desc }}</div>
+                  </a>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+    <sc-if value="{{ flyoutOpen }}" hint-placeholder-val="{{ false }}">
+      <div id="pvh-flyout" class="pvh-desktop liquid-glass {{ flyCls }}" role="menu" onMouseEnter="{{ flyKeep }}" onMouseLeave="{{ flyLeave }}" style="position:absolute;left:{{ flyLeft }};top:{{ flyTop }};z-index:130;width:min(380px,90vw);border-radius:16px;padding:8px;color:#fff;">
+        <sc-for list="{{ viewFamily }}" as="v" hint-placeholder-count="5">
+          <a class="pvh-mega-item" href="{{ v.href }}" role="menuitem" style="display:block;padding:12px 14px;border-radius:10px;">
+            <div style="display:flex;align-items:baseline;gap:8px;"><span style="font-size:16px;font-weight:600;color:#fff;">{{ v.label }}</span><span style="font-family:'Readex Pro',sans-serif;font-size:10px;font-weight:600;color:#CC2200;">{{ v.tag }}</span></div>
+            <div style="margin-top:3px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.45;">{{ v.desc }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- SCRIM -->
+  <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="pvh-desktop {{ ovCls }}" onClick="{{ closePanel }}" style="position:fixed;inset:0;z-index:96;background:rgba(0,0,0,.3);"></div>
+  </sc-if>
+
+  <!-- MOBILE DRAWER -->
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.45);animation:pvhFade .2s ease;" onClick="{{ closeMobile }}">
+      <div dir="{{ dir }}" onClick="{{ stop }}" style="position:absolute;top:0;bottom:0;{{ drawerSide }}:0;width:min(86vw,400px);background:#fff;color:#0a0a0a;overflow-y:auto;animation:pvhDrawer .3s cubic-bezier(.2,.7,.2,1);box-shadow:0 0 60px rgba(0,0,0,.3);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid #eee;">
+          <span style="font-size:17px;"><span style="font-weight:300;">Perfect</span> <span style="font-weight:700;">Vision</span></span>
+          <div class="pvh-iconbtn" onClick="{{ closeMobile }}" style="font-size:28px;line-height:1;font-weight:300;">&times;</div>
+        </div>
+        <div style="padding:8px 12px 20px;">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+            <div style="border-bottom:1px solid #f0f0f0;">
+              <div onClick="{{ n.onAccordion }}" style="display:flex;align-items:center;justify-content:space-between;padding:16px 12px;cursor:pointer;">
+                <a href="{{ n.href }}" style="font-size:18px;font-weight:600;">{{ n.label }}</a>
+                <span style="font-family:'Readex Pro',sans-serif;font-size:18px;color:#F50115;width:20px;text-align:center;">{{ n.accSign }}</span>
+              </div>
+              <sc-if value="{{ n.accOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:0 12px 14px;display:flex;flex-direction:column;gap:2px;">
+                  <sc-for list="{{ n.links }}" as="l" hint-placeholder-count="4">
+                    <a href="{{ l.href }}" style="padding:10px 12px;border-radius:9px;font-size:15px;font-weight:400;color:#444;background:#fafafa;">{{ l.label }}</a>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:18px 22px 36px;display:flex;flex-direction:column;gap:14px;">
+          <a class="pvh-cta" href="Contact.dc.html" onClick="{{ openDemo }}" aria-haspopup="dialog" style="background:#F50115;color:#fff;text-align:center;padding:14px;border-radius:40px;font-size:15px;font-weight:600;">{{ t.demo }}</a>
+          <button onClick="{{ toggleLang }}" style="background:none;border:1px solid #ccc;color:#333;font-family:'Readex Pro',sans-serif;font-size:14px;font-weight:500;padding:13px;border-radius:40px;cursor:pointer;">{{ otherLangLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:620},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;solutions&quot;,&quot;fleetic&quot;,&quot;industries&quot;,&quot;newsroom&quot;,&quot;about&quot;,&quot;careers&quot;,&quot;contact&quot;,&quot;&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang, openPanel: null, closing: false, revealed: false, rise: false, megaH: '0px', flyout: false, flyClosing: false, flyPos: { left: 0, top: 0 }, searchOpen: false, mobileOpen: false, accordion: null, scrolled: false };
+  }
+  componentDidMount() {
+    this._lastY = window.scrollY;
+    this._onScroll = () => {
+      const y = window.scrollY;
+      const s = y > 40; if (s !== this.state.scrolled) this.setState({ scrolled: s }); this.updateChrome(s);
+      const hd = document.getElementById('pvh-header');
+      if (hd) {
+        const open = this.state.openPanel || this.state.mobileOpen || this.state.searchOpen || this.state.flyout;
+        const dy = y - this._lastY;
+        const setHid = (h) => { hd.classList.toggle('pvh-hidden', h); try { document.body.classList.toggle('pv-mainnav-hidden', h); } catch (err) {} };
+        if (open || y < 140) { setHid(false); this._down = 0; this._up = 0; }
+        else if (dy > 0) { this._down = (this._down || 0) + dy; this._up = 0; if (this._down > 26) setHid(true); }
+        else if (dy < 0) { this._up = (this._up || 0) - dy; this._down = 0; if (this._up > 12) setHid(false); }
+      }
+      this._lastY = y;
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onLang = (e) => { this.setState({ lang: e.detail }); };
+    window.addEventListener('pv-langchange', this._onLang);
+    this._onKey = (e) => { if (e.key === 'Escape' || e.key === 'Esc') { if (this.state.flyout && !this.state.flyClosing) { this.flyClose(); if (this._flyTrigger && this._flyTrigger.focus) { try { this._flyTrigger.focus(); } catch (err) {} } return; } if (this.state.openPanel && !this.state.closing) { this._refocus = true; this.startClose(); } if (this.state.searchOpen) this.closeSearch(); if (this.state.mobileOpen) this.closeMobile(); } };
+    window.addEventListener('keydown', this._onKey);
+    this.updateChrome(window.scrollY > 40);
+    try { const d = this.data(); ['solutions', 'fleetic', 'newsroom', 'about'].forEach(k => { const n = d.nav[k]; if (n && n.img) { const im = new Image(); im.src = n.img; } }); } catch (err) {}
+  }
+  componentDidUpdate() { this.updateChrome(this.state.scrolled); }
+  componentWillUnmount() { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('pv-langchange', this._onLang); window.removeEventListener('keydown', this._onKey); this._clearTimers(); }
+  updateChrome(scrolled) {
+    const hd = document.getElementById('pvh-header');
+    if (hd && (this.state.openPanel || this.state.mobileOpen || this.state.searchOpen)) { hd.classList.remove('pvh-hidden'); try { document.body.classList.remove('pv-mainnav-hidden'); } catch (err) {} }
+    const bar = document.getElementById('pvh-bar');
+    if (!bar) return;
+    const solid = scrolled || this.state.openPanel || this.state.searchOpen || this.props.barMode === 'solid';
+    bar.style.background = solid ? 'rgba(10,10,10,.42)' : '';
+    bar.style.boxShadow = solid ? 'inset 0 1px 1px rgba(255,255,255,0.1), 0 18px 46px -20px rgba(0,0,0,.45)' : '';
+  }
+  toggleLang = () => { const nl = this.state.lang === 'en' ? 'ar' : 'en'; try { localStorage.setItem('pv-lang', nl); } catch (e) {} window.dispatchEvent(new CustomEvent('pv-langchange', { detail: nl })); this.setState({ lang: nl }); };
+  _clearTimers() { if (this._t1) { clearTimeout(this._t1); this._t1 = null; } if (this._t2) { clearTimeout(this._t2); this._t2 = null; } if (this._flyT) { clearTimeout(this._flyT); this._flyT = null; } if (this._flyT2) { clearTimeout(this._flyT2); this._flyT2 = null; } if (this._hovT) { clearTimeout(this._hovT); this._hovT = null; } }
+  flyOpen = (e) => {
+    const t = e && e.currentTarget;
+    if (t) this._flyTrigger = t;
+    if (this._flyT) { clearTimeout(this._flyT); this._flyT = null; }
+    if (this.state.flyClosing && this._flyT2) { clearTimeout(this._flyT2); this._flyT2 = null; }
+    const hd = document.getElementById('pvh-header');
+    if (!this._flyTrigger || !hd) return;
+    const r = this._flyTrigger.getBoundingClientRect(), h = hd.getBoundingClientRect();
+    const w = Math.min(380, h.width - 24);
+    const left = Math.max(12, Math.min(r.left - h.left, h.width - w - 12));
+    this.setState({ flyout: true, flyClosing: false, flyPos: { left, top: r.bottom - h.top + 8 } });
+  };
+  flyDelayClose = () => { if (this._flyT) clearTimeout(this._flyT); this._flyT = setTimeout(() => { this._flyT = null; this.flyClose(); }, 180); };
+  flyKeep = () => { if (this._flyT) { clearTimeout(this._flyT); this._flyT = null; } if (this.state.flyClosing) { if (this._flyT2) { clearTimeout(this._flyT2); this._flyT2 = null; } this.setState({ flyClosing: false }); } };
+  flyClose = () => {
+    if (!this.state.flyout || this.state.flyClosing) return;
+    if (this.reducedMotion()) { this.setState({ flyout: false, flyClosing: false }); return; }
+    this.setState({ flyClosing: true });
+    this._flyT2 = setTimeout(() => { this._flyT2 = null; this.setState({ flyout: false, flyClosing: false }); }, 140);
+  };
+  flyToggleClick = (e) => {
+    let coarse = false; try { coarse = window.matchMedia('(hover: none)').matches; } catch (err) {}
+    if (!coarse) return;
+    if (e && e.preventDefault) e.preventDefault();
+    if (this.state.flyout && !this.state.flyClosing) this.flyClose(); else this.flyOpen(e);
+  };
+  reducedMotion() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (err) { return false; } }
+  measureMega() { const c = document.getElementById('pvh-megacontent'); return c ? c.scrollHeight : 0; }
+  _grow() {
+    this.setState({ megaH: this.measureMega() + 'px' });
+    this._t2 = setTimeout(() => { if (this.state.openPanel && !this.state.closing && !this.state.revealed) this.setState({ revealed: true }); }, 650);
+  }
+  togglePanel = (k) => (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.currentTarget) this._trigger = e.currentTarget;
+    const { openPanel, closing } = this.state;
+    this._clearTimers();
+    if (closing) { this.setState({ openPanel: k, closing: false, revealed: this.reducedMotion(), rise: true }, () => this._grow()); return; }
+    if (openPanel === k) { this.startClose(); return; }
+    if (openPanel) {
+      if (this.reducedMotion()) { this.setState({ openPanel: k, revealed: true }, () => this._grow()); return; }
+      this.setState({ revealed: false, rise: false, flyout: false, flyClosing: false });
+      this._t1 = setTimeout(() => {
+        this.setState({ openPanel: k, rise: true }, () => {
+          const h = this.measureMega() + 'px';
+          if (h === this.state.megaH) { requestAnimationFrame(() => requestAnimationFrame(() => { if (this.state.openPanel === k && !this.state.closing) this.setState({ revealed: true }); })); }
+          else this._grow();
+        });
+      }, 170);
+      return;
+    }
+    this.setState({ openPanel: k, closing: false, revealed: this.reducedMotion(), rise: true }, () => this._grow());
+  };
+  panelKey = (k) => (e) => { if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); this.togglePanel(k)(e); } };
+  hoverOpen = (k) => (e) => {
+    let coarse = false; try { coarse = window.matchMedia('(hover: none)').matches; } catch (err) {}
+    if (coarse) return;
+    if (this._hovT) { clearTimeout(this._hovT); this._hovT = null; }
+    if (this.state.openPanel === k && !this.state.closing) return;
+    this.togglePanel(k)(e && e.currentTarget ? { currentTarget: e.currentTarget } : undefined);
+  };
+  hoverAwayClose = () => { if (this.state.openPanel && !this.state.closing) this.startClose(); };
+  navClick = (k, hasMega) => (e) => {
+    if (!hasMega) return;
+    if (e && e.preventDefault) e.preventDefault();
+    if (!(this.state.openPanel === k && !this.state.closing)) this.togglePanel(k)(e);
+  };
+  barEnter = () => { if (this._hovT) { clearTimeout(this._hovT); this._hovT = null; } };
+  barLeave = () => {
+    if (!this.state.openPanel || this.state.closing) return;
+    if (this._hovT) clearTimeout(this._hovT);
+    this._hovT = setTimeout(() => { this._hovT = null; this.startClose(); }, 280);
+  };
+  onWrapEnd = (e) => {
+    if (!e || e.propertyName !== 'height') return;
+    if (this.state.closing) { this.finishClose(); return; }
+    if (this.state.openPanel && !this.state.revealed) this.setState({ revealed: true });
+  };
+  startClose = () => {
+    const { openPanel, closing } = this.state;
+    if (!openPanel || closing) return;
+    this._clearTimers();
+    if (this.reducedMotion()) { this.finishClose(); return; }
+    this.setState({ closing: true, revealed: false, rise: false, flyout: false, flyClosing: false });
+    this._t1 = setTimeout(() => {
+      this.setState({ megaH: '0px' });
+      this._t2 = setTimeout(() => { if (this.state.closing) this.finishClose(); }, 520);
+    }, 150);
+  };
+  finishClose = () => {
+    this._clearTimers();
+    this.setState({ openPanel: null, closing: false, revealed: false, megaH: '0px' });
+    if (this._refocus && this._trigger && this._trigger.focus) { try { this._trigger.focus(); } catch (err) {} }
+    this._refocus = false;
+  };
+  closePanel = () => this.startClose();
+  openSearch = () => { this._clearTimers(); this.setState({ searchOpen: true, openPanel: null, closing: false, revealed: false, megaH: '0px' }); };
+  closeSearch = () => this.setState({ searchOpen: false });
+  openMobile = () => this.setState({ mobileOpen: true });
+  closeMobile = () => this.setState({ mobileOpen: false });
+  stop = (e) => { e.stopPropagation(); };
+  setAccordion = (k) => () => this.setState(s => ({ accordion: s.accordion === k ? null : k }));
+
+  data() {
+    const en = {
+      utility: 'Trusted across 500+ facilities in the Kingdom.', demo: 'Request a Demo',
+      searchLabel: 'Search', searchPh: 'Search products, platform, news…',
+      nav: {
+        solutions: { label: 'Solutions', href: 'Solutions.dc.html', kicker: 'The View Family', title: 'One line that sees what matters', blurb: 'Five systems, one purpose: awareness on every site.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'The View Family', tag: 'All solutions', href: 'Solutions.dc.html', desc: 'One connected family of safety systems' },
+          { label: 'ProxView', tag: 'PWAS', href: 'ProxView.dc.html', desc: 'Proximity warning around moving equipment' },
+          { label: 'FleetView', tag: 'IVMS', href: 'FleetView.dc.html', desc: 'Vehicle & driver monitoring' },
+          { label: 'TrackView', tag: 'GPS', href: 'TrackView.dc.html', desc: 'GPS vehicle positioning & tracking' },
+          { label: 'AirView', tag: 'AQMS', href: 'AirView.dc.html', desc: 'Air quality monitoring' },
+          { label: 'LiftView', tag: 'LMI', href: 'LiftView.dc.html', desc: 'Load monitoring for cranes' } ] },
+        fleetic: { label: 'Fleetic', href: 'Fleetic.dc.html', mega: false, kicker: 'Powered by Fleetic', title: 'Every Journey, Under Control', blurb: 'The intelligence layer that turns devices into decisions.', img: 'assets/fleetic/brand/fleetic-menu-thumbnail.webp', links: [
+          { label: 'Overview', tag: '', href: 'Fleetic.dc.html', desc: 'The connected platform' },
+          { label: 'Powered by Fleetic', tag: '', href: 'Fleetic.dc.html', desc: 'The branding programme' },
+          { label: 'Login', tag: '', href: 'Fleetic.dc.html', desc: 'Access your dashboard' } ] },
+        newsroom: { label: 'Newsroom', href: 'Newsroom.dc.html', mega: false, kicker: 'Newsroom', title: 'Deployments, insights & updates', blurb: 'The latest from across our network.', img: 'assets/photos/perfect-vision-photo-excavator.webp', links: [
+          { label: 'The Blog', tag: '', href: 'Newsroom.dc.html#pr-news', desc: 'News, announcements & insights' },
+          { label: 'Photo Gallery', tag: '', href: 'Newsroom.dc.html#pr-gallery', desc: 'Deployments in the field' } ] },
+        about: { label: 'About', href: 'About.dc.html', mega: false, kicker: 'About', title: 'Founded in Dammam', blurb: 'A trusted authority in industrial safety technology.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'Company story', tag: '', href: 'About.dc.html', desc: 'Our origin and mission' },
+          { label: 'Vision 2030', tag: '', href: 'About.dc.html', desc: 'An active national partner' },
+          { label: 'Brand values', tag: '', href: 'About.dc.html', desc: 'Precision \u00b7 Protection \u00b7 Performance' },
+          { label: 'Careers', tag: '', href: 'Careers.dc.html', desc: 'Join the team' } ] },
+        careers: { label: 'Careers', href: 'Careers.dc.html', mega: false },
+        contact: { label: 'Contact', href: 'Contact.dc.html', mega: false }
+      },
+      searchSuggest: [ { label: 'ProxView', href: 'ProxView.dc.html' }, { label: 'Fleetic platform', href: 'Fleetic.dc.html' }, { label: 'Base Line', href: 'Solutions.dc.html' }, { label: 'NEOM', href: 'Industries.dc.html' }, { label: 'Newsroom', href: 'Newsroom.dc.html' } ]
+    };
+    const ar = {
+      utility: 'محل ثقة أكثر من 500 منشأة في المملكة.', demo: 'اطلب عرضًا',
+      searchLabel: 'بحث', searchPh: 'ابحث عن المنتجات والمنصة والأخبار…',
+      nav: {
+        solutions: { label: 'الحلول', href: 'Solutions.dc.html', kicker: 'عائلة View', title: 'منظومة واحدة ترى ما يهم', blurb: 'خمسة أنظمة، هدف واحد: الوعي بالخطر في كل موقع.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'The View Family', tag: 'كل الحلول', href: 'Solutions.dc.html', desc: 'عائلة متكاملة من أنظمة السلامة' },
+          { label: 'ProxView', tag: 'PWAS', href: 'ProxView.dc.html', desc: 'التحذير من الاقتراب' },
+          { label: 'FleetView', tag: 'IVMS', href: 'FleetView.dc.html', desc: 'مراقبة المركبات والسائقين' },
+          { label: 'TrackView', tag: 'GPS', href: 'TrackView.dc.html', desc: 'تتبع مواقع المركبات عبر GPS' },
+          { label: 'AirView', tag: 'AQMS', href: 'AirView.dc.html', desc: 'مراقبة جودة الهواء' },
+          { label: 'LiftView', tag: 'LMI', href: 'LiftView.dc.html', desc: 'مؤشر عزم الحمولة للرافعات' } ] },
+        fleetic: { label: 'Fleetic', href: 'Fleetic.dc.html', mega: false, kicker: 'Powered by Fleetic', title: 'كل رحلة، تحت السيطرة', blurb: 'طبقة الذكاء التي تحوّل بيانات الأجهزة إلى قرارات.', img: 'assets/fleetic/brand/fleetic-menu-thumbnail.webp', links: [
+          { label: 'Overview', tag: '', href: 'Fleetic.dc.html', desc: 'المنصة المتصلة' },
+          { label: 'Powered by Fleetic', tag: '', href: 'Fleetic.dc.html', desc: 'الأجهزة المتصلة بالمنصة' },
+          { label: 'Login', tag: '', href: 'Fleetic.dc.html', desc: 'ادخل إلى لوحة التحكم' } ] },
+        newsroom: { label: 'الأخبار', href: 'Newsroom.dc.html', mega: false, kicker: 'الأخبار', title: 'المشاريع والمقالات', blurb: 'آخر أخبارنا من الميدان.', img: 'assets/photos/perfect-vision-photo-excavator.webp', links: [
+          { label: 'المدونة', tag: '', href: 'Newsroom.dc.html#pr-news', desc: 'الأخبار والمقالات' },
+          { label: 'معرض الصور', tag: '', href: 'Newsroom.dc.html#pr-gallery', desc: 'لقطات من الميدان' } ] },
+        about: { label: 'من نحن', href: 'About.dc.html', mega: false, kicker: 'من نحن', title: 'تأسست في الدمام', blurb: 'مرجع موثوق في تقنيات السلامة الصناعية.', img: 'assets/photos/perfect-vision-photo-truck-dust.webp', links: [
+          { label: 'قصة الشركة', tag: '', href: 'About.dc.html', desc: 'بدايتنا ورسالتنا' },
+          { label: 'رؤية 2030', tag: '', href: 'About.dc.html', desc: 'شريك وطني فاعل' },
+          { label: 'قيمنا', tag: '', href: 'About.dc.html', desc: 'الدقة \u00b7 الحماية \u00b7 الأداء' },
+          { label: 'الوظائف', tag: '', href: 'Careers.dc.html', desc: 'انضم إلى الفريق' } ] },
+        careers: { label: 'الوظائف', href: 'Careers.dc.html', mega: false },
+        contact: { label: 'تواصل', href: 'Contact.dc.html', mega: false }
+      },
+      searchSuggest: [ { label: 'ProxView', href: 'ProxView.dc.html' }, { label: 'Fleetic', href: 'Fleetic.dc.html' }, { label: 'Base Line', href: 'Solutions.dc.html' }, { label: 'نيوم', href: 'Industries.dc.html' }, { label: 'الأخبار', href: 'Newsroom.dc.html' } ]
+    };
+    return this.state.lang === 'ar' ? ar : en;
+  }
+
+  openDemo = (e) => {
+    if (!document.querySelector('dialog.pvf-dlg')) return; // no footer dialog on this page: follow the link
+    e.preventDefault();
+    if (this.state && this.state.mobileOpen && this.closeMobile) this.closeMobile();
+    window.dispatchEvent(new CustomEvent('pv-open-demo'));
+  };
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const d = this.data();
+    const order = ['solutions', 'fleetic', 'newsroom', 'about', 'careers', 'contact'];
+    const navItems = order.map(k => {
+      const n = d.nav[k];
+      const hasMega = n.mega !== false;
+      const isActive = this.props.active === k;
+      const isOpen = hasMega && this.state.openPanel === k && !this.state.closing;
+      const anyOpen = !!this.state.openPanel && !this.state.closing;
+      const selected = anyOpen ? isOpen : isActive;
+      return {
+        label: n.label, href: n.href, weight: 600,
+        bg: isActive ? 'rgba(255,255,255,.12)' : 'transparent', txt: selected ? '#fff' : 'rgba(255,255,255,.55)',
+        border: 'none',
+        shadow: isActive ? 'inset 0 1px 1px rgba(255,255,255,.22)' : 'none',
+        pillCls: '',
+        caretDisplay: hasMega ? 'inline-flex' : 'none', padEnd: hasMega ? '20px' : '24px', onClick: this.navClick(k, hasMega), onEnter: hasMega ? this.hoverOpen(k) : this.hoverAwayClose, onKey: hasMega ? this.panelKey(k) : null,
+        haspopup: hasMega ? 'true' : 'false', expanded: (hasMega && this.state.openPanel === k && !this.state.closing) ? 'true' : 'false',
+        onAccordion: hasMega ? this.setAccordion(k) : (() => { window.location.href = n.href; }),
+        accOpen: this.state.accordion === k, accSign: this.state.accordion === k ? '\u2212' : '+',
+        links: (k === 'solutions' && n.viewFamily) ? n.viewFamily.concat(n.links.filter(l => !l.fly)) : (n.links || [])
+      };
+    });
+    const ap = this.state.openPanel ? d.nav[this.state.openPanel] : null;
+    const chev = isAr ? '\u25c2' : '\u25b8';
+    const apLinks = ap ? ap.links.map(l => {
+      const base = l.fly ? Object.assign({}, l, { onEnter: this.flyOpen, onLeave: this.flyDelayClose, onClick: this.flyToggleClick, chevron: chev }) : Object.assign({}, l);
+      base.tagDash = l.tag ? '- ' + l.tag : '';
+      return base;
+    }) : [];
+    const closing = this.state.closing;
+    const revealed = this.state.revealed;
+    return {
+      openDemo: this.openDemo,
+      dir: isAr ? 'rtl' : 'ltr', t: { utility: d.utility, demo: d.demo, searchLabel: d.searchLabel, searchPh: d.searchPh },
+      otherLangLabel: isAr ? 'English' : 'العربية',
+      navItems,
+      panelOpen: !!ap, hasPanel: !!ap,
+      activePanel: ap ? Object.assign({}, ap, { links: apLinks }) : { img: '', kicker: '', title: '', blurb: '', links: [] },
+      showPanelText: this.state.openPanel !== 'fleetic',
+      megaContentCls: this.state.openPanel === 'fleetic' ? 'pvh-fleetic' : '',
+      panelImgOpacity: this.state.openPanel === 'fleetic' ? 1 : 0.5,
+      flyoutOpen: this.state.flyout,
+      flyCls: this.state.flyClosing ? 'pvh-fly-closing' : 'pvh-fly-open',
+      flyLeft: this.state.flyPos.left + 'px', flyTop: this.state.flyPos.top + 'px',
+      flyKeep: this.flyKeep, flyLeave: this.flyDelayClose,
+      viewFamily: d.nav.solutions.viewFamily || [],
+      megaH: this.state.megaH,
+      megaOpacity: revealed ? 1 : 0,
+      megaShift: revealed ? 'translateY(0px)' : (this.state.rise ? 'translateY(12px)' : 'translateY(0px)'),
+      megaCtTransition: revealed ? 'opacity .22s ease,transform .24s cubic-bezier(.16,1,.3,1)' : 'opacity .12s ease,transform .14s ease',
+      barRadius: this.state.megaH === '0px' ? '40px' : '24px',
+      onWrapEnd: this.onWrapEnd,
+      ovCls: closing ? 'pvh-ov-closing' : 'pvh-ov-open',
+      searchOpen: this.state.searchOpen, mobileOpen: this.state.mobileOpen,
+      searchSuggest: d.searchSuggest,
+      drawerSide: isAr ? 'left' : 'right',
+      toggleLang: this.toggleLang, closePanel: this.closePanel,
+      barEnter: this.barEnter, barLeave: this.barLeave,
+      openSearch: this.openSearch, closeSearch: this.closeSearch,
+      openMobile: this.openMobile, closeMobile: this.closeMobile, stop: this.stop
+    };
+  }
+}
+</script>
+</body>
+</html>

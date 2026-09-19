@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Readex Pro',sans-serif;background:#F0F0F0;color:#0a0a0a;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1);}
+  .pr-tab{transition:background .3s ease,color .3s ease;cursor:pointer;white-space:nowrap;}
+  .pr-tab:hover{color:#0a0a0a;}
+  .liquid-glass{background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.9);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.18) 0%,rgba(10,10,10,0.06) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.06) 80%,rgba(10,10,10,0.18) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pr-gbtn{width:32px;height:32px;border-radius:50%;border:none;background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease;padding:0;}
+  .pr-gbtn:hover{background:rgba(255,255,255,.12);}
+  @keyframes pv-kb{from{transform:scale(1.005);}to{transform:scale(1.09);}}
+  .pv-jrow-img{transition:transform .5s cubic-bezier(.2,0,0,1);}
+  .pv-jrow.liquid-glass{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);background:rgba(8,8,8,.22);}
+  .pv-jrow:hover .pv-jrow-img{transform:scale(1.09);}
+  .pv-jrow-arrow{transition:background .25s ease,border-color .25s ease;}
+  .pv-jrow-arrow svg{transition:transform .3s cubic-bezier(.2,0,0,1);}
+  .pv-jrow:hover .pv-jrow-arrow{background:#fff;border-color:#fff;}
+  .pv-jrow:hover .pv-jrow-arrow svg{transform:translate(3px,-3px);stroke:#0a0a0a;}
+  [dir="rtl"] .pv-jrow-arrow svg{transform:scaleX(-1);}
+  [dir="rtl"] .pv-jrow:hover .pv-jrow-arrow svg{transform:scaleX(-1) translate(3px,-3px);stroke:#0a0a0a;}
+  @media(max-width:840px){
+    .pv-jrow{padding:10px !important;padding-inline-end:16px !important;gap:16px !important;}
+    .pv-jrow-thumb{width:56px !important;height:56px !important;}
+    .pv-jrow-excerpt,.pv-jrow-meta{display:none !important;}
+    .pv-jrow-arrow{width:40px !important;height:40px !important;}
+    .pv-jrow-title{font-size:16px !important;}
+  }
+  .pr-seeall{transition:background .3s ease,transform .25s ease;cursor:pointer;}
+  .pr-seeall:hover{background:rgba(255,255,255,.14);}
+  .pr-ncard{flex:0 0 calc((100% - 48px)/3);}
+  @media(max-width:1000px){.pr-ncard{flex:0 0 calc((100% - 24px)/2);}}
+  @media(max-width:640px){.pr-ncard{flex:0 0 100%;}}
+  .pr-news-card:hover .pr-news-img{transform:scale(1.06);}
+  .pr-news-img,.pr-blog-img{transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  .pr-arrow{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;line-height:1;transition:background .3s ease,transform .25s ease,opacity .3s ease;}
+  .pr-arrow:hover{background:#F50115;}
+  [dir="rtl"] .pr-arrow{transform:scaleX(-1);}
+  .pr-gnav{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.92);color:#0a0a0a;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;line-height:1;transition:background .3s ease,transform .25s ease;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);}
+  .pr-gnav:hover{background:#fff;transform:scale(1.07);}
+  .pv-galnav{transition:background .3s ease,transform .25s ease;}
+  .pv-galnav:hover{background:rgba(255,255,255,.16) !important;transform:translateY(-50%) scale(1.07);}
+  .pr-dot{transition:width .3s ease,background .3s ease;cursor:pointer;}
+  .pr-clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .pr-clamp3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .pv-subhead{top:94px;transition:top .6s cubic-bezier(.2,0,0,1);}
+  body.pv-mainnav-hidden .pv-subhead{top:18px;}
+  .pv-allbtn{position:relative;border-radius:44px;background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);overflow:hidden;transition:background .3s ease;}
+  .pv-allbtn::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-allbtn:hover{background:rgba(10,10,10,0.08);}
+  .pv-allbtn-in{display:inline-flex;align-items:center;gap:10px;border-radius:inherit;background:transparent;padding:12px 26px;font-size:15px;font-weight:500;}
+  .pv-arr{transition:transform .3s ease;}
+  .pv-allbtn:hover .pv-arr{transform:translateX(4px);}
+  [dir="rtl"] .pv-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pv-allbtn:hover .pv-arr{transform:scaleX(-1) translateX(4px);}
+  .pv-carr{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s ease,opacity .3s ease;}
+  .pv-carr svg{transition:transform .3s ease;flex:none;}
+  .pv-carr-next:hover svg{transform:translateX(3px);}
+  .pv-carr-prev svg{transform:scaleX(-1);}
+  .pv-carr-prev:hover svg{transform:scaleX(-1) translateX(3px);}
+  [dir="rtl"] .pv-carr-next svg{transform:scaleX(-1);}
+  [dir="rtl"] .pv-carr-next:hover svg{transform:scaleX(-1) translateX(3px);}
+  [dir="rtl"] .pv-carr-prev svg{transform:none;}
+  [dir="rtl"] .pv-carr-prev:hover svg{transform:translateX(3px);}
+  .pv-allbtn-light{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);}
+  .pv-allbtn-light::before{background:linear-gradient(180deg,rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.5) 100%);}
+  .pv-allbtn-light:hover{background:rgba(255,255,255,0.18);}
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}[data-reveal]{opacity:1 !important;transform:none !important;}}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;background:#F0F0F0;">
+
+  <dc-import name="SiteHeader" active="newsroom" bar-mode="solid" hint-size="100%,80px"></dc-import>
+
+  <div style="position:relative;background:#F0F0F0;color:#0a0a0a;padding-top:96px;">
+
+    <!-- NEWS -->
+    <section id="pr-news" style="position:relative;z-index:1;overflow:hidden;padding:clamp(44px,5vw,72px) clamp(20px,6vw,80px);scroll-margin-top:140px;">
+      <div style="position:relative;max-width:1240px;margin:0 auto;">
+        <div data-reveal style="display:flex;align-items:center;justify-content:space-between;gap:20px;">
+          <h2 style="font-size:clamp(34px,5vw,64px);font-weight:700;">{{ t.newsTitle }}</h2>
+          <a href="Blogs.dc.html" class="pv-allbtn" style="white-space:nowrap;"><span class="pv-allbtn-in" style="color:#0a0a0a;">{{ t.seeAllNews }}<svg class="pv-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a>
+        </div>
+        <div data-reveal style="overflow:hidden;margin-top:clamp(28px,3vw,44px);padding:4px 0 12px;">
+          <div style="display:flex;gap:24px;width:100%;">
+          <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+            <a class="pr-ncard pr-news-card" href="{{ n.href }}" style="aspect-ratio:3/4.05;border-radius:22px;overflow:hidden;position:relative;display:block;background:#161616;transform:{{ n.tf }};opacity:{{ n.op }};filter:{{ n.fl }};pointer-events:{{ n.pe }};transition:{{ n.tr }};">
+              <img class="pr-news-img" src="{{ n.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ n.pos }};" />
+              <div style="position:absolute;left:0;right:0;bottom:0;height:52%;pointer-events:none;background:{{ n.scrim }};"></div>
+              <sc-if value="{{ n.hasLogo }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(closest-side at 50% 45%,rgba(255,255,255,.86) 0%,rgba(255,255,255,.5) 55%,rgba(255,255,255,0) 100%);">
+                  <img src="{{ n.logo }}" alt="Saudi Aramco" style="width:58%;max-width:190px;height:auto;display:block;filter:drop-shadow(0 2px 8px rgba(255,255,255,.6));" />
+                </div>
+              </sc-if>
+              <div class="pr-ncap" style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
+                <h3 class="pr-clamp2" style="color:{{ n.ink }};font-size:20px;font-weight:600;line-height:1.25;">{{ n.title }}</h3>
+                <div style="display:flex;align-items:center;gap:10px;margin-top:10px;"><span style="font-size:11px;font-weight:600;color:{{ n.chipInk }};background:{{ n.chipBg }};padding:3px 10px;border-radius:20px;">{{ n.cat }}</span><span style="color:{{ n.inkSoft }};font-size:12.5px;">{{ n.date }}</span></div>
+              </div>
+            </a>
+          </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:26px;">
+          <div style="flex:1;max-width:760px;height:2px;background:rgba(0,0,0,.12);border-radius:2px;overflow:hidden;"><div style="height:100%;width:{{ newsProg }};background:#F50115;border-radius:2px;transition:width .65s cubic-bezier(.2,.7,.2,1);"></div></div>
+          <div style="display:flex;gap:12px;">
+            <div class="pv-carr pv-allbtn pv-carr-prev" role="button" tabindex="0" onClick="{{ newsPrev }}" aria-label="Previous" style="opacity:{{ prevOp }};pointer-events:{{ prevPe }};color:#0a0a0a;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            <div class="pv-carr pv-allbtn pv-carr-next" role="button" tabindex="0" onClick="{{ newsNext }}" aria-label="Next" style="opacity:{{ nextOp }};pointer-events:{{ nextPe }};color:#0a0a0a;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY -->
+    <section id="pr-gallery" style="position:relative;z-index:1;overflow:hidden;padding:clamp(44px,5vw,72px) clamp(20px,6vw,80px) clamp(80px,10vw,140px);scroll-margin-top:140px;">
+      <div style="position:relative;max-width:1240px;margin:0 auto;">
+        <h2 data-reveal style="font-size:clamp(34px,5vw,64px);font-weight:700;">{{ t.galleryTitle }}</h2>
+        <div data-reveal style="margin:clamp(32px,4vw,56px) auto 0;position:relative;">
+          <div style="border-radius:22px;overflow:hidden;position:relative;aspect-ratio:16/9;background:#161616;">
+            <sc-for list="{{ glayers }}" as="g" hint-placeholder-count="4">
+              <div style="position:absolute;inset:0;opacity:{{ g.op }};transform:{{ g.tf }};z-index:{{ g.z }};transition:{{ g.tr }};will-change:opacity,transform;">
+                <img src="{{ g.img }}" alt="" style="width:100%;height:100%;object-fit:cover;transform-origin:center;animation:{{ g.anim }};" />
+                <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));"></div>
+                <div style="position:absolute;left:24px;right:64px;bottom:20px;color:#fff;font-size:15px;font-weight:500;opacity:{{ g.capOp }};transform:{{ g.capTf }};transition:opacity .7s ease {{ g.capDelay }},transform .7s cubic-bezier(.2,0,0,1) {{ g.capDelay }};">{{ g.cap }}</div>
+              </div>
+            </sc-for>
+            <!-- side nav arrows, vertically centered -->
+            <button class="pv-carr pv-allbtn pv-allbtn-light pv-carr-prev" onClick="{{ galPrev }}" aria-label="Previous image" style="position:absolute;top:50%;inset-inline-start:16px;transform:translateY(-50%);z-index:6;color:#fff;border:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <button class="pv-carr pv-allbtn pv-allbtn-light pv-carr-next" onClick="{{ galNext }}" aria-label="Next image" style="position:absolute;top:50%;inset-inline-end:16px;transform:translateY(-50%);z-index:6;color:#fff;border:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <!-- dots overlay, bottom center -->
+            <div style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:8px;">
+              <sc-for list="{{ dots }}" as="d" hint-placeholder-count="5">
+                <button onClick="{{ d.go }}" aria-label="{{ d.aria }}" style="width:7px;height:7px;border-radius:50%;border:none;cursor:pointer;background:{{ d.bg }};transition:background .25s ease,transform .25s ease;transform:{{ d.scale }};padding:0;box-shadow:0 1px 3px rgba(0,0,0,.4);"></button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang, active: 0, gi: 0, ni: 0, vis: 3 };
+    this._gn = 1;
+  }
+  measureTone(src) {
+    if (!src) return;
+    this._tones = this._tones || {};
+    if (src in this._tones) return;
+    this._tones[src] = null;
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const W = 24, H = 12, c = document.createElement('canvas');
+        c.width = W; c.height = H;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, Math.round(img.naturalHeight * 0.58), img.naturalWidth, Math.round(img.naturalHeight * 0.42), 0, 0, W, H);
+        const d = ctx.getImageData(0, 0, W, H).data;
+        let sum = 0, n = 0;
+        for (let k = 0; k < d.length; k += 4) { sum += 0.2126 * d[k] + 0.7152 * d[k + 1] + 0.0722 * d[k + 2]; n++; }
+        this._tones[src] = (sum / n) > 150 ? 'light' : 'dark';
+      } catch (e) { this._tones[src] = 'dark'; }
+      this.forceUpdate();
+    };
+    img.onerror = () => { this._tones[src] = 'dark'; };
+    img.src = src;
+  }
+  componentDidMount() {
+    this._onLang = (e) => this.setState({ lang: e.detail });
+    window.addEventListener('pv-langchange', this._onLang);
+    this._onScroll = () => {
+      const ids = ['pr-news', 'pr-gallery']; let a = 0;
+      ids.forEach((id, i) => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 160) a = i; });
+      if (a !== this.state.active) this.setState({ active: a });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._mqs = [window.matchMedia('(max-width:640px)'), window.matchMedia('(max-width:1000px)')];
+    this._updVis = () => {
+      const vis = this._mqs[0].matches ? 1 : this._mqs[1].matches ? 2 : 3;
+      const maxNi = Math.max(0, (this._nn || 6) - vis);
+      this.setState(s => ({ vis, ni: Math.min(s.ni, maxNi) }));
+    };
+    this._mqs.forEach(m => m.addEventListener('change', this._updVis));
+    this._updVis();
+    this.initReveal();
+    this._scrollToHash = () => {
+      const id = (location.hash || '').replace('#', '');
+      if (!id || !/^pr-/.test(id)) return;
+      let tries = 0;
+      const go = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 120;
+          window.scrollTo({ top: y, behavior: 'auto' });
+          [140, 420, 800].forEach(d => setTimeout(() => {
+            const e2 = document.getElementById(id);
+            if (e2) window.scrollTo({ top: e2.getBoundingClientRect().top + window.pageYOffset - 120, behavior: 'auto' });
+          }, d));
+        } else if (tries++ < 60) { requestAnimationFrame(go); }
+      };
+      requestAnimationFrame(go);
+    };
+    this._scrollToHash();
+    window.addEventListener('hashchange', this._scrollToHash);
+  }
+  componentDidUpdate() { this.initReveal(); }
+  componentWillUnmount() {
+    window.removeEventListener('pv-langchange', this._onLang);
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._scrollToHash) window.removeEventListener('hashchange', this._scrollToHash);
+    if (this._mqs) this._mqs.forEach(m => m.removeEventListener('change', this._updVis));
+    if (this._io) this._io.disconnect();
+  }
+  initReveal() {
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    if (!this._io) this._io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; this._io.unobserve(e.target); } }), { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => { if (!el._o) { el._o = true; this._io.observe(el); } });
+  }
+  goSection = (i, id) => () => { this.setState({ active: i }); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 120, behavior: 'smooth' }); };
+  gal = (dir) => () => { const n = this._gn || 1; this._prevGi = this.state.gi; this.setState({ gi: (this.state.gi + dir + n) % n, gdir: dir }); };
+  goGal = (i) => () => { if (i === this.state.gi) return; this._prevGi = this.state.gi; this.setState({ gdir: i > this.state.gi ? 1 : -1, gi: i }); };
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const P = 'assets/photos/perfect-vision-photo-truck-dust.webp', P2 = 'assets/photos/perfect-vision-photo-fleet-row.webp', P3 = 'assets/photos/perfect-vision-photo-excavator.webp';
+    const MON = 'assets/products/shared/perfect-vision-monitor-display-7in.webp', TRK = 'assets/fleetic/hero/fleetic-hero-truck-silhouette-blue.webp', ISO = 'assets/news/perfect-vision-news-iso-certification-portrait.webp', BRAND = 'assets/news/perfect-vision-news-brand-launch-portrait.webp';
+    const SAIL = 'assets/heroes/perfect-vision-hero-about-dammam-sails.webp', PROX = 'assets/products/proxview/perfect-vision-proxview-wiring-diagram.webp', FIELD = 'assets/photos/perfect-vision-photo-field-workers.webp';
+    const MEGA = 'assets/photos/perfect-vision-photo-megaproject-aerial.webp', PETRO = 'assets/photos/perfect-vision-photo-petrochemical-plant.webp', YARD = 'assets/photos/perfect-vision-photo-fleet-yard-aerial.webp', HIGH = 'assets/photos/perfect-vision-photo-highrise-site-topdown.webp', ROW = 'assets/photos/perfect-vision-photo-fleet-row.webp', DEMO = 'assets/photos/perfect-vision-photo-construction-site-aerial.webp', GAS = 'assets/photos/perfect-vision-photo-crew-gas-plant.webp', TVU = 'assets/products/trackview/perfect-vision-trackview-plus-unit.jpg', PVKIT = 'assets/products/proxview/perfect-vision-proxview-kit-monitor-cameras-alarm.webp', AVU = 'assets/products/airview/perfect-vision-airview-station-angle.webp', CONS = 'assets/photos/perfect-vision-photo-earthworks-site.webp';
+    const en = {
+      newsTitle: 'The Blog', blogsTitle: 'Articles', galleryTitle: 'Photo Gallery',
+      seeAllNews: 'See All Posts', seeAllBlogs: 'See All Articles',
+      subnav: ['The Blog', 'Photo Gallery'],
+      news: [
+        { img: BRAND, cat: 'News', date: '8 Jul 2026', title: 'New mark. New era. Same promise.', href: 'Article-Brand.dc.html' },
+        { img: ISO, cat: 'News', date: '1 Jul 2026', title: 'Three ISO certificates. One discipline.', href: 'Article-ISO.dc.html' },
+        { img: MEGA, cat: 'News', date: '27 Apr 2026', title: 'Perfect Vision crosses 500 connected facilities' },
+        { img: AVU, cat: 'News', date: '19 Apr 2026', title: 'AirView goes live at a SABIC complex' },
+        { img: YARD, cat: 'News', date: '22 Jan 2026', title: 'ProxView rollout across a NEOM logistics corridor' },
+        { img: HIGH, cat: 'News', date: '1 Jan 2026', title: 'LiftView retrofitted across an Eastern Province crane fleet' },
+        { img: TVU, cat: 'News', date: '3 Nov 2025', title: 'TrackView goes live across a national logistics fleet' }
+      ],
+      blogs: [
+        { img: DEMO, logo: 'assets/clients/client-logo-saudi-aramco.png', href: 'Article-ProxView-Aramco.dc.html', date: '25 Feb 2026', read: '5 min read', title: 'Why ProxView meets Aramco-approved safety requirements', excerpt: 'What Aramco approval really asks for, and how ProxView was engineered to meet it from the start.' },
+        { img: CONS, pos: '68% center', href: 'Article-Vision2030.dc.html', date: '22 Oct 2025', read: '6 min read', title: 'Digital transformation is rewriting construction safety in the Kingdom', excerpt: 'How Vision 2030 moves safety from paperwork and inspection to awareness that acts in real time.' },
+        { img: GAS, href: 'Article-AirView.dc.html', date: '25 Aug 2025', read: '5 min read', title: 'Why the Kingdom is monitoring the air, from cities to worksites', excerpt: 'Measuring the hazard no one can see, so evacuation can happen before exposure.' }
+      ],
+      gallery: [
+        { img: 'assets/photos/perfect-vision-photo-field-workers.webp', cap: 'Field crew, Eastern Province deployment' },
+        { img: 'assets/photos/perfect-vision-photo-cab-mirror-device.webp', cap: 'ProxView unit installed on a hauler cab' },
+        { img: 'assets/photos/perfect-vision-photo-cab-monitor.webp', cap: 'In-cab monitor commissioning' },
+        { img: 'assets/photos/perfect-vision-photo-cab-interior.webp', cap: 'Perfect Vision hardware fitted on site' }
+      ]
+    };
+    const ar = {
+      newsTitle: 'المدونة', blogsTitle: 'المقالات', galleryTitle: 'معرض الصور',
+      seeAllNews: 'كل المنشورات', seeAllBlogs: 'كل المقالات',
+      subnav: ['المدونة', 'معرض الصور'],
+      news: [
+        { img: BRAND, cat: 'أخبار', date: '8 Jul 2026', title: 'شعار جديد. مرحلة جديدة. الوعد نفسه.', href: 'Article-Brand.dc.html' },
+        { img: ISO, cat: 'أخبار', date: '1 Jul 2026', title: 'ثلاث شهادات آيزو. منهجية واحدة.', href: 'Article-ISO.dc.html' },
+        { img: MEGA, cat: 'أخبار', date: '27 Apr 2026', title: 'Perfect Vision تتجاوز 500 منشأة متصلة' },
+        { img: AVU, cat: 'أخبار', date: '19 Apr 2026', title: 'AirView يبدأ العمل في مجمع سابك' },
+        { img: YARD, cat: 'أخبار', date: '22 Jan 2026', title: 'تركيب ProxView على ممر لوجستي في نيوم' },
+        { img: HIGH, cat: 'أخبار', date: '1 Jan 2026', title: 'LiftView على أسطول رافعات الشرقية' },
+        { img: TVU, cat: 'أخبار', date: '3 Nov 2025', title: 'TrackView يدخل الخدمة على أسطول لوجستي وطني' }
+      ],
+      blogs: [
+        { img: DEMO, logo: 'assets/clients/client-logo-saudi-aramco.png', href: 'Article-ProxView-Aramco.dc.html', date: '25 Feb 2026', read: 'قراءة 5 دقائق', title: 'لماذا يستوفي ProxView متطلبات السلامة المعتمدة من أرامكو', excerpt: 'ما الذي يطلبه اعتماد أرامكو فعلًا، وكيف صمم ProxView وفقه منذ البداية.' },
+        { img: CONS, pos: '68% center', href: 'Article-Vision2030.dc.html', date: '22 Oct 2025', read: 'قراءة 6 دقائق', title: 'التحول الرقمي يعيد كتابة سلامة الإنشاءات في المملكة', excerpt: 'كيف تنقل رؤية 2030 السلامة من الأوراق والتفتيش إلى وعي بالخطر يتصرف في اللحظة.' },
+        { img: GAS, href: 'Article-AirView.dc.html', date: '25 Aug 2025', read: 'قراءة 5 دقائق', title: 'لماذا تراقب المملكة الهواء، من المدن إلى مواقع العمل', excerpt: 'قياس الخطر الذي لا يراه أحد، ليتم الإخلاء قبل التعرض.' }
+      ],
+      gallery: [
+        { img: 'assets/photos/perfect-vision-photo-field-workers.webp', cap: 'فريق ميداني أثناء التركيب في المنطقة الشرقية' },
+        { img: 'assets/photos/perfect-vision-photo-cab-mirror-device.webp', cap: 'تركيب وحدة ProxView على مقصورة الشاحنة' },
+        { img: 'assets/photos/perfect-vision-photo-cab-monitor.webp', cap: 'تشغيل شاشة المراقبة داخل المقصورة' },
+        { img: 'assets/photos/perfect-vision-photo-cab-interior.webp', cap: 'تركيب أجهزة Perfect Vision في الموقع' }
+      ]
+    };
+    const t = isAr ? ar : en;
+    const mon = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11 };
+    const dv = (d) => { const p = (d || '').split(' '); return new Date(+p[2] || 0, mon[(p[1] || '').toUpperCase()] || 0, +p[0] || 1).getTime(); };
+    const posts = t.news.map(n => Object.assign({}, n, { chipBg: 'rgba(255,255,255,.22)' }))
+      .concat(t.blogs.map(b => ({ img: b.img, logo: b.logo, pos: b.pos, href: b.href, date: b.date, title: b.title, cat: isAr ? 'مقال' : 'Article', chipBg: 'rgba(255,255,255,.22)' })))
+      .sort((a, b) => dv(b.date) - dv(a.date));
+    this._gn = t.gallery.length;
+    const gi = this.state.gi % t.gallery.length;
+    const N = posts.length; this._nn = N;
+    const vis = this.state.vis || 3;
+    const maxNi = Math.max(0, N - vis);
+    const ni = Math.min(this.state.ni, maxNi);
+    const sign = isAr ? 1 : -1;
+    const DUR = '.65s';
+    const newsCards = posts.map((n, idx) => {
+      const p = idx - ni; const on = p >= 0 && p < vis;
+      const d = (Math.max(0, Math.min(p, vis - 1)) * 70) + 'ms';
+      this.measureTone(n.img);
+      const tone = (this._tones || {})[n.img] === 'light' ? 'light' : 'dark';
+      const scrim = tone === 'light'
+        ? 'linear-gradient(0deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.72) 45%,rgba(255,255,255,0) 100%)'
+        : 'linear-gradient(0deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.5) 45%,rgba(0,0,0,0) 100%)';
+      return Object.assign({}, n, {
+        scrim,
+        pos: n.pos || 'center',
+        hasLogo: !!n.logo,
+        ink: tone === 'light' ? '#0a0a0a' : '#fff',
+        inkSoft: tone === 'light' ? 'rgba(10,10,10,.72)' : 'rgba(255,255,255,.86)',
+        chipInk: tone === 'light' ? '#0a0a0a' : '#fff',
+        chipBg: tone === 'light' ? 'rgba(10,10,10,.10)' : 'rgba(255,255,255,.22)',
+        href: n.href || 'Article.dc.html',
+        tf: 'translateX(calc(' + (ni * sign) + ' * (100% + 24px))) scale(' + (on ? 1 : 0.86) + ')',
+        op: on ? 1 : 0,
+        fl: on ? 'none' : 'blur(10px)',
+        pe: on ? 'auto' : 'none',
+        tr: 'transform ' + DUR + ' cubic-bezier(.2,.7,.2,1) ' + d + ',opacity ' + DUR + ' ease ' + d + ',filter ' + DUR + ' ease ' + d
+      });
+    });
+    const subnav = t.subnav.map((label, i) => { const on = i === this.state.active; return { label, go: this.goSection(i, ['pr-news', 'pr-gallery'][i]), bg: on ? '#0a0a0a' : 'transparent', color: on ? '#fff' : '#3A3A3A', weight: on ? 600 : 400, shadow: 'none' }; });
+    const dots = t.gallery.map((g, i) => ({ go: this.goGal(i), aria: (isAr ? 'صورة ' : 'Image ') + (i + 1), bg: i === gi ? '#fff' : 'rgba(255,255,255,.3)', scale: i === gi ? 'scale(1.25)' : 'scale(1)' }));
+    const vdir = (this.state.gdir || 1) * (isAr ? -1 : 1);
+    const glayers = t.gallery.map((g, i) => {
+      const active = i === gi;
+      const isPrev = i === this._prevGi && !active;
+      const xp = active ? 0 : (isPrev ? -vdir * 5 : vdir * 5);
+      return {
+        img: g.img, cap: g.cap,
+        op: active ? 1 : 0,
+        z: active ? 2 : 1,
+        tf: 'translateX(' + xp + '%)',
+        tr: 'opacity .85s ease, transform .9s cubic-bezier(.2,0,0,1)',
+        anim: active ? 'pv-kb 9s cubic-bezier(.2,0,0,1) forwards' : 'none',
+        capOp: active ? 1 : 0,
+        capTf: active ? 'translateY(0)' : 'translateY(10px)',
+        capDelay: active ? '.18s' : '0s'
+      };
+    });
+    return {
+      dir: isAr ? 'rtl' : 'ltr', t,
+      subnav, news: newsCards,
+      newsProg: (16 + (maxNi ? ni / maxNi : 1) * 84) + '%',
+      prevOp: ni === 0 ? 0.35 : 1, prevPe: ni === 0 ? 'none' : 'auto',
+      nextOp: ni >= maxNi ? 0.35 : 1, nextPe: ni >= maxNi ? 'none' : 'auto',
+      gallery: t.gallery[gi], glayers, dots, arrowFlip: isAr ? 'scaleX(-1)' : 'none',
+      newsPrev: () => this.setState(s => ({ ni: Math.max(0, s.ni - 1) })),
+      newsNext: () => this.setState(s => { const mx = Math.max(0, (this._nn || 6) - (s.vis || 3)); return { ni: Math.min(mx, s.ni + 1) }; }),
+      galPrev: this.gal(-1), galNext: this.gal(1)
+    };
+  }
+}
+</script>
+</body>
+</html>

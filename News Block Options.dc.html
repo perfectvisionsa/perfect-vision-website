@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  body{background:#1b1b1e;font-family:'Readex Pro',sans-serif;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  .nwo-row .nwo-img{transition:transform .5s cubic-bezier(.2,0,0,1);}
+  .nwo-row:hover .nwo-img{transform:scale(1.09);}
+  .liquid-glass{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .nwo-arrow{transition:background .25s ease,border-color .25s ease;}
+  .nwo-arrow svg{transition:transform .3s cubic-bezier(.2,0,0,1);}
+  .nwo-row:hover .nwo-arrow{background:#F50115;border-color:#F50115;}
+  .nwo-row:hover .nwo-arrow svg{transform:translate(3px,-3px);}
+  [dir="rtl"] .nwo-arrow svg{transform:scaleX(-1);}
+  [dir="rtl"] .nwo-row:hover .nwo-arrow svg{transform:scaleX(-1) translate(3px,-3px);}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+
+<section style="display:flex;flex-direction:column;gap:40px;padding:56px;padding-bottom:0;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1320px;">
+    <div>
+      <div style="font-size:12px;color:#F50115;">Turn 2</div>
+      <h1 style="font-size:26px;font-weight:700;margin-top:8px;">النسخة المعتمدة · زجاج الهيدر + سهم تفاعلي</h1>
+      <p style="margin-top:8px;color:rgba(255,255,255,.55);font-size:14px;font-weight:300;">نفس <a href="#1a" style="color:#F50115;">1a</a> لكن الشريط بخامة liquid-glass المطابقة للهيدر، وسهم دائري ينقلب أحمر وينزلق عند الهوفر</p>
+    </div>
+    <button onClick="{{ toggleLang }}" style="flex:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Readex Pro',sans-serif;font-size:14px;font-weight:600;padding:10px 22px;border-radius:40px;cursor:pointer;" style-hover="background:rgba(255,255,255,.16);">{{ langLabel }}</button>
+  </div>
+
+  <div id="2a" style="display:flex;flex-direction:column;gap:14px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="#2a" style="background:#F50115;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:40px;">2a</a>
+      <span style="font-size:14px;color:rgba(255,255,255,.7);">liquid-glass مثل الهيدر تمامًا + سهم دخول تفاعلي</span>
+    </div>
+    <div data-screen-label="Option 2a" dir="{{ dir }}" style="width:1280px;position:relative;color:#fff;overflow:hidden;padding:clamp(64px,7vw,110px) 64px;border-radius:16px;background:#0a0a0a;">
+      <img src="assets/photos/perfect-vision-photo-excavator.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,#000 10%,rgba(0,0,0,.4));"></div>
+      <div style="position:relative;max-width:1160px;margin:0 auto;">
+        <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;">
+          <div>
+            <div style="font-size:12px;color:#F50115;">{{ t.eyebrow }}</div>
+            <h2 style="font-size:48px;font-weight:700;margin-top:14px;line-height:1.05;">{{ t.a.titleA }}<span style="color:#F50115;">{{ t.a.titleB }}</span></h2>
+            <p style="margin-top:14px;max-width:520px;font-size:16px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.65);">{{ t.a.sub }}</p>
+          </div>
+          <a href="Newsroom.dc.html" style="color:#F50115;font-size:15px;font-weight:600;border:1px solid #F50115;padding:11px 24px;border-radius:40px;transition:all .2s;" style-hover="background:#F50115;color:#fff;">{{ t.cta }}</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px;margin-top:44px;">
+          <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+            <a class="nwo-row liquid-glass" href="Newsroom.dc.html" style="display:flex;align-items:center;gap:clamp(28px,3.4vw,44px);padding:22px;padding-inline-end:34px;border-radius:999px;">
+              <div style="width:112px;height:112px;border-radius:50%;overflow:hidden;flex:none;background:#161616;">
+                <img class="nwo-img" src="{{ n.img }}" alt="" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-size:22px;font-weight:600;line-height:1.3;">{{ n.title }}</h3>
+                <p style="margin-top:6px;font-size:15px;font-weight:300;line-height:1.5;color:rgba(255,255,255,.55);">{{ n.excerpt }}</p>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none;color:rgba(255,255,255,.55);text-align:end;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">{{ n.date }}</span>
+              </div>
+              <div class="nwo-arrow" style="width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;flex:none;color:#fff;">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <div style="margin-top:96px;">
+          <h2 style="font-size:64px;font-weight:700;line-height:1.03;text-wrap:balance;">{{ t.philA }}<br><span style="color:#F50115;">{{ t.philB }}</span></h2>
+          <div style="display:flex;align-items:center;gap:14px;margin-top:34px;">
+            <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;">
+              <img src="assets/team/perfect-vision-ceo-portrait.webp" alt="{{ t.ceoName }}" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+            </div>
+            <div>
+              <div style="font-size:17px;font-weight:600;">{{ t.ceoName }}</div>
+              <div style="font-size:14px;font-weight:300;color:rgba(255,255,255,.6);margin-top:2px;">{{ t.ceoTitle }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section style="display:flex;flex-direction:column;gap:40px;padding:56px;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1320px;">
+    <div>
+      <div style="font-size:12px;color:#F50115;">Exploration</div>
+      <h1 style="font-size:30px;font-weight:700;margin-top:8px;">بلوك المقالات · 3 نسخ فوق كلمة الرئيس</h1>
+      <p style="margin-top:8px;color:rgba(255,255,255,.55);font-size:14px;font-weight:300;">نفس القسم الداكن في الرئيسية · أشرطة زجاجية · صورة دائرية · زوم خفيف عند الهوفر · العناوين من صفحة Newsroom</p>
+    </div>
+    <button onClick="{{ toggleLang }}" style="flex:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Readex Pro',sans-serif;font-size:14px;font-weight:600;padding:10px 22px;border-radius:40px;cursor:pointer;" style-hover="background:rgba(255,255,255,.16);">{{ langLabel }}</button>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start;">
+
+    <!-- ═══════════ 1a ═══════════ -->
+    <div id="1a" style="display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="#1a" style="background:#F50115;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:40px;">1a</a>
+        <span style="font-size:14px;color:rgba(255,255,255,.7);">زجاجي نقي · الأقرب للمرجع، الميتا بخط أحادي</span>
+      </div>
+      <div data-screen-label="Option 1a" dir="{{ dir }}" style="width:1280px;position:relative;color:#fff;overflow:hidden;padding:clamp(64px,7vw,110px) 64px;border-radius:16px;background:#0a0a0a;">
+        <img src="assets/photos/perfect-vision-photo-excavator.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#000 10%,rgba(0,0,0,.4));"></div>
+        <div style="position:relative;max-width:1160px;margin:0 auto;">
+          <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;">
+            <div>
+              <div style="font-size:12px;color:#F50115;">{{ t.eyebrow }}</div>
+              <h2 style="font-size:48px;font-weight:700;margin-top:14px;line-height:1.05;">{{ t.a.titleA }}<span style="color:#F50115;">{{ t.a.titleB }}</span></h2>
+              <p style="margin-top:14px;max-width:520px;font-size:16px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.65);">{{ t.a.sub }}</p>
+            </div>
+            <a href="Newsroom.dc.html" style="color:#F50115;font-size:15px;font-weight:600;border:1px solid #F50115;padding:11px 24px;border-radius:40px;transition:all .2s;" style-hover="background:#F50115;color:#fff;">{{ t.cta }}</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:44px;">
+            <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+              <a class="nwo-row" href="Newsroom.dc.html" style="display:flex;align-items:center;gap:26px;padding:12px;padding-inline-end:34px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:999px;backdrop-filter:blur(14px);transition:background .2s,border-color .2s;" style-hover="background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.26);">
+                <div style="width:74px;height:74px;border-radius:50%;overflow:hidden;flex:none;background:#161616;">
+                  <img class="nwo-img" src="{{ n.img }}" alt="" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h3 style="flex:1;font-size:20px;font-weight:600;line-height:1.35;">{{ n.title }}</h3>
+                <div style="display:flex;align-items:center;gap:18px;flex:none;color:rgba(255,255,255,.55);">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">{{ n.date }}</span>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+          <div style="margin-top:96px;">
+            <h2 style="font-size:64px;font-weight:700;line-height:1.03;text-wrap:balance;">{{ t.philA }}<br><span style="color:#F50115;">{{ t.philB }}</span></h2>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:34px;">
+              <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;">
+                <img src="assets/team/perfect-vision-ceo-portrait.webp" alt="{{ t.ceoName }}" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+              </div>
+              <div>
+                <div style="font-size:17px;font-weight:600;">{{ t.ceoName }}</div>
+                <div style="font-size:14px;font-weight:300;color:rgba(255,255,255,.6);margin-top:2px;">{{ t.ceoTitle }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ 1b ═══════════ -->
+    <div id="1b" style="display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="#1b" style="background:#F50115;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:40px;">1b</a>
+        <span style="font-size:14px;color:rgba(255,255,255,.7);">مؤشر رقمي · ترقيم أحمر أحادي الخط، طابع تقني</span>
+      </div>
+      <div data-screen-label="Option 1b" dir="{{ dir }}" style="width:1280px;position:relative;color:#fff;overflow:hidden;padding:clamp(64px,7vw,110px) 64px;border-radius:16px;background:#0a0a0a;">
+        <img src="assets/photos/perfect-vision-photo-excavator.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#000 10%,rgba(0,0,0,.4));"></div>
+        <div style="position:relative;max-width:1160px;margin:0 auto;">
+          <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;">
+            <div>
+              <div style="font-size:12px;color:#F50115;">{{ t.eyebrow }}</div>
+              <h2 style="font-size:48px;font-weight:700;margin-top:14px;line-height:1.05;">{{ t.b.titleA }}<span style="color:#F50115;">{{ t.b.titleB }}</span></h2>
+              <p style="margin-top:14px;max-width:520px;font-size:16px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.65);">{{ t.b.sub }}</p>
+            </div>
+            <a href="Newsroom.dc.html" style="color:#F50115;font-size:15px;font-weight:600;border:1px solid #F50115;padding:11px 24px;border-radius:40px;transition:all .2s;" style-hover="background:#F50115;color:#fff;">{{ t.cta }}</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:44px;">
+            <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+              <a class="nwo-row" href="Newsroom.dc.html" style="display:flex;align-items:center;gap:24px;padding:12px;padding-inline-start:32px;padding-inline-end:34px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:999px;backdrop-filter:blur(14px);transition:background .2s,border-color .2s;" style-hover="background:rgba(255,255,255,.12);border-color:rgba(245,1,21,.45);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;color:#F50115;flex:none;">{{ n.num }}</span>
+                <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;flex:none;background:#161616;border:1px solid rgba(255,255,255,.18);">
+                  <img class="nwo-img" src="{{ n.img }}" alt="" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <h3 style="flex:1;font-size:20px;font-weight:600;line-height:1.35;">{{ n.title }}</h3>
+                <div style="display:flex;align-items:center;gap:16px;flex:none;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.55);">
+                  <span>{{ n.date }}</span>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+          <div style="margin-top:96px;">
+            <h2 style="font-size:64px;font-weight:700;line-height:1.03;text-wrap:balance;">{{ t.philA }}<br><span style="color:#F50115;">{{ t.philB }}</span></h2>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:34px;">
+              <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;">
+                <img src="assets/team/perfect-vision-ceo-portrait.webp" alt="{{ t.ceoName }}" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+              </div>
+              <div>
+                <div style="font-size:17px;font-weight:600;">{{ t.ceoName }}</div>
+                <div style="font-size:14px;font-weight:300;color:rgba(255,255,255,.6);margin-top:2px;">{{ t.ceoTitle }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ 1c ═══════════ -->
+    <div id="1c" style="display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="#1c" style="background:#F50115;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:40px;">1c</a>
+        <span style="font-size:14px;color:rgba(255,255,255,.7);">رأس جانبي · تكوين غير متماثل، الهيدر بجانب القائمة</span>
+      </div>
+      <div data-screen-label="Option 1c" dir="{{ dir }}" style="width:1280px;position:relative;color:#fff;overflow:hidden;padding:clamp(64px,7vw,110px) 64px;border-radius:16px;background:#0a0a0a;">
+        <img src="assets/photos/perfect-vision-photo-excavator.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#000 10%,rgba(0,0,0,.4));"></div>
+        <div style="position:relative;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start;">
+          <div>
+            <div style="font-size:12px;color:#F50115;">{{ t.eyebrow }}</div>
+            <h2 style="font-size:42px;font-weight:700;margin-top:14px;line-height:1.1;text-wrap:balance;">{{ t.c.titleA }}<span style="color:#F50115;">{{ t.c.titleB }}</span></h2>
+            <p style="margin-top:16px;font-size:15.5px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.65);">{{ t.c.sub }}</p>
+            <a href="Newsroom.dc.html" style="display:inline-block;margin-top:28px;color:#F50115;font-size:15px;font-weight:600;border:1px solid #F50115;padding:11px 24px;border-radius:40px;transition:all .2s;" style-hover="background:#F50115;color:#fff;">{{ t.cta }}</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+              <a class="nwo-row" href="Newsroom.dc.html" style="display:flex;align-items:center;gap:22px;padding:11px;padding-inline-end:30px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:999px;backdrop-filter:blur(14px);transition:background .2s,border-color .2s;" style-hover="background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.26);">
+                <div style="width:66px;height:66px;border-radius:50%;overflow:hidden;flex:none;background:#161616;">
+                  <img class="nwo-img" src="{{ n.img }}" alt="" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <h3 style="font-size:18px;font-weight:600;line-height:1.35;">{{ n.title }}</h3>
+                  <div style="display:flex;align-items:center;gap:12px;margin-top:5px;color:rgba(255,255,255,.5);font-size:12.5px;">
+                    <span style="font-family:'JetBrains Mono',monospace;">{{ n.date }}</span>
+                  </div>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:relative;max-width:1160px;margin:96px auto 0;">
+          <h2 style="font-size:64px;font-weight:700;line-height:1.03;text-wrap:balance;">{{ t.philA }}<br><span style="color:#F50115;">{{ t.philB }}</span></h2>
+          <div style="display:flex;align-items:center;gap:14px;margin-top:34px;">
+            <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;">
+              <img src="assets/team/perfect-vision-ceo-portrait.webp" alt="{{ t.ceoName }}" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+            </div>
+            <div>
+              <div style="font-size:17px;font-weight:600;">{{ t.ceoName }}</div>
+              <div style="font-size:14px;font-weight:300;color:rgba(255,255,255,.6);margin-top:2px;">{{ t.ceoTitle }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'ar' };
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const P = 'assets/photos/perfect-vision-photo-truck-dust.webp', P2 = 'assets/photos/perfect-vision-photo-fleet-row.webp', P3 = 'assets/photos/perfect-vision-photo-excavator.webp';
+    const en = {
+      eyebrow: 'Newsroom', cta: 'View all',
+      a: { titleA: 'Signals from ', titleB: 'the field.', sub: 'What 500+ connected facilities are telling us.' },
+      b: { titleA: 'The latest, ', titleB: 'from every site.', sub: 'News and field notes from across the Kingdom.' },
+      c: { titleA: 'What the field ', titleB: 'reports.', sub: 'Stories from 500+ connected facilities, told in the time it takes to drink a coffee.' },
+      philA: 'Specs don\u2019t protect people.', philB: 'Awareness does.', ceoName: 'Saleh Al-Omar', ceoTitle: 'Chief Executive Officer',
+      news: [
+        { img: P3, date: '27 Apr 2026', title: 'Perfect Vision crosses 500 connected facilities', read: '4 min read', readMono: '4 MIN', excerpt: 'A milestone for industrial safety adoption across the Kingdom.' },
+        { img: P2, date: '19 Apr 2026', title: 'AirView goes live at a SABIC complex', read: '3 min read', readMono: '3 MIN', excerpt: 'Real-time gas and dust monitoring, wired into the control room.' },
+        { img: P, date: '22 Jan 2026', title: 'ProxView rollout across a NEOM logistics corridor', read: '5 min read', readMono: '5 MIN', excerpt: 'Proximity warning live on the primary haul routes.' }
+      ]
+    };
+    const ar = {
+      eyebrow: '\u063a\u0631\u0641\u0629 \u0627\u0644\u0623\u062e\u0628\u0627\u0631', cta: '\u0639\u0631\u0636 \u0627\u0644\u0643\u0644',
+      a: { titleA: '\u0625\u0634\u0627\u0631\u0627\u062a \u0645\u0646 ', titleB: '\u0627\u0644\u0645\u064a\u062f\u0627\u0646.', sub: '\u0645\u0627 \u062a\u062e\u0628\u0631\u0646\u0627 \u0628\u0647 \u0623\u0643\u062b\u0631 \u0645\u0646 500 \u0645\u0646\u0634\u0623\u0629 \u0645\u062a\u0635\u0644\u0629.' },
+      b: { titleA: '\u0627\u0644\u062c\u062f\u064a\u062f\u060c ', titleB: '\u0645\u0646 \u0643\u0644 \u0645\u0648\u0642\u0639.', sub: '\u0623\u062e\u0628\u0627\u0631 \u0648\u0645\u0644\u0627\u062d\u0638\u0627\u062a \u0645\u064a\u062f\u0627\u0646\u064a\u0629 \u0645\u0646 \u0623\u0646\u062d\u0627\u0621 \u0627\u0644\u0645\u0645\u0644\u0643\u0629.' },
+      c: { titleA: '\u0645\u0627 \u064a\u0631\u0635\u062f\u0647 ', titleB: '\u0627\u0644\u0645\u064a\u062f\u0627\u0646.', sub: 'قصص من أكثر من 500 منشأة متصلة، تقرأ في دقائق.' },
+      philA: '\u0627\u0644\u0645\u0648\u0627\u0635\u0641\u0627\u062a \u0644\u0627 \u062a\u062d\u0645\u064a \u0627\u0644\u0628\u0634\u0631.', philB: '\u0627\u0644\u0625\u062f\u0631\u0627\u0643 \u0647\u0648 \u0645\u0627 \u064a\u062d\u0645\u064a\u0647\u0645.', ceoName: '\u0635\u0627\u0644\u062d \u0627\u0644\u0639\u0645\u0631', ceoTitle: '\u0627\u0644\u0631\u0626\u064a\u0633 \u0627\u0644\u062a\u0646\u0641\u064a\u0630\u064a',
+      news: [
+        { img: P3, date: '27 Apr 2026', title: 'Perfect Vision \u062a\u062a\u062c\u0627\u0648\u0632 500 \u0645\u0646\u0634\u0623\u0629 \u0645\u062a\u0635\u0644\u0629', read: '\u0642\u0631\u0627\u0621\u0629 4 \u062f\u0642\u0627\u0626\u0642', readMono: '4 MIN', excerpt: '\u0645\u062d\u0637\u0629 \u0641\u0627\u0631\u0642\u0629 \u0641\u064a \u062a\u0628\u0646\u064a \u0627\u0644\u0633\u0644\u0627\u0645\u0629 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629 \u0639\u0628\u0631 \u0627\u0644\u0645\u0645\u0644\u0643\u0629.' },
+        { img: P2, date: '19 Apr 2026', title: 'AirView \u064a\u0628\u062f\u0623 \u0627\u0644\u0639\u0645\u0644 \u0641\u064a \u0645\u062c\u0645\u0639 SABIC', read: '\u0642\u0631\u0627\u0621\u0629 3 \u062f\u0642\u0627\u0626\u0642', readMono: '3 MIN', excerpt: '\u0645\u0631\u0627\u0642\u0628\u0629 \u0641\u0648\u0631\u064a\u0629 \u0644\u0644\u063a\u0627\u0632 \u0648\u0627\u0644\u063a\u0628\u0627\u0631 \u0645\u062a\u0635\u0644\u0629 \u0628\u063a\u0631\u0641\u0629 \u0627\u0644\u062a\u062d\u0643\u0645.' },
+        { img: P, date: '22 Jan 2026', title: '\u0646\u0634\u0631 ProxView \u0639\u0628\u0631 \u0645\u0645\u0631 \u0644\u0648\u062c\u0633\u062a\u064a \u0641\u064a NEOM', read: '\u0642\u0631\u0627\u0621\u0629 5 \u062f\u0642\u0627\u0626\u0642', readMono: '5 MIN', excerpt: '\u062a\u062d\u0630\u064a\u0631 \u0627\u0644\u0627\u0642\u062a\u0631\u0627\u0628 \u064a\u0639\u0645\u0644 \u0639\u0644\u0649 \u0637\u0631\u0642 \u0627\u0644\u0646\u0642\u0644 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629.' }
+      ]
+    };
+    const t = isAr ? ar : en;
+    const news = t.news.map((n, i) => ({ ...n, num: '0' + (i + 1) }));
+    return {
+      t, news,
+      dir: isAr ? 'rtl' : 'ltr',
+      langLabel: isAr ? 'English' : '\u0639\u0631\u0628\u064a',
+      toggleLang: () => this.setState(s => ({ lang: s.lang === 'ar' ? 'en' : 'ar' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

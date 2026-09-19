@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  .pvf *{box-sizing:border-box;}
+  .pvf a{text-decoration:none;color:inherit;}
+  .pvf-link{transition:opacity .25s ease,color .25s ease;opacity:.72;}
+  .pvf-link:hover{opacity:1;}
+  .pvf-social{transition:background .3s ease,transform .25s ease;}
+  .pvf-social-icon{filter:brightness(0);transition:opacity .25s ease;opacity:.5;}
+  .pvf-social:hover .pvf-social-icon{opacity:1;}
+  .pvf-cta{transition:background .3s ease,transform .2s ease,box-shadow .3s ease;box-shadow:0 6px 22px -8px rgba(245,1,21,.7);}
+  .pvf-cta:hover{box-shadow:0 10px 32px -6px rgba(245,1,21,.95),0 0 18px 2px rgba(245,1,21,.5);}
+  .pvf-cta:active{transform:scale(.96);}
+  .pvf-arr{transition:transform .3s ease;}
+  .pvf-cta:hover .pvf-arr{transform:translate(2px,-2px);}
+  [dir="rtl"] .pvf-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pvf-cta:hover .pvf-arr{transform:scaleX(-1) translate(2px,-2px);}
+  [dir="rtl"] .pvf-input{padding:0 22px 0 66px !important;}
+  [dir="rtl"] .pvf-glass[role="status"]{padding:0 22px 0 6px !important;}
+  .pvf-democta{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;gap:clamp(18px,2.6vw,40px);border:none;border-radius:999px;background:rgba(0,0,0,0.02);box-shadow:none;transition:background .3s ease,box-shadow .3s ease;padding:clamp(14px,1.6vw,22px) clamp(14px,1.6vw,22px) clamp(14px,1.6vw,22px) clamp(26px,3.2vw,48px);transition:background .3s ease;}
+  .pvf-democta::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(0,0,0,0.16) 0%,rgba(0,0,0,0.06) 25%,rgba(0,0,0,0.03) 50%,rgba(0,0,0,0.06) 75%,rgba(0,0,0,0.16) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pvf-democta > *{position:relative;z-index:2;}
+  [dir="rtl"] .pvf-democta{padding:clamp(14px,1.6vw,22px) clamp(26px,3.2vw,48px) clamp(14px,1.6vw,22px) clamp(14px,1.6vw,22px);}
+  .pvf-democta:hover{background:rgba(0,0,0,0.04);}
+  .pvf-democirc{transition:transform .3s ease,box-shadow .3s ease;box-shadow:0 6px 22px -8px rgba(245,1,21,.7);}
+  .pvf-democta:hover .pvf-democirc{transform:scale(1.06);box-shadow:0 10px 32px -6px rgba(245,1,21,.95),0 0 18px 2px rgba(245,1,21,.5);}
+  .pvf-democta:active .pvf-democirc{transform:scale(.96);}
+  .pvf-democta:hover .pvf-arr{transform:translate(2px,-2px);}
+  [dir="rtl"] .pvf-democta:hover .pvf-arr{transform:scaleX(-1) translate(2px,-2px);}
+  .pvf-row{display:flex;align-items:center;gap:clamp(24px,3.5vw,56px);}
+  .pvf-row-mid{margin-top:clamp(36px,4.5vw,64px);align-items:stretch;}
+  .pvf-row-nl{margin-top:clamp(32px,4vw,56px);}
+  .pvf-lead{flex:0 0 clamp(200px,28%,360px);min-width:0;display:flex;align-items:center;}
+  .pvf-vdiv{flex:0 0 1px;align-self:stretch;min-height:64px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.16) 15%,rgba(0,0,0,.16) 85%,transparent);}
+  .pvf-links{flex:1 1 auto;min-width:0;display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);justify-content:space-between;gap:16px clamp(24px,4vw,64px);align-content:center;}
+  .pvf-glass{position:relative;overflow:hidden;isolation:isolate;background:rgba(0,0,0,0.02);box-shadow:none;transition:background .3s ease,box-shadow .3s ease;}
+  .pvf-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(0,0,0,0.16) 0%,rgba(0,0,0,0.06) 25%,rgba(0,0,0,0.03) 50%,rgba(0,0,0,0.06) 75%,rgba(0,0,0,0.16) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pvf-glass > *{position:relative;z-index:2;}
+  .pvf-glass:focus-within{background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.3);}
+  .pvf-input{background:transparent;border:none;color:#0a0a0a;}
+  .pvf-input::placeholder{color:#6B6B6B;}
+  .pvf-input:focus{outline:none;}
+  /* cinematic bottom-rising red beam backdrop */
+  .cf{position:relative;overflow:hidden;isolation:isolate;}
+  .cf-bg{position:absolute;inset:0;z-index:-2;background:#FFFFFF;}
+  .cf-beam{position:absolute;left:50%;bottom:-24%;transform:translateX(-50%);z-index:-1;
+    width:130%;height:124%;pointer-events:none;
+    background:radial-gradient(60% 132% at 50% 100%,rgba(245,1,21,.30) 0%,rgba(245,1,21,.16) 28%,rgba(245,1,21,.07) 50%,rgba(245,1,21,.025) 68%,transparent 84%);
+    -webkit-mask-image:radial-gradient(60% 132% at 50% 100%,#000 54%,transparent 90%);
+            mask-image:radial-gradient(60% 132% at 50% 100%,#000 54%,transparent 90%);
+    animation:beam 9s ease-in-out infinite;}
+  .cf-core{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:-1;
+    width:66%;height:2px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(245,1,21,.95),transparent);
+    filter:blur(1px);box-shadow:0 0 40px 8px rgba(245,1,21,.28);
+    animation:core 9s ease-in-out infinite;}
+  @keyframes beam{0%,100%{opacity:.85;transform:translateX(-50%) scaleY(1);}50%{opacity:1;transform:translateX(-50%) scaleY(1.05);}}
+  @keyframes core{0%,100%{opacity:.65;}50%{opacity:1;}}
+  @media(prefers-reduced-motion:reduce){ .cf-beam,.cf-core{animation:none;} }
+  /* responsive footer */
+  @media(max-width:900px){.pvf-row{flex-direction:column;align-items:stretch;gap:22px;}.pvf-lead{flex:none;}.pvf-vdiv{display:none;}.pvf-links{grid-template-rows:repeat(3,auto);justify-content:start;gap:14px 40px;}}
+  @media(max-width:420px){.pvf-links{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:1fr;}.pvf-democta{gap:14px;}}
+  /* demo request dialog */
+  body:has(.pvf-dlg[open]){overflow:hidden;}
+  .pvf-dlg{position:fixed;inset:0;margin:auto;width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:0;border:none;background:transparent;color:#0a0a0a;font-family:'Readex Pro',sans-serif;color-scheme:light;overflow:visible;}
+  .pvf-dlg::backdrop{background:rgba(5,5,5,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:pvfFade .32s cubic-bezier(.16,1,.3,1) both;}
+  .pvf-dlg-panel{position:relative;isolation:isolate;overflow:hidden;max-height:calc(100dvh - 32px);display:flex;flex-direction:column;border-radius:28px;background:#fff;padding:0;box-shadow:0 48px 120px -32px rgba(0,0,0,.7);}
+  .pvf-dlg-scroll{position:relative;z-index:2;flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:clamp(24px,4vw,40px);scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.22) transparent;}
+  .pvf-dlg-scroll::-webkit-scrollbar{width:6px;}
+  .pvf-dlg-scroll::-webkit-scrollbar-track{background:transparent;margin:14px 0;}
+  .pvf-dlg-scroll::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:3px;}
+  .pvf-sellist{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.22) transparent;overscroll-behavior:contain;}
+  .pvf-sellist::-webkit-scrollbar{width:6px;}
+  .pvf-sellist::-webkit-scrollbar-track{background:transparent;margin:8px 0;}
+  .pvf-sellist::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:3px;}
+  .pvf-dlg-glow{position:absolute;left:50%;bottom:-55%;transform:translateX(-50%);width:150%;height:95%;z-index:-1;pointer-events:none;background:radial-gradient(60% 100% at 50% 100%,rgba(245,1,21,.14) 0%,rgba(245,1,21,.05) 42%,transparent 72%);}
+  .pvf-dlg[open] .pvf-dlg-panel{animation:pvfRise .5s cubic-bezier(.16,1,.3,1) both;}
+  .pvf-dlg.pvf-dlg-closing .pvf-dlg-panel{animation:pvfSink .22s cubic-bezier(.4,0,1,1) both;}
+  .pvf-dlg.pvf-dlg-closing::backdrop{animation:pvfFadeOut .22s ease-in both;}
+  .pvf-dlg-x{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,.14);background:#F0F0F0;color:#0a0a0a;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:background .25s ease,border-color .25s ease,transform .2s ease;}
+  .pvf-dlg-x:hover{background:#e6e6e6;border-color:rgba(0,0,0,.3);}
+  .pvf-dlg-x:active{transform:scale(.94);}
+  .pvf-fin{display:block;width:100%;height:56px;border-radius:40px;padding:0 22px;background:#F7F7F7;border:1px solid rgba(0,0,0,.12);color:#0a0a0a;font-family:'Readex Pro',sans-serif;font-size:15px;font-weight:300;box-sizing:border-box;transition:border-color .25s ease,background .25s ease;}
+  .pvf-fin::placeholder{color:#6B6B6B;}
+  .pvf-fin:hover{border-color:rgba(0,0,0,.28);}
+  .pvf-fin:focus,.pvf-fin:focus-visible{outline:none;border-color:#0a0a0a;background:#fff;border-radius:40px;}
+  textarea.pvf-fin:focus,textarea.pvf-fin:focus-visible{border-radius:22px;}
+  .pvf-req{color:#F50115;font-weight:500;margin-inline-start:2px;}
+  .pvf-opt{color:#8A8A8A;font-weight:300;margin-inline-start:4px;}
+  .pvf-fin.pvf-fin-err,.pvf-fin.pvf-fin-err:hover,.pvf-fin.pvf-fin-err:focus{border-color:#F50115;background:#fff;}
+  .pvf-ferr{display:flex;align-items:center;gap:6px;margin:8px 0 0;padding-inline-start:6px;font-size:12.5px;font-weight:400;line-height:1.4;color:#F50115;animation:pvfRise .25s cubic-bezier(.16,1,.3,1) both;}
+  .pvf-ferr svg{flex:0 0 auto;}
+  .pvf-fbanner{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;background:#FFF0F1;border:1px solid rgba(245,1,21,.28);color:#0a0a0a;font-size:13.5px;font-weight:400;line-height:1.45;animation:pvfRise .3s cubic-bezier(.16,1,.3,1) both;}
+  .pvf-fbanner svg{flex:0 0 auto;color:#F50115;}
+  textarea.pvf-fin{height:auto;min-height:112px;padding:16px 22px;border-radius:22px;resize:vertical;line-height:1.5;}
+  select.pvf-fin{appearance:none;-webkit-appearance:none;padding-inline-end:52px;cursor:pointer;}
+  select.pvf-fin:invalid{color:#6B6B6B;}
+  select.pvf-fin option{color:#0a0a0a;background:#fff;}
+  .pvf-selwrap{position:relative;}
+  .pvf-selbtn{display:flex;align-items:center;text-align:start;cursor:pointer;}
+  .pvf-selbtn[aria-expanded="true"]{border-color:#0a0a0a;background:#fff;}
+  .pvf-selbtn .pvf-selph{color:#6B6B6B;}
+  .pvf-selbtn[aria-expanded="true"] + .pvf-selchev svg{transform:rotate(180deg);}
+  .pvf-selchev svg{transition:transform .2s ease;}
+  .pvf-sellist{position:relative;z-index:5;margin:8px 0 0;padding:6px;list-style:none;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:20px;box-shadow:0 20px 50px -20px rgba(0,0,0,.35),0 4px 14px -6px rgba(0,0,0,.12);max-height:296px;overflow-y:auto;animation:pvfRise .25s cubic-bezier(.16,1,.3,1) both;}
+  .pvf-selitem{display:flex;align-items:baseline;gap:6px;width:100%;padding:12px 16px;border:none;border-radius:14px;background:transparent;color:#0a0a0a;font-family:'Readex Pro',sans-serif;font-size:15px;line-height:1.4;text-align:start;cursor:pointer;}
+  .pvf-selitem:hover,.pvf-selitem:focus-visible{background:#F0F0F0;outline:none;}
+  .pvf-selitem[aria-selected="true"]{background:#F0F0F0;}
+  .pvf-selitem b{font-weight:600;}
+  .pvf-selitem .pvf-seldesc{font-weight:300;color:#5B5B5B;}
+  .pvf-selval b{font-weight:600;}
+  .pvf-selval .pvf-seldesc{font-weight:300;color:#5B5B5B;}
+  .pvf-addbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 16px 0 6px;border-radius:40px;border:1px solid rgba(0,0,0,.14);background:#fff;color:#0a0a0a;font-family:'Readex Pro',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:border-color .2s ease,background .2s ease,transform .2s ease;}
+  [dir="rtl"] .pvf-addbtn{padding:0 6px 0 16px;}
+  .pvf-addbtn:hover{border-color:rgba(0,0,0,.3);transform:translateY(-1px);}
+  .pvf-addbtn:active{transform:scale(.97);}
+  .pvf-addplus{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#F50115;color:#fff;}
+  .pvf-selhid{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;}
+  .pvf-selchev{position:absolute;top:50%;inset-inline-end:20px;transform:translateY(-50%);pointer-events:none;color:#5B5B5B;display:flex;}
+  .pvf-flabel{display:block;font-size:13px;font-weight:400;color:#5B5B5B;margin-bottom:8px;padding-inline-start:4px;}
+  .pvf-submit{width:100%;height:56px;border-radius:40px;border:none;background:#F50115;color:#fff;font-family:'Readex Pro',sans-serif;font-size:15.5px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:box-shadow .3s ease,transform .2s ease,background .3s ease;box-shadow:0 8px 28px -10px rgba(245,1,21,.75);}
+  .pvf-submit:hover{background:#ff1a2d;box-shadow:0 12px 36px -8px rgba(245,1,21,.95),0 0 20px 2px rgba(245,1,21,.45);}
+  .pvf-submit:active{transform:scale(.97);}
+  .pvf-submit .pvf-arr{flex:0 0 auto;transition:transform .3s ease;}
+  .pvf-submit:hover .pvf-arr{transform:translate(4px,-4px);}
+  [dir="rtl"] .pvf-submit .pvf-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pvf-submit:hover .pvf-arr{transform:scaleX(-1) translate(4px,-4px);}
+  .pvf-submit:hover{transform:translateY(-2px);}
+  .pvf-submit.pvf-sending{pointer-events:none;}
+  .pvf-submit.pvf-sending .pvf-arr{animation:pvfArrFly .55s cubic-bezier(.32,.72,0,1) both;}
+  [dir="rtl"] .pvf-submit.pvf-sending .pvf-arr{animation-name:pvfArrFlyR;}
+  .pvf-submit.pvf-sending span{animation:pvfFadeOut .3s ease .15s both;}
+  @keyframes pvfArrFly{0%{transform:translate(0,0);opacity:1;}45%{transform:translate(18px,-18px);opacity:0;}50%{transform:translate(-14px,14px);opacity:0;}100%{transform:translate(0,0);opacity:1;}}
+  @keyframes pvfArrFlyR{0%{transform:scaleX(-1) translate(0,0);opacity:1;}45%{transform:scaleX(-1) translate(18px,-18px);opacity:0;}50%{transform:scaleX(-1) translate(-14px,14px);opacity:0;}100%{transform:scaleX(-1) translate(0,0);opacity:1;}}
+  @media(prefers-reduced-motion:reduce){.pvf-submit .pvf-arr,.pvf-submit.pvf-sending .pvf-arr,.pvf-submit.pvf-sending span{animation:none;transition:none;}}
+  .pvf-done{animation:pvfRise .5s cubic-bezier(.16,1,.3,1) both;}
+  .pvf-done-mark{animation:pvfPop .6s cubic-bezier(.16,1,.3,1) .1s both;}
+  @keyframes pvfRise{from{opacity:0;transform:translateY(22px) scale(.975);}to{opacity:1;transform:none;}}
+  @keyframes pvfSink{from{opacity:1;transform:none;}to{opacity:0;transform:translateY(12px) scale(.985);}}
+  @keyframes pvfFade{from{opacity:0;}to{opacity:1;}}
+  @keyframes pvfFadeOut{from{opacity:1;}to{opacity:0;}}
+  @keyframes pvfPop{from{opacity:0;transform:scale(.6);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){.pvf-dlg[open] .pvf-dlg-panel,.pvf-dlg.pvf-dlg-closing .pvf-dlg-panel,.pvf-dlg::backdrop,.pvf-dlg.pvf-dlg-closing::backdrop,.pvf-done,.pvf-done-mark{animation-duration:.01ms;}}
+  @media(max-width:520px){.pvf-dlg{width:100%;max-height:100dvh;inset:auto 0 0 0;}.pvf-dlg-panel{border-radius:28px 28px 0 0;max-height:100dvh;}}
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  input:not(.pvf-fin):focus-visible,textarea:not(.pvf-fin):focus-visible,select:not(.pvf-fin):focus-visible{outline:2px solid #F50115;outline-offset:3px;}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div class="pvf cf" dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;background:#FFFFFF;color:#0a0a0a;">
+  <div style="padding:clamp(48px,6vw,84px) clamp(20px,6vw,80px) clamp(24px,3vw,40px);">
+  <div style="max-width:1240px;margin:0 auto;">
+
+    <!-- BACKDROP -->
+    <div class="cf-bg"></div>
+
+    <!-- CTA capsule -->
+    <a class="pvf-democta" href="Contact.dc.html" onClick="{{ openDemo }}" aria-haspopup="dialog" aria-label="{{ t.ctaTitle }}">
+      <img src="assets/brand/perfect-vision-mark-red.webp" alt="" style="flex:0 0 auto;width:clamp(44px,4.6vw,64px);height:clamp(44px,4.6vw,64px);object-fit:contain;">
+      <span style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:clamp(24px,2.8vw,40px);font-weight:700;line-height:1.1;color:#0a0a0a;">{{ t.ctaTitle }}</span>
+        <span style="font-size:clamp(14.5px,1.35vw,19px);font-weight:300;line-height:1.4;color:#5B5B5B;">{{ t.ctaSub }}</span>
+      </span>
+      <span class="pvf-democirc" style="flex:0 0 auto;width:clamp(56px,6vw,80px);height:clamp(56px,6vw,80px);border-radius:50%;background:#F50115;color:#fff;display:inline-flex;align-items:center;justify-content:center;">
+        <svg class="pvf-arr" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg>
+      </span>
+    </a>
+
+    <!-- tagline | divider | links -->
+    <div class="pvf-row pvf-row-mid">
+      <div class="pvf-lead">
+        <p style="font-size:clamp(22px,2.2vw,30px);font-weight:400;line-height:1.25;text-wrap:balance;"><span style="color:#0a0a0a;">{{ t.tagA }}</span><br /><span style="color:#8A8A8A;">{{ t.tagB }}</span></p>
+      </div>
+      <div class="pvf-vdiv" aria-hidden="true"></div>
+      <nav class="pvf-links" aria-label="Site">
+        <sc-for list="{{ pages }}" as="l" hint-placeholder-count="6">
+          <a class="pvf-link" href="{{ l.href }}" style="font-size:16px;font-weight:400;line-height:1.3;white-space:nowrap;color:#0a0a0a;">{{ l.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+
+    <!-- newsletter -->
+    <div class="pvf-row pvf-row-nl">
+      <div class="pvf-lead">
+        <p style="font-size:15px;font-weight:400;color:#0a0a0a;">{{ t.nlTitle }}</p>
+      </div>
+      <div style="flex:1 1 auto;min-width:0;">
+        <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+          <div class="pvf-glass" role="status" style="display:flex;align-items:center;gap:14px;height:56px;border-radius:40px;padding:0 6px 0 22px;font-size:14.5px;font-weight:400;color:#0a0a0a;">
+            <span style="flex:1 1 auto;min-width:0;">{{ t.nlThanks }}</span>
+            <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#0a0a0a;color:#fff;display:inline-flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+            </span>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+          <form class="pvf-nlform pvf-glass" onSubmit="{{ onSubscribe }}" style="position:relative;display:flex;align-items:center;border-radius:40px;">
+            <input class="pvf-input" name="email" type="email" required="" placeholder="{{ t.nlPh }}" dir="ltr" style="flex:1 1 auto;min-width:0;height:56px;box-sizing:border-box;border-radius:40px;padding:0 66px 0 22px;font-family:'Readex Pro',sans-serif;font-size:14.5px;">
+            <button class="pvf-cta" type="submit" aria-label="{{ t.nlBtn }}" aria-busy="{{ subscribing }}" style="position:absolute;top:6px;bottom:6px;inset-inline-end:6px;width:44px;display:inline-flex;align-items:center;justify-content:center;background:#F50115;color:#fff;border:none;border-radius:50%;padding:0;cursor:pointer;pointer-events:{{ subscribingPE }};opacity:{{ subscribingOp }};">
+              <svg class="pvf-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg>
+            </button>
+          </form>
+          <sc-if value="{{ subscribeError }}" hint-placeholder-val="{{ false }}">
+            <p class="pvf-ferr" role="alert"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ subscribeError }}</span></p>
+          </sc-if>
+        </sc-if>
+      </div>
+    </div>
+
+    <!-- bottom -->
+    <div style="margin-top:clamp(32px,4vw,52px);height:1px;background:rgba(0,0,0,.1);"></div>
+    <div style="margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;">
+      <div style="font-size:12.5px;color:#5B5B5B;" dir="ltr">© 2026 Perfect Vision Factory</div>
+      <div style="display:flex;align-items:center;gap:22px;">
+        <sc-for list="{{ socials }}" as="s" hint-placeholder-count="4">
+          <a class="pvf-social" href="{{ s.href }}" aria-label="{{ s.name }}" style="display:flex;align-items:center;justify-content:center;color:#0a0a0a;">
+            <img class="pvf-social-icon" src="{{ s.icon }}" alt="{{ s.name }}" style="width:18px;height:18px;object-fit:contain;">
+          </a>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- demo request dialog -->
+  <dialog class="pvf-dlg {{ dlgCls }}" ref="{{ dlgRef }}" dir="{{ dir }}" onClick="{{ onDlgClick }}" onCancel="{{ onDlgCancel }}" onClose="{{ onDlgClosed }}" aria-labelledby="pvf-dlg-title">
+    <div class="pvf-dlg-panel">
+      <div class="pvf-dlg-glow" aria-hidden="true"></div>
+      <div class="pvf-dlg-scroll">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;">
+            <div style="display:flex;flex-direction:column;gap:8px;min-width:0;">
+              <h2 id="pvf-dlg-title" style="margin:0;font-size:clamp(24px,3vw,30px);font-weight:700;line-height:1.15;color:#0a0a0a;text-wrap:balance;">{{ d.title }}</h2>
+              <p style="margin:0;font-size:14.5px;font-weight:300;line-height:1.5;color:#5B5B5B;text-wrap:pretty;">{{ d.sub }}</p>
+            </div>
+            <button class="pvf-dlg-x" type="button" onClick="{{ closeDemo }}" aria-label="{{ d.close }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+            </button>
+          </div>
+          <form onSubmit="{{ onDemoSubmit }}" onInput="{{ onFieldInput }}" noValidate="" style="margin-top:28px;display:flex;flex-direction:column;gap:18px;">
+            <sc-if value="{{ errCount }}" hint-placeholder-val="{{ false }}">
+              <div class="pvf-fbanner" role="alert" aria-live="assertive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ errSummary }}</span></div>
+            </sc-if>
+            <sc-if value="{{ sendErr }}" hint-placeholder-val="{{ false }}">
+              <div class="pvf-fbanner" role="alert" aria-live="assertive"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ d.vSendError }}</span></div>
+            </sc-if>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px 14px;">
+              <div>
+                <label class="pvf-flabel" for="pvf-f-name">{{ d.name }}<span class="pvf-req" aria-hidden="true">*</span></label>
+                <input class="pvf-fin {{ cls.name }}" id="pvf-f-name" name="name" type="text" autocomplete="name" ref="{{ nameRef }}" placeholder="{{ d.namePh }}" aria-invalid="{{ inv.name }}">
+                <sc-if value="{{ err.name }}" hint-placeholder-val="{{ false }}"><p class="pvf-ferr" role="alert"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ err.name }}</span></p></sc-if>
+              </div>
+              <div>
+                <label class="pvf-flabel" for="pvf-f-company">{{ d.company }}<span class="pvf-req" aria-hidden="true">*</span></label>
+                <input class="pvf-fin {{ cls.company }}" id="pvf-f-company" name="company" type="text" autocomplete="organization" placeholder="{{ d.companyPh }}" aria-invalid="{{ inv.company }}">
+                <sc-if value="{{ err.company }}" hint-placeholder-val="{{ false }}"><p class="pvf-ferr" role="alert"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ err.company }}</span></p></sc-if>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px 14px;">
+              <div>
+                <label class="pvf-flabel" for="pvf-f-phone">{{ d.phone }}<span class="pvf-req" aria-hidden="true">*</span></label>
+                <input class="pvf-fin {{ cls.phone }}" id="pvf-f-phone" name="phone" type="tel" autocomplete="tel" inputMode="tel" dir="ltr" placeholder="{{ d.phonePh }}" aria-invalid="{{ inv.phone }}">
+                <sc-if value="{{ err.phone }}" hint-placeholder-val="{{ false }}"><p class="pvf-ferr" role="alert"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ err.phone }}</span></p></sc-if>
+              </div>
+              <div>
+                <label class="pvf-flabel" for="pvf-f-email">{{ d.email }}<span class="pvf-opt">{{ d.optional }}</span></label>
+                <input class="pvf-fin {{ cls.email }}" id="pvf-f-email" name="email" type="email" autocomplete="email" inputMode="email" dir="ltr" placeholder="{{ d.emailPh }}" aria-invalid="{{ inv.email }}">
+                <sc-if value="{{ err.email }}" hint-placeholder-val="{{ false }}"><p class="pvf-ferr" role="alert"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ err.email }}</span></p></sc-if>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <label class="pvf-flabel" for="pvf-f-product-0" style="margin-bottom:-4px;">{{ d.product }}<span class="pvf-req" aria-hidden="true">*</span></label>
+              <sc-for list="{{ rows }}" as="row" hint-placeholder-count="1">
+                <div class="pvf-selwrap" style="display:flex;align-items:center;gap:10px;">
+                  <div style="position:relative;flex:1 1 auto;min-width:0;">
+                    <button class="pvf-fin pvf-selbtn {{ row.cls }}" id="{{ row.id }}" type="button" aria-invalid="{{ row.inv }}" aria-haspopup="listbox" aria-expanded="{{ row.open }}" onClick="{{ row.toggle }}" onKeyDown="{{ onSelKey }}">
+                      <sc-if value="{{ row.has }}" hint-placeholder-val="{{ false }}">
+                        <span class="pvf-selval"><b>{{ row.name }}</b><sc-if value="{{ row.hasDesc }}" hint-placeholder-val="{{ false }}"><span class="pvf-seldesc"> - {{ row.desc }}</span></sc-if></span>
+                      </sc-if>
+                      <sc-if value="{{ row.empty }}" hint-placeholder-val="{{ true }}">
+                        <span class="pvf-selph">{{ d.productPh }}</span>
+                      </sc-if>
+                    </button>
+                    <input class="pvf-selhid" name="{{ row.field }}" type="hidden" value="{{ row.value }}">
+                    <sc-if value="{{ row.open }}" hint-placeholder-val="{{ false }}">
+                      <ul class="pvf-sellist" role="listbox" aria-labelledby="{{ row.id }}">
+                        <sc-for list="{{ row.options }}" as="p" hint-placeholder-count="6">
+                          <li role="none"><button class="pvf-selitem" type="button" role="option" aria-selected="{{ p.selected }}" onClick="{{ p.pick }}"><b>{{ p.name }}</b><sc-if value="{{ p.hasDesc }}" hint-placeholder-val="{{ true }}"><span class="pvf-seldesc">- {{ p.desc }}</span></sc-if></button></li>
+                        </sc-for>
+                      </ul>
+                    </sc-if>
+                    <span class="pvf-selchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                  </div>
+                  <sc-if value="{{ row.removable }}" hint-placeholder-val="{{ false }}">
+                    <button class="pvf-dlg-x" type="button" onClick="{{ row.remove }}" aria-label="{{ d.removeProduct }}" style="width:40px;height:40px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+                    </button>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ err.product }}" hint-placeholder-val="{{ false }}"><p class="pvf-ferr" role="alert" style="margin-top:-4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg><span>{{ err.product }}</span></p></sc-if>
+              <sc-if value="{{ canAdd }}" hint-placeholder-val="{{ false }}">
+                <button class="pvf-addbtn" type="button" onClick="{{ addRow }}">
+                  <span class="pvf-addplus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+                  <span>{{ d.addProduct }}</span>
+                </button>
+              </sc-if>
+            </div>
+            <div>
+              <label class="pvf-flabel" for="pvf-f-notes">{{ d.notes }}<span class="pvf-opt">{{ d.optional }}</span></label>
+              <textarea class="pvf-fin" id="pvf-f-notes" name="notes" rows="3" placeholder="{{ d.notesPh }}"></textarea>
+            </div>
+            <button class="pvf-submit {{ submitCls }}" type="submit" style="margin-top:6px;" aria-busy="{{ sending }}">
+              <span>{{ d.submit }}</span>
+              <svg class="pvf-arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg>
+            </button>
+          </form>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div class="pvf-done" role="status" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:16px 0 8px;">
+            <span class="pvf-done-mark" aria-hidden="true" style="width:72px;height:72px;border-radius:50%;background:#F50115;color:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 12px 40px -10px rgba(245,1,21,.9);">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"></polyline></svg>
+            </span>
+            <h2 style="margin:6px 0 0;font-size:clamp(22px,2.8vw,28px);font-weight:700;line-height:1.15;color:#0a0a0a;">{{ d.doneTitle }}</h2>
+            <p style="margin:0;max-width:34ch;font-size:14.5px;font-weight:300;line-height:1.55;color:#5B5B5B;text-wrap:pretty;">{{ d.doneSub }}</p>
+            <button class="pvf-dlg-x" type="button" onClick="{{ closeDemo }}" style="width:auto;height:48px;padding:0 26px;border-radius:40px;margin-top:10px;font-family:'Readex Pro',sans-serif;font-size:14.5px;font-weight:400;">{{ d.close }}</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </dialog>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:560}}">
+// Demo requests and newsletter signups are sent through a small Cloudflare Worker proxy
+// (see /pv-forms-proxy) that holds the real Web3Forms and Supabase keys server-side, so no
+// API key ever ships in this page's source. This URL is just a public endpoint, not a secret.
+const PV_PROXY_URL = 'https://pv-forms-proxy.perfectvision.workers.dev';
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang, subscribed: false, subscribing: false, subscribeError: '', demoOpen: false, demoClosing: false, demoSent: false, sendError: false, products: [''], selOpen: -1, errors: {}, sending: false };
+    this.dlgRef = React.createRef();
+    this.nameRef = React.createRef();
+  }
+  componentDidMount() {
+    this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang);
+    this._onOpenDemo = () => this.openDemo({ preventDefault() {} }); window.addEventListener('pv-open-demo', this._onOpenDemo);
+    document.addEventListener('click', this.onDocClick, true);
+    this.initAnimGate('.cf-beam,.cf-core');
+  }
+  componentDidUpdate() { this.initAnimGate('.cf-beam,.cf-core'); }
+  componentWillUnmount() { if (this._agIo) this._agIo.disconnect(); window.removeEventListener('pv-langchange', this._onLang); window.removeEventListener('pv-open-demo', this._onOpenDemo); document.removeEventListener('click', this.onDocClick, true); clearTimeout(this._closeT); }
+  initAnimGate(sel) {
+    if (!('IntersectionObserver' in window)) return;
+    if (!this._agIo) this._agIo = new IntersectionObserver((es) => es.forEach(e => { e.target.style.animationPlayState = e.isIntersecting ? '' : 'paused'; }), { rootMargin: '80px' });
+    document.querySelectorAll(sel).forEach(el => { if (!el._ag) { el._ag = true; this._agIo.observe(el); } });
+  }
+  onSubscribe = (e) => {
+    e.preventDefault();
+    const isAr = this.state.lang === 'ar';
+    const form = e.currentTarget;
+    const email = ((form.elements.email && form.elements.email.value) || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      this.setState({ subscribeError: isAr ? 'أدخل بريدًا إلكترونيًا صحيحًا.' : 'Enter a valid email address.' });
+      return;
+    }
+    this.setState({ subscribing: true, subscribeError: '' });
+    fetch(PV_PROXY_URL + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, lang: this.state.lang })
+    }).then(r => r.json()).then(data => {
+      if (data && data.success) this.setState({ subscribed: true, subscribing: false, subscribeError: '' });
+      else this.setState({ subscribing: false, subscribeError: isAr ? 'تعذر إتمام الاشتراك. حاول مرة أخرى.' : 'Couldn’t complete your subscription. Please try again.' });
+    }).catch(() => this.setState({ subscribing: false, subscribeError: isAr ? 'تعذر إتمام الاشتراك. حاول مرة أخرى.' : 'Couldn’t complete your subscription. Please try again.' }));
+  };
+  openDemo = (e) => {
+    const dlg = this.dlgRef.current;
+    if (!dlg || typeof dlg.showModal !== 'function') return; // fall back to the Contact page link
+    e.preventDefault();
+    clearTimeout(this._closeT);
+    this.setState({ demoOpen: true, demoClosing: false, demoSent: false, sendError: false, products: [''], selOpen: -1, errors: {} }, () => {
+      if (!dlg.open) dlg.showModal();
+      requestAnimationFrame(() => { const n = this.nameRef.current; if (n) n.focus(); });
+    });
+  };
+  closeDemo = () => {
+    const dlg = this.dlgRef.current;
+    if (!dlg || !dlg.open || this.state.demoClosing) return;
+    this.setState({ demoClosing: true });
+    this._closeT = setTimeout(() => { if (dlg.open) dlg.close(); }, 230);
+  };
+  onDlgCancel = (e) => { e.preventDefault(); this.closeDemo(); };
+  onDlgClosed = () => { clearTimeout(this._sendT); this.setState({ demoOpen: false, demoClosing: false, demoSent: false, sendError: false, errors: {}, selOpen: -1, sending: false }); };
+  onDlgClick = (e) => { if (e.target === this.dlgRef.current) this.closeDemo(); };
+  dict() {
+    const isAr = this.state.lang === 'ar';
+    return isAr ? {
+      title: 'اطلب عرضًا', sub: 'أخبرنا قليلًا عنك، ونرتّب لك عرضًا تعريفيًا في موقعك أو عن بُعد.', close: 'إغلاق',
+      name: 'الاسم', namePh: 'اسمك الكامل', company: 'الشركة', companyPh: 'اسم الشركة',
+      phone: 'رقم الجوال', phonePh: '+XXX XXXXXXXXX', email: 'البريد الإلكتروني', emailPh: 'name@company.com', optional: '(اختياري)',
+      vName: 'أدخل اسمك الكامل.', vNameShort: 'الاسم قصير جدًا.', vCompany: 'أدخل اسم الشركة.', vPhone: 'أدخل رقم الجوال.', vPhoneBad: 'رقم الجوال غير صحيح، من 7 إلى 15 رقمًا.', vEmailBad: 'البريد الإلكتروني غير صحيح.', vProduct: 'اختر منتجًا.', vProductRow: 'اختر منتجًا أو أزل هذا الحقل.',
+      vOne: 'يرجى تصحيح حقل واحد للمتابعة.', vMany: 'يرجى تصحيح {n} حقول للمتابعة.', vSendError: 'تعذر إرسال طلبك. حاول مرة أخرى أو راسلنا مباشرة.',
+      addProduct: 'إضافة منتج آخر', removeProduct: 'إزالة المنتج', phoneHint: 'أدخل رقم جوال صحيحًا مع رمز الدولة',
+      product: 'المنتج', productPh: 'اختر منتجًا', notes: 'ملاحظات', notesPh: 'حجم الموقع، نوع المعدات، أو أي تفاصيل تساعدنا في التجهيز.',
+      submit: 'أرسل الطلب', doneTitle: 'تم استلام طلبك.', doneSub: 'سيتواصل معك أحد فريقنا خلال يومي عمل لتحديد موعد العرض.'
+    } : {
+      title: 'Request a demo', sub: 'Tell us a little about you and we\u2019ll set up a session on your site or online.', close: 'Close',
+      name: 'Your name', namePh: 'Full name', company: 'Company', companyPh: 'Company name',
+      phone: 'Mobile number', phonePh: '+XXX XXXXXXXXX', email: 'Email', emailPh: 'name@company.com', optional: '(optional)',
+      vName: 'Enter your full name.', vNameShort: 'Name is too short.', vCompany: 'Enter your company name.', vPhone: 'Enter your mobile number.', vPhoneBad: 'Enter a valid number, 7 to 15 digits.', vEmailBad: 'Enter a valid email address.', vProduct: 'Choose a product.', vProductRow: 'Choose a product or remove this field.',
+      vOne: 'Please fix 1 field to continue.', vMany: 'Please fix {n} fields to continue.', vSendError: 'We couldn’t send your request. Please try again or email us directly.',
+      addProduct: 'Add another product', removeProduct: 'Remove product', phoneHint: 'Enter a valid mobile number with country code',
+      product: 'Product', productPh: 'Choose a product', notes: 'Notes', notesPh: 'Site size, equipment type, or anything that helps us prepare.',
+      submit: 'Send request', doneTitle: 'Request received.', doneSub: 'Someone from our team will reach out within two working days to schedule the demo.'
+    };
+  }
+  validate = (form) => {
+    const d = this.dict();
+    const v = k => ((form.elements[k] && form.elements[k].value) || '').trim();
+    const errors = {};
+    const name = v('name'); if (!name) errors.name = d.vName; else if (name.length < 2) errors.name = d.vNameShort;
+    if (!v('company')) errors.company = d.vCompany;
+    const phone = v('phone'); const digits = phone.replace(/\D/g, '');
+    if (!phone) errors.phone = d.vPhone; else if (!/^\+?[0-9\s().-]+$/.test(phone) || digits.length < 7 || digits.length > 15) errors.phone = d.vPhoneBad;
+    const email = v('email'); if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errors.email = d.vEmailBad;
+    const prods = this.state.products; const badRows = prods.map((x, i) => x ? -1 : i).filter(i => i >= 0);
+    if (badRows.length) { errors.productRows = badRows; errors.product = prods.length === 1 ? d.vProduct : d.vProductRow; }
+    return errors;
+  };
+  onDemoSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const errors = this.validate(form);
+    if (Object.keys(errors).length) {
+      this.setState({ errors, selOpen: -1 }, () => {
+        const order = ['name', 'company', 'phone', 'email'];
+        let first = order.find(k => errors[k]); let el = first ? form.elements[first] : document.getElementById('pvf-f-product-' + (errors.productRows ? errors.productRows[0] : 0));
+        if (el) { el.focus({ preventScroll: true }); const sc = el.closest('.pvf-dlg-scroll'); if (sc) { const r = el.getBoundingClientRect(), sb = sc.getBoundingClientRect(); if (r.top < sb.top + 80 || r.bottom > sb.bottom - 20) sc.scrollBy({ top: r.top - sb.top - 120, behavior: 'smooth' }); } }
+      });
+      return;
+    }
+    this.setState({ sending: true, errors: {}, sendError: false });
+    const v = k => ((form.elements[k] && form.elements[k].value) || '').trim();
+    const catalog = this.productCatalog();
+    const products = this.state.products.filter(Boolean).map(val => { const p = catalog.find(x => x.value === val); return p ? p.name : val; }).join(', ');
+    const payload = {
+      name: v('name'), company: v('company'), phone: v('phone'), email: v('email') || 'not provided',
+      products: products || 'not specified', notes: v('notes') || '—'
+    };
+    clearTimeout(this._sendT);
+    fetch(PV_PROXY_URL + '/demo', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    }).then(r => r.json()).then(data => {
+      if (data && data.success) this.setState({ demoSent: true, sending: false });
+      else this.setState({ sending: false, sendError: true });
+    }).catch(() => this.setState({ sending: false, sendError: true }));
+  };
+  onFieldInput = (e) => { const k = e.target && e.target.name; if (k && this.state.errors[k]) { const errors = { ...this.state.errors }; delete errors[k]; this.setState({ errors }); } };
+  clearProductErr = () => { if (this.state.errors.product) { const errors = { ...this.state.errors }; delete errors.product; delete errors.productRows; this.setState({ errors }); } };
+  toggleSel = (i, e) => { e.stopPropagation(); this.setState(s => ({ selOpen: s.selOpen === i ? -1 : i }), () => this.revealList(i)); };
+  revealList = (i) => { if (this.state.selOpen !== i) return; requestAnimationFrame(() => { const b = document.getElementById('pvf-f-product-' + i); const sc = b && b.closest('.pvf-dlg-scroll'); const list = b && b.parentElement.querySelector('.pvf-sellist'); if (!sc || !list) return; const lb = list.getBoundingClientRect(), sb = sc.getBoundingClientRect(); const over = lb.bottom - (sb.bottom - 16); if (over > 0) sc.scrollBy({ top: Math.min(over, lb.top - sb.top - 80), behavior: 'smooth' }); }); };
+  onSelKey = (e) => { if (e.key === 'Escape' && this.state.selOpen >= 0) { e.stopPropagation(); this.setState({ selOpen: -1 }); } };
+  pickProduct = (i, v) => { this.clearProductErr(); this.setState(s => { const products = s.products.slice(); products[i] = v; return { products, selOpen: -1 }; }, () => { const b = document.getElementById('pvf-f-product-' + i); if (b) b.focus(); }); };
+  addRow = () => { this.setState(s => ({ products: s.products.concat(''), selOpen: s.products.length }), () => { const i = this.state.products.length - 1; const b = document.getElementById('pvf-f-product-' + i); if (b) b.focus(); this.revealList(i); }); };
+  removeRow = (i) => { this.clearProductErr(); this.setState(s => ({ products: s.products.filter((_, k) => k !== i), selOpen: -1 })); };
+  onDocClick = (e) => { if (this.state.selOpen >= 0 && !(e.target.closest && e.target.closest('.pvf-selwrap'))) this.setState({ selOpen: false }); };
+  productCatalog() {
+    const isAr = this.state.lang === 'ar';
+    return [
+      { value: 'proxview', name: 'ProxView', desc: isAr ? 'التحذير من الاقتراب' : 'Proximity Warning' },
+      { value: 'liftview', name: 'LiftView', desc: isAr ? 'مؤشر عزم الحمولة' : 'Load Monitoring' },
+      { value: 'fleetview', name: 'FleetView', desc: isAr ? 'مراقبة المركبات والسائقين' : 'Vehicle Monitoring' },
+      { value: 'airview', name: 'AirView', desc: isAr ? 'جودة الهواء' : 'Air Quality Monitoring' },
+      { value: 'trackview', name: 'TrackView', desc: isAr ? 'تتبع المركبات' : 'Vehicle Tracking' },
+      { value: 'fleetic', name: 'Fleetic', desc: isAr ? 'منصة إدارة الأساطيل' : 'Fleet Platform' },
+      { value: 'unsure', name: isAr ? 'لست متأكدًا بعد' : 'Not sure yet', desc: '' }
+    ];
+  }
+
+
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const en = {
+      tagA: 'Safety,', tagB: 'Intelligently Built.', ctaTitle: 'Request a demo', ctaSub: 'Build safety in from the start.',
+      address: '5th Floor, Modon Tower, 1st Industrial City, Dammam',
+      nlKicker: 'Newsletter', nlTitle: 'Subscribe to our newsletter', nlPh: 'Your email', nlBtn: 'Subscribe',
+      nlNote: 'A quarterly letter on industrial safety. Unsubscribe anytime.', nlThanks: 'You\u2019re subscribed. Thank you.',
+      pages: [
+        { label: 'The View Family', href: 'Solutions.dc.html' },
+        { label: 'Fleetic', href: 'Fleetic.dc.html' },
+        { label: 'Newsroom', href: 'Newsroom.dc.html' },
+        { label: 'About', href: 'About.dc.html' },
+        { label: 'Careers', href: 'Careers.dc.html' },
+        { label: 'Contact', href: 'Contact.dc.html' }
+      ]
+    };
+    const ar = {
+      tagA: 'سلامة', tagB: 'تُبنى بذكاء.', ctaTitle: 'اطلب عرضًا', ctaSub: 'ابدأ بالسلامة من الأساس.',
+      address: '\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062e\u0627\u0645\u0633\u060c \u0628\u0631\u062c \u0645\u062f\u0646\u060c \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629 \u0627\u0644\u0623\u0648\u0644\u0649\u060c \u0627\u0644\u062f\u0645\u0627\u0645',
+      nlKicker: '\u0627\u0644\u0646\u0634\u0631\u0629', nlTitle: 'اشترك في نشرتنا', nlPh: 'بريدك الإلكتروني', nlBtn: '\u0627\u0634\u062a\u0631\u0627\u0643',
+      nlNote: 'نشرة ربع سنوية عن السلامة الصناعية، ويمكنك إلغاء الاشتراك متى شئت.', nlThanks: 'تم اشتراكك، شكرًا لك.',
+      pages: [
+        { label: 'The View Family', href: 'Solutions.dc.html' },
+        { label: 'Fleetic', href: 'Fleetic.dc.html' },
+        { label: 'غرفة الأخبار', href: 'Newsroom.dc.html' },
+        { label: 'من نحن', href: 'About.dc.html' },
+        { label: 'الوظائف', href: 'Careers.dc.html' },
+        { label: 'تواصل', href: 'Contact.dc.html' }
+      ]
+    };
+    const t = isAr ? ar : en;
+    const d = this.dict();
+
+    const raw = this.productCatalog();
+    const chosen = this.state.products;
+    const byVal = v => raw.find(x => x.value === v);
+    const rows = chosen.map((v, i) => {
+      const sel = byVal(v);
+      const options = raw.filter(x => x.value === v || (!chosen.includes(x.value) && (x.value !== 'unsure' || chosen.length === 1)))
+        .map(x => ({ ...x, hasDesc: !!x.desc, selected: x.value === v, pick: () => this.pickProduct(i, x.value) }));
+      return { id: 'pvf-f-product-' + i, field: i === 0 ? 'product' : 'product_' + (i + 1), value: v, has: !!sel, empty: !sel, name: sel ? sel.name : '', desc: sel ? sel.desc : '', hasDesc: !!(sel && sel.desc),
+        open: this.state.selOpen === i, options, toggle: (e) => this.toggleSel(i, e), cls: (this.state.errors.productRows || []).includes(i) ? 'pvf-fin-err' : '', inv: (this.state.errors.productRows || []).includes(i), removable: i > 0, remove: () => this.removeRow(i) };
+    });
+    const last = chosen[chosen.length - 1];
+    const canAdd = !!last && !chosen.includes('unsure') && chosen.length < raw.length - 1;
+    return {
+      dir: isAr ? 'rtl' : 'ltr',
+      d, rows, canAdd, addRow: this.addRow, onSelKey: this.onSelKey,
+      err: this.state.errors, cls: Object.fromEntries(['name','company','phone','email'].map(k => [k, this.state.errors[k] ? 'pvf-fin-err' : ''])), inv: Object.fromEntries(['name','company','phone','email'].map(k => [k, !!this.state.errors[k]])),
+      errCount: Object.keys(this.state.errors).filter(k => k !== 'productRows').length, errSummary: (() => { const n = Object.keys(this.state.errors).filter(k => k !== 'productRows').length; return n === 1 ? d.vOne : d.vMany.replace('{n}', n); })(),
+      sendErr: this.state.sendError,
+      onFieldInput: this.onFieldInput, sending: this.state.sending, submitCls: this.state.sending ? 'pvf-sending' : '',
+      dlgRef: this.dlgRef, nameRef: this.nameRef,
+      dlgCls: this.state.demoClosing ? 'pvf-dlg-closing' : '',
+      sent: this.state.demoSent, notSent: !this.state.demoSent,
+      openDemo: this.openDemo, closeDemo: this.closeDemo, onDlgClick: this.onDlgClick, onDlgCancel: this.onDlgCancel, onDlgClosed: this.onDlgClosed, onDemoSubmit: this.onDemoSubmit,
+      t: { tagA: t.tagA, tagB: t.tagB, ctaTitle: t.ctaTitle, ctaSub: t.ctaSub, address: t.address, nlKicker: t.nlKicker, nlTitle: t.nlTitle, nlPh: t.nlPh, nlBtn: t.nlBtn, nlNote: t.nlNote, nlThanks: t.nlThanks },
+      pages: t.pages,
+      socials: [ { name: 'LinkedIn', icon: 'assets/social/icon-social-linkedin.svg', href: '#' }, { name: 'X', icon: 'assets/social/icon-social-x.svg', href: '#' }, { name: 'Instagram', icon: 'assets/social/icon-social-instagram.svg', href: '#' }, { name: 'YouTube', icon: 'assets/social/icon-social-youtube.svg', href: '#' } ],
+      onSubscribe: this.onSubscribe, subscribed: this.state.subscribed, notSubscribed: !this.state.subscribed,
+      subscribing: this.state.subscribing, subscribeError: this.state.subscribeError,
+      subscribingPE: this.state.subscribing ? 'none' : 'auto', subscribingOp: this.state.subscribing ? '0.6' : '1'
+    };
+  }
+}
+</script>
+</body>
+</html>

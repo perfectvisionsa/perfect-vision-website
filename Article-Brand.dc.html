@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Readex Pro',sans-serif;background:#fff;color:#0a0a0a;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .pv-cta{transition:background .35s ease,color .35s ease,border-color .35s ease,transform .25s ease;}
+  .pv-allbtn{position:relative;border-radius:44px;background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);overflow:hidden;transition:background .3s ease;}
+  .pv-allbtn::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-allbtn:hover{background:rgba(10,10,10,0.08);}
+  .pv-allbtn-in{display:inline-flex;align-items:center;gap:10px;border-radius:inherit;background:transparent;color:#0a0a0a;padding:12px 26px;font-size:15px;font-weight:500;}
+  .pv-arr{transition:transform .3s ease;}
+  .pv-allbtn:hover .pv-arr{transform:translateX(4px);}
+  [dir="rtl"] .pv-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pv-allbtn:hover .pv-arr{transform:scaleX(-1) translateX(4px);}
+  .pv-arr-back{transition:translate .3s ease;}
+  .pv-allbtn:hover .pv-arr-back{translate:-4px 0;}
+  [dir="rtl"] .pv-arr-back{transform:scaleX(-1);}
+  [dir="rtl"] .pv-allbtn:hover .pv-arr-back{translate:4px 0;}
+  .pv-news:hover .pv-news-img{transform:scale(1.06);}
+  .pv-news-img{transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  .liquid-glass{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .liquid-glass-dark{background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;position:relative;box-shadow:inset 0 1px 1px rgba(255,255,255,0.5);}
+  .liquid-glass-dark::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+  .pv-glass-btn{transition:background .3s ease,transform .25s ease;}
+  .pv-glass-btn:hover{background:rgba(10,10,10,.08);}
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}[data-reveal]{opacity:1 !important;transform:none !important;}}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;">
+
+  <dc-import name="SiteHeader" active="newsroom" bar-mode="solid" hint-size="100%,80px"></dc-import>
+
+  <!-- ARTICLE HERO -->
+  <section data-screen-label="Brand Article Hero" style="background:#fff;color:#0a0a0a;padding:clamp(120px,15vh,175px) clamp(20px,6vw,80px) clamp(10px,1.5vw,20px);">
+    <div style="max-width:1240px;margin:0 auto;width:100%;padding-bottom:clamp(24px,3vw,38px);border-bottom:1px solid #E4E4E4;">
+      <a class="pv-allbtn" href="Newsroom.dc.html" data-reveal style="display:inline-block;">
+        <span class="pv-allbtn-in" style="color:#111;"><svg class="pv-arr-back" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>{{ t.back }}</span>
+      </a>
+      <h1 data-reveal style="font-size:clamp(32px,5vw,68px);font-weight:700;line-height:1.06;margin-top:26px;text-wrap:balance;">{{ t.a.title }}</h1>
+      <div data-reveal style="display:flex;align-items:center;gap:12px;margin-top:22px;font-size:13px;color:#8A8A8A;font-weight:300;"><span>{{ t.a.cat }}</span><span style="color:#D4D4D4;">|</span><span>{{ t.a.date }}</span></div>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <article data-screen-label="Brand Article Body" style="background:#fff;padding:clamp(56px,7vw,96px) clamp(20px,6vw,80px) clamp(70px,9vw,120px);">
+    <div style="max-width:1240px;margin:0 auto;"><div>
+      <p data-reveal style="font-size:clamp(20px,2.2vw,27px);font-weight:300;line-height:1.5;color:#1a1a1a;text-wrap:pretty;">{{ t.a.lead }}</p>
+
+      <sc-for list="{{ blocksTop }}" as="b" hint-placeholder-count="2">
+        <div data-reveal style="margin-top:34px;">
+          <sc-if value="{{ b.isHeading }}" hint-placeholder-val="{{ false }}"><h2 style="font-size:clamp(22px,2.6vw,32px);font-weight:700;line-height:1.2;">{{ b.text }}</h2></sc-if>
+          <sc-if value="{{ b.isQuote }}" hint-placeholder-val="{{ false }}"><blockquote style="border-{{ quoteSide }}:3px solid #F50115;padding-{{ quoteSide }}:24px;font-size:clamp(20px,2.2vw,26px);font-weight:400;line-height:1.45;color:#0a0a0a;font-style:normal;">{{ b.text }}</blockquote></sc-if>
+          <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ true }}"><p style="font-size:17px;font-weight:300;line-height:1.75;color:#444;">{{ b.text }}</p></sc-if>
+        </div>
+      </sc-for>
+
+      <!-- NEW LOCKUP SHOWCASE -->
+      <div data-reveal style="margin-top:44px;border-radius:22px;overflow:hidden;border:1px solid #eee;background:#fff;display:flex;align-items:center;justify-content:center;padding:clamp(24px,4vw,56px);">
+        <img src="assets/news/perfect-vision-news-brand-launch-portrait.webp" alt="{{ t.lockupAlt }}" style="max-width:min(420px,80%);height:auto;display:block;" />
+      </div>
+
+      <!-- IDENTITY ANATOMY TIMELINE -->
+      <div data-reveal style="margin-top:40px;display:flex;flex-direction:column;">
+        <sc-for list="{{ timeline }}" as="m" hint-placeholder-count="4">
+          <div style="display:flex;gap:24px;position:relative;">
+            <div style="display:flex;flex-direction:column;align-items:center;flex:none;width:14px;">
+              <div style="width:14px;height:14px;border-radius:50%;background:#F50115;flex:none;margin-top:5px;box-shadow:0 0 0 4px rgba(245,1,21,.12);"></div>
+              <div style="width:2px;flex:1;background:{{ m.lineBg }};margin-top:8px;"></div>
+            </div>
+            <div style="flex:1;padding-bottom:{{ m.padBottom }};min-width:0;">
+              <div style="font-size:12px;color:#F50115;font-weight:600;">{{ m.date }}</div>
+              <h3 style="font-size:clamp(18px,2vw,23px);font-weight:700;margin-top:6px;line-height:1.25;">{{ m.std }} · {{ m.name }}</h3>
+              <p style="font-size:16.5px;font-weight:300;line-height:1.7;color:#444;margin-top:8px;">{{ m.desc }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <sc-for list="{{ blocksBottom }}" as="b" hint-placeholder-count="3">
+        <div data-reveal style="margin-top:34px;">
+          <sc-if value="{{ b.isHeading }}" hint-placeholder-val="{{ false }}"><h2 style="font-size:clamp(22px,2.6vw,32px);font-weight:700;line-height:1.2;">{{ b.text }}</h2></sc-if>
+          <sc-if value="{{ b.isQuote }}" hint-placeholder-val="{{ false }}"><blockquote style="border-{{ quoteSide }}:3px solid #F50115;padding-{{ quoteSide }}:24px;font-size:clamp(20px,2.2vw,26px);font-weight:400;line-height:1.45;color:#0a0a0a;font-style:normal;">{{ b.text }}</blockquote></sc-if>
+          <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ true }}"><p style="font-size:17px;font-weight:300;line-height:1.75;color:#444;">{{ b.text }}</p></sc-if>
+        </div>
+      </sc-for>
+
+      <div data-reveal style="margin-top:48px;padding-top:28px;border-top:1px solid #eee;display:flex;align-items:center;gap:14px;">
+        <div style="width:46px;height:46px;border-radius:50%;background:#0E8345;display:flex;align-items:center;justify-content:center;"><img src="assets/brand/perfect-vision-mark-white.webp" alt="" style="width:24px;height:24px;" /></div>
+        <div><div style="font-size:15px;font-weight:600;">{{ t.bylineSub }}</div><div style="font-size:13px;color:#888;font-weight:300;">{{ t.byline }}</div></div>
+      </div>
+    </div></div>
+  </article>
+
+  <!-- RELATED -->
+  <section data-screen-label="Related News" style="background:#F0F0F0;padding:clamp(64px,8vw,110px) clamp(20px,6vw,80px);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <h2 data-reveal style="font-size:clamp(22px,2.8vw,38px);font-weight:700;">{{ t.more }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;margin-top:32px;">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+          <a class="pv-news" href="{{ r.href }}" data-reveal style="aspect-ratio:3/4.05;border-radius:22px;overflow:hidden;position:relative;display:block;background:#161616;">
+            <img class="pv-news-img" src="{{ r.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.86));"></div>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
+              <h3 style="color:#fff;font-size:21px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ r.title }}</h3>
+              <div style="color:rgba(255,255,255,.7);font-size:12.5px;margin-top:10px;">{{ r.date }}</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang };
+  }
+  componentDidMount() { this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang); if (window.scrollY) window.scrollTo(0, 0); this.initReveal(); }
+  componentDidUpdate() { this.initReveal(); }
+  componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); if (this._io) this._io.disconnect(); }
+  initReveal() {
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    if (!this._io) this._io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; this._io.unobserve(e.target); } }), { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => { if (!el._o) { el._o = true; this._io.observe(el); } });
+  }
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const P = 'assets/photos/perfect-vision-photo-truck-dust.webp', P2 = 'assets/photos/perfect-vision-photo-fleet-row.webp', ISO = 'assets/news/perfect-vision-news-iso-certification-portrait.webp', P3 = 'assets/photos/perfect-vision-photo-excavator.webp';
+    const en = {
+      back: 'Back to Newsroom', byline: 'Perfect Vision', bylineSub: 'Editorial Team', more: 'More from the Newsroom',
+      lockupAlt: 'The new Perfect Vision Factory bilingual logo lockup',
+      a: { cat: 'News', date: '8 Jul 2026', title: 'New mark. New era. Same promise.',
+        lead: 'Perfect Vision Factory unveils a new brand identity: a four-point star drawn in signal red, carrying a bilingual name and a single claim. Reliability and safety in the Kingdom’s industry are entering a new era, and this company intends to lead it.' },
+      blocksTop: [
+        { type: 'para', text: 'A safety company does not change its face lightly. For years, the Perfect Vision mark has stood at the gates of more than 500 facilities: on devices, on helmets, on control-room screens. The new identity is meant to say, precisely, what the company has become: an industrial partner whose word is measured in uptime, audits and lives protected.' },
+        { type: 'heading', text: 'The anatomy of the new identity' }
+      ],
+      timeline: [
+        { date: 'The mark', std: 'A four-point star', name: 'Vision, focused', desc: 'Four curved fields converge to carve a star of light in the negative space: an aperture, an eye that never blinks. It reads at fifty metres on a site banner and at sixteen pixels in a browser tab.' },
+        { date: 'The colour', std: 'Signal red', name: 'Used like an alarm', desc: 'One red, worn like industrial signage rather than marketing gloss. It appears where attention is owed and nowhere else. On the wall of a refinery, that restraint is the difference between decoration and warning.' },
+        { date: 'The name', std: 'Perfect Vision Factory', name: 'مصنع الرؤية المثالية للصناعة', desc: 'Arabic and English stand in one lockup, equal in weight: a company of the Kingdom, built in Dammam, speaking to global industry without translation.' },
+        { date: 'The era', std: 'One identity', name: 'From devices to trust', desc: 'The new brand now extends across everything that carries the company’s name: hardware, platforms, documents, sites. One mark, one discipline, one standard of reliability wherever it appears.' }
+      ],
+      blocksBottom: [
+        { type: 'quote', text: '"A brand is a promise made in public. We wrote ours in the colour of a signal: impossible to miss, and expensive to break."' },
+        { type: 'heading', text: 'What changes for clients' },
+        { type: 'para', text: 'On site, nothing changes, and that is deliberate. The same teams, the same devices, the same audited management system stand behind the new mark. What changes is the clarity of the promise: when this star appears on a gate, a vehicle or a screen, it now says exactly what more than 500 facilities already know: awareness, not paperwork, is what keeps people safe.' },
+        { type: 'para', text: 'The identity rolls out across facilities, fleets and platforms through the second half of 2026, aligned with Saudi Arabia’s Vision 2030 and the industrial expansion it is driving. No blind spot. No exception. No excuse.' }
+      ],
+      related: [
+        { date: '1 Jul 2026', img: ISO, title: 'Three ISO certificates. One discipline.', href: 'Article-ISO.dc.html' },
+        { date: 'Apr 2026', img: P3, title: 'Perfect Vision crosses 500 connected facilities', href: 'Article.dc.html' },
+        { date: 'Apr 2026', img: P2, title: 'AirView goes live at a SABIC complex', href: 'Article.dc.html' }
+      ]
+    };
+    const ar = {
+      back: 'العودة إلى الأخبار', byline: 'Perfect Vision', bylineSub: 'فريق التحرير', more: 'المزيد من الأخبار',
+      lockupAlt: 'الشعار الجديد ثنائي اللغة لمصنع الرؤية المثالية للصناعة',
+      a: { cat: 'أخبار', date: '8 Jul 2026', title: 'شعار جديد. مرحلة جديدة. الوعد نفسه.',
+        lead: 'يكشف مصنع الرؤية المثالية للصناعة عن هويته الجديدة، نجمة رباعية مرسومة بالأحمر الإشاري، تحمل اسمًا ثنائي اللغة ووعدًا واحدًا: الموثوقية والسلامة في صناعة المملكة تدخلان عصرًا جديدًا، وهذه الشركة تنوي أن تقوده.' },
+      blocksTop: [
+        { type: 'para', text: 'شركة سلامة لا تغير وجهها باستخفاف. لسنوات، وقفت علامة Perfect Vision عند بوابات أكثر من 500 منشأة، على الأجهزة، والخوذ، وشاشات غرف التحكم. الهوية الجديدة لم تصمم لتبدو مختلفة، بل لتقول بدقة ما صارته الشركة: شريك صناعي تقاس كلمته بزمن التشغيل، والتدقيقات، والأرواح التي تحمى.' },
+        { type: 'heading', text: 'تشريح الهوية الجديدة' }
+      ],
+      timeline: [
+        { date: 'العلامة', std: 'نجمة رباعية', name: 'رؤية مركزة', desc: 'أربعة حقول منحنية تتلاقى لتنحت نجمة من الضوء في الفراغ، عدسة، وعين لا ترمش. تقرأ من خمسين مترًا على لافتة موقع، ومن ستة عشر بكسلًا في تبويب متصفح. الدقة، مرسومة.' },
+        { date: 'اللون', std: 'الأحمر الإشاري', name: 'يستخدم كإنذار', desc: 'أحمر واحد، يُستخدم كما في لافتات السلامة الصناعية لا كبريق تسويقي. يظهر حيث يستحق الانتباه، ولا مكان غيره. على جدار مصفاة، هذا الانضباط هو الفرق بين الزخرفة والتحذير.' },
+        { date: 'الاسم', std: 'مصنع الرؤية المثالية للصناعة', name: 'Perfect Vision Factory', desc: 'العربية والإنجليزية في تكوين بصري واحد بوزن متساوٍ: شركة من المملكة، نشأت في الدمام، وتخاطب الصناعة العالمية دون ترجمة.' },
+        { date: 'العصر', std: 'هوية واحدة', name: 'من الأجهزة إلى الثقة', desc: 'تمتد الهوية الجديدة الآن عبر كل ما يحمل اسم الشركة، الأجهزة، والمنصات، والوثائق، والمواقع. علامة واحدة، ومنهجية واحدة، ومعيار واحد للموثوقية أينما ظهرت.' }
+      ],
+      blocksBottom: [
+        { type: 'quote', text: '\u00abالعلامة التجارية وعد يقطع علنًا. كتبنا وعدنا بلون الإشارة، يستحيل ألا تراه، ويكلف أن تخلفه.\u00bb' },
+        { type: 'heading', text: 'ماذا يتغير للعملاء؟' },
+        { type: 'para', text: 'في الموقع، لا شيء، وهذا مقصود. الفرق نفسها، والأجهزة نفسها، ونظام الإدارة المدقق نفسه يقف خلف العلامة الجديدة. ما يتغير هو وضوح الوعد: حين تظهر هذه النجمة على بوابة أو مركبة أو شاشة، فهي تقول بالضبط ما تعرفه أكثر من 500 منشأة أصلًا، أن الوعي بالخطر، لا الأوراق، هو ما يحمي الناس.' },
+        { type: 'para', text: 'تطرح الهوية تدريجيًا عبر المنشآت والأساطيل والمنصات خلال النصف الثاني من 2026، بما يتسق مع رؤية السعودية 2030 والتوسع الصناعي الذي تقوده. لا نقطة عمياء. لا استثناء. لا عذر.' }
+      ],
+      related: [
+        { date: '1 Jul 2026', img: ISO, title: 'ثلاث شهادات آيزو. منهجية واحدة.', href: 'Article-ISO.dc.html' },
+        { date: 'Apr 2026', img: P3, title: 'Perfect Vision تتجاوز 500 منشأة متصلة', href: 'Article.dc.html' },
+        { date: 'Apr 2026', img: P2, title: 'AirView يبدأ العمل في مجمع سابك', href: 'Article.dc.html' }
+      ]
+    };
+    const t = isAr ? ar : en;
+    const mapBlocks = (list) => list.map(b => ({ text: b.text, isHeading: b.type === 'heading', isQuote: b.type === 'quote', isPara: b.type === 'para' }));
+    const timeline = t.timeline.map((m, i) => ({ ...m, lineBg: i < t.timeline.length - 1 ? '#ececec' : 'transparent', padBottom: i < t.timeline.length - 1 ? '36px' : '0px' }));
+    return { dir: isAr ? 'rtl' : 'ltr', t, blocksTop: mapBlocks(t.blocksTop), blocksBottom: mapBlocks(t.blocksBottom), timeline, related: t.related, backArrow: isAr ? '\u2192' : '\u2190', quoteSide: isAr ? 'right' : 'left' };
+  }
+}
+</script>
+</body>
+</html>

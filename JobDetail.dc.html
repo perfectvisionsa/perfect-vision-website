@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Readex Pro',sans-serif;background:#fff;color:#0a0a0a;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .pv-cta{transition:background .3s ease,color .3s ease,border-color .3s ease;}
+  .pv-icon{transition:color .2s ease,background .3s ease;cursor:pointer;}
+  .pv-icon:hover{color:#F50115;}
+  .pv-icon.liquid-glass-dark{transition:background .3s ease,color .2s ease;}
+  .pv-cta-circ .pv-arr-a,.pv-cta-circ .pv-arr-b{transition:transform .5s cubic-bezier(.2,0,0,1),opacity .35s ease;}
+  .pv-cta-circ .pv-arr-b{position:absolute;transform:translateX(-170%);opacity:0;}
+  .pv-cta:hover .pv-arr-a{transform:translateX(170%);opacity:0;}
+  .pv-cta:hover .pv-arr-b{transform:translateX(0);opacity:1;transition-delay:.06s;}
+  [dir="rtl"] .pv-cta-circ .pv-arr-a{transform:scaleX(-1);}
+  [dir="rtl"] .pv-cta-circ .pv-arr-b{transform:translateX(170%) scaleX(-1);}
+  [dir="rtl"] .pv-cta:hover .pv-arr-a{transform:translateX(-170%) scaleX(-1);}
+  [dir="rtl"] .pv-cta:hover .pv-arr-b{transform:translateX(0) scaleX(-1);}
+  .pv-icon.liquid-glass-dark:hover{background:rgba(10,10,10,0.08);}
+  .pv-glass-cta:hover{background:rgba(10,10,10,0.08);}
+  .liquid-glass-dark{background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);position:relative;overflow:hidden;}
+  .liquid-glass-dark::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-back{transition:background .3s ease;}
+  .pv-back:hover{background:rgba(10,10,10,0.08);}
+  .pv-back svg{transition:transform .3s cubic-bezier(.2,0,0,1);}
+  .pv-back:hover svg{transform:translateX(-3px);}
+  [dir="rtl"] .pv-back svg{transform:scaleX(-1);}
+  [dir="rtl"] .pv-back:hover svg{transform:scaleX(-1) translateX(-3px);}
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}[data-reveal]{opacity:1 !important;transform:none !important;}}
+  .pv-allbtn{position:relative;border-radius:44px;background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);overflow:hidden;transition:background .3s ease;}
+  .pv-allbtn::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-allbtn:hover{background:rgba(10,10,10,0.08);}
+  .pv-allbtn-in{display:inline-flex;align-items:center;gap:10px;border-radius:inherit;background:transparent;color:#0a0a0a;padding:12px 26px;font-size:15px;font-weight:500;}
+  .pv-arr{transition:transform .3s ease;}
+  .pv-allbtn:hover .pv-arr{transform:translateX(4px);}
+  [dir="rtl"] .pv-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pv-allbtn:hover .pv-arr{transform:scaleX(-1) translateX(4px);}
+  .pvj-apply:hover .pv-arr{transform:translate(2px,-2px);}
+  [dir="rtl"] .pvj-apply:hover .pv-arr{transform:scaleX(-1) translate(2px,-2px);}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;">
+
+  <dc-import name="SiteHeader" active="careers" bar-mode="solid" hint-size="100%,80px"></dc-import>
+
+  <!-- HEADER -->
+  <section style="background:#fff;padding:140px clamp(20px,6vw,80px) 40px;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <a href="Careers.dc.html" class="pv-back liquid-glass-dark" style="display:inline-flex;align-items:center;gap:9px;font-size:14px;color:#0a0a0a;font-weight:500;padding:10px 22px;border-radius:999px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:2;flex:none;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg><span style="position:relative;z-index:2;">{{ t.back }}</span></a>
+
+      <div data-reveal style="text-align:start;margin-top:40px;">
+        <h1 style="margin-top:0;font-size:clamp(32px,5vw,58px);font-weight:700;line-height:1.05;">{{ job.title }}</h1>
+        <div style="margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;padding-top:24px;border-top:1px solid #ececec;">
+          <div style="display:flex;flex-wrap:wrap;gap:12px 40px;font-size:14px;line-height:1.5;color:#555;">
+            <div style="display:flex;align-items:baseline;gap:8px;"><span style="color:#8a8a8a;">{{ t.location }}</span><span style="color:#0a0a0a;font-weight:500;">{{ job.location }}</span></div>
+            <div style="display:flex;align-items:baseline;gap:8px;"><span style="color:#8a8a8a;">{{ t.posted }}</span><span style="color:#0a0a0a;font-weight:500;">{{ job.posted }}</span></div>
+            <div style="color:#0a0a0a;font-weight:500;">{{ t.type }}</div>
+          </div>
+          <a class="pv-cta pvj-apply" href="Contact.dc.html" style="display:inline-flex;align-items:center;gap:8px;box-sizing:border-box;background:#019563;color:#fff;border:none;padding-block:10px;padding-inline-start:24px;padding-inline-end:20px;border-radius:30px;font-size:13.5px;font-weight:600;white-space:nowrap;line-height:1;flex:0 0 auto;" style-hover="background:#01754E;"><span style="line-height:1;">{{ t.submit }}</span><svg class="pv-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="8 7 17 7 17 16"></polyline></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section style="background:#fff;padding:24px clamp(20px,6vw,80px) 0;">
+    <div data-reveal style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,4vw,56px);align-items:start;">
+      <div>
+        <h2 style="font-size:24px;font-weight:700;">{{ t.summary }}</h2>
+      </div>
+      <div style="display:grid;gap:18px;">
+        <sc-for list="{{ job.summary }}" as="p" hint-placeholder-count="3">
+          <p style="font-size:16px;font-weight:300;line-height:1.7;color:#1a1a1a;">{{ p }}</p>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESCRIPTION -->
+  <section style="background:#fff;padding:clamp(40px,5vw,64px) clamp(20px,6vw,80px) clamp(70px,9vw,120px);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div style="border-top:1px solid #ececec;margin-bottom:clamp(32px,4vw,56px);"></div>
+      <div data-reveal style="display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,4vw,56px);align-items:start;">
+        <div>
+          <h2 style="font-size:24px;font-weight:700;">{{ t.description }}</h2>
+        </div>
+        <div style="display:grid;gap:16px;">
+          <sc-for list="{{ job.desc }}" as="p" hint-placeholder-count="4">
+            <p style="font-size:16px;font-weight:300;line-height:1.7;color:#1a1a1a;">{{ p }}</p>
+          </sc-for>
+          <h3 style="font-size:19px;font-weight:700;margin-top:14px;">{{ t.quals }}</h3>
+          <ul style="display:grid;gap:11px;padding-{{ startSide }}:20px;">
+            <sc-for list="{{ job.quals }}" as="q" hint-placeholder-count="4">
+              <li style="font-size:16px;font-weight:300;line-height:1.6;color:#1a1a1a;">{{ q }}</li>
+            </sc-for>
+          </ul>
+          <h3 style="font-size:19px;font-weight:700;margin-top:14px;">{{ t.nice }}</h3>
+          <ul style="display:grid;gap:11px;padding-{{ startSide }}:20px;">
+            <sc-for list="{{ job.nice }}" as="q" hint-placeholder-count="3">
+              <li style="font-size:16px;font-weight:300;line-height:1.6;color:#1a1a1a;">{{ q }}</li>
+            </sc-for>
+          </ul>
+          <sc-if value="{{ hasApply }}" hint-placeholder-val="{{ false }}">
+            <h3 style="font-size:19px;font-weight:700;margin-top:14px;">{{ t.apply }}</h3>
+            <p style="font-size:16px;font-weight:300;line-height:1.7;color:#1a1a1a;">{{ job.apply }}</p>
+          </sc-if>
+          <p style="margin-top:14px;font-size:14px;font-weight:300;line-height:1.7;color:#555;">{{ t.inclusion }}</p>
+        </div>
+      </div>
+      <div style="border-top:1px solid #ececec;margin-top:clamp(32px,4vw,56px);"></div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+  <template id="__bundler_thumbnail" data-bg-color="#910C07">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#910C07"/>
+      <path d="M600 300 L640 380 L720 400 L640 420 L600 500 L560 420 L480 400 L560 380 Z" fill="#ffffff"/>
+      <text x="600" y="600" font-family="sans-serif" font-size="56" font-weight="700" fill="#ffffff" text-anchor="middle">Careers</text>
+    </svg>
+  </template>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    let id = 1;
+    try { const m = (window.location.search || '').match(/[?&]id=(\d+)/); if (m) id = parseInt(m[1], 10); } catch (e) {}
+    this.state = { lang, id };
+  }
+  componentDidMount() { this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang); this.initReveal(); }
+  componentDidUpdate() { this.initReveal(); }
+  componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); if (this._io) this._io.disconnect(); }
+  initReveal() {
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    if (!this._io) this._io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; this._io.unobserve(e.target); } }), { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => { if (!el._o) { el._o = true; this._io.observe(el); } });
+  }
+  jobsData() {
+    return {
+      1: { title: 'Senior Java & IoT Back-end Developer', team: 'Fleetic Platform · Perfect Vision', location: 'Dammam, Eastern Province', posted: 'Sep 01, 2026', num: 'PV-2026-001',
+        summary: ['Fleetic is a high-concurrency IoT platform. Thousands of devices send data over TCP, UDP, MQTT and HTTP, and the platform has to collect it, make sense of it and hand it to the people who act on it. You lead the backend that does this work.',
+          'The role is senior. You own architecture decisions, review code, mentor developers and work day to day with frontend, DevOps and product.'],
+        desc: ['Build and maintain the platform services in Spring Boot: data collection endpoints for each protocol, consumption and analysis endpoints for real-time processing, and the push endpoints and business APIs that partners integrate with.',
+          'Design a loosely coupled architecture where each device family has its own access component, and write protocol decoders that bring new devices onto the platform.',
+          'Develop the audio and video alarm file services and streaming media components.',
+          'Expose the platform to third parties through webhooks and OpenAPI, and keep it fast under heavy load.',
+          'Lead code reviews, testing strategy and monitoring. Set the standards the team codes to and take part in sprint planning.'],
+        quals: ['Degree in computer science or software engineering, or equivalent experience, with 7+ years of Java backend development and time in a senior or lead role.',
+          'Expert in Java 8+ and the Spring ecosystem (Spring Boot, Spring MVC, Spring Security), with strong Netty experience for network programming and protocol handling.',
+          'Production experience with RabbitMQ or Kafka, Redis, MongoDB and MySQL.',
+          'Solid understanding of IoT protocols (TCP, UDP, MQTT, HTTP, WebSocket), RESTful and OpenAPI design, webhooks, microservices and distributed systems.',
+          'A record of building high-concurrency, high-availability systems, and the communication skills to mentor others and translate business needs into technical design.'],
+        nice: ['Docker and Kubernetes, Linux server administration, and CI/CD pipelines.',
+          'Elasticsearch, time-series databases (InfluxDB, TimescaleDB) and stream processing (Flink, Storm).',
+          'Monitoring with Prometheus, Grafana or the ELK stack.',
+          'IoT security practices, device management and protocol translation.',
+          'Open-source Java contributions.'],
+        apply: 'Send your resume with a portfolio or GitHub profile that shows your Java backend work, especially distributed systems, IoT protocols and high-concurrency services. Links to live systems and community contributions are welcome.' },
+      2: { title: 'Embedded Systems Engineer', team: 'Engineering · Perfect Vision', location: 'Dammam, Eastern Province', posted: 'Sep 01, 2026', num: 'PV-2026-002',
+        summary: ['Our telematics devices capture vehicle and asset data, process it at the edge and stream it securely to the platform. You design and build the firmware that does this.',
+          'That means efficient, robust C/C++ on constrained hardware, sensor and connectivity integration, and the over-the-air update pipeline the fleet depends on.'],
+        desc: ['Design, write and maintain firmware in C/C++ for microcontrollers, on an RTOS (FreeRTOS, Zephyr) or bare metal.',
+          'Develop device drivers and low-level interfaces: UART, SPI, I2C, ADC, GPIO and DMA.',
+          'Acquire vehicle data over CAN, OBD-II, J1939 and Modbus, and build cellular telemetry with MQTT, TCP/IP and TLS.',
+          'Design OTA update mechanisms with rollback and integrity checks, and optimise for low power, small memory footprint and long field life.',
+          'Work with hardware engineers during board bring-up and with the platform team on device-to-cloud data contracts. Write unit and integration tests, debug with JTAG/SWD and support field diagnostics.'],
+        quals: ['Degree in computer or electronic engineering, computer science or equivalent, with 3+ years of embedded development.',
+          'Strong C, ideally C++, on resource-constrained microcontrollers.',
+          'Hands-on experience with RTOS concepts, interrupts and real-time constraints.',
+          'Practical experience with UART, SPI and I2C, and at least one vehicle bus (CAN or OBD-II).',
+          'Experience with cellular or wireless connectivity and MQTT/TCP-IP networking, and comfort with oscilloscopes, logic analysers and JTAG/SWD.'],
+        nice: ['Shipping OTA update systems and secure boot.',
+          'GNSS/GPS positioning and dead reckoning.',
+          'Embedded security: TLS, key storage, secure elements.',
+          'CI for firmware and hardware-in-the-loop testing.'],
+        apply: '' },
+      3: { title: 'IoT Engineer', team: 'Fleetic Platform · Perfect Vision', location: 'Dammam, Eastern Province', posted: 'Sep 01, 2026', num: 'PV-2026-003',
+        summary: ['You are the link between devices in the field and the platform that turns their data into value. You design how thousands of devices connect, authenticate, provision and stream data reliably and securely.',
+          'The work covers the connectivity layer, the data pipelines and the fleet-management tooling that keeps a large connected estate healthy.'],
+        desc: ['Design and operate the device-to-cloud connectivity layer on MQTT and cloud IoT services such as AWS IoT Core or Azure IoT Hub.',
+          'Build provisioning, identity and lifecycle workflows for large device populations, with mutual TLS, certificate and key management and secure onboarding.',
+          'Develop ingestion pipelines that feed telemetry into the platform and analytics.',
+          'Create edge and cloud logic for command-and-control, remote configuration and OTA orchestration.',
+          'Monitor connectivity health, build observability and alerting, and reduce device downtime. Manage cellular data usage, cost and SIM connectivity across the fleet.',
+          'Partner with embedded engineers on data contracts and with backend teams on APIs and storage.'],
+        quals: ['Degree in computer science, software or electronic engineering or equivalent, with 3+ years of relevant experience.',
+          'Hands-on experience with an IoT cloud platform (AWS IoT, Azure IoT, Google Cloud IoT or similar).',
+          'Strong grasp of MQTT and HTTP (CoAP a plus) and networking fundamentals.',
+          'Proficiency in Python, Node.js, Go or Java for backend and edge services.',
+          'Understanding of device security, certificates and identity management, and experience with message queues or streaming (Kafka, Kinesis, Pub/Sub).'],
+        nice: ['Managing cellular connectivity, APNs and SIM fleets.',
+          'Terraform, Docker and Kubernetes.',
+          'Time-series databases and telemetry visualisation.',
+          'Prior work with telematics, automotive or asset-tracking data.'],
+        apply: '' },
+      4: { title: 'Senior Accountant', team: 'Finance · Perfect Vision', location: 'Dammam, Eastern Province', posted: 'Sep 01, 2026', num: 'PV-2026-004',
+        summary: ['You run the day-to-day accounting that keeps Perfect Vision compliant and its numbers trustworthy: journal entries, reconciliations and an accurate general ledger.',
+          'You work with the Senior Accounting Supervisor on financial statements, analysis and performance evaluation.'],
+        desc: ['Execute daily accounting transactions and keep the general ledger accurate and current.',
+          'Support month-end and year-end closings, reconcile accounts and validate financial data.',
+          'Help prepare financial statements, supporting schedules and reports.',
+          'Contribute to Zakat compliance and filings, and support internal audits that strengthen financial controls.',
+          'Manage accounts payable, office expenses and customer discounts within approved budgets and company policy.',
+          'Coordinate with banks, government bodies, customers and internal teams so financial operations run smoothly.'],
+        quals: ['Bachelor\'s degree in accounting, finance or a related field.',
+          '4 to 5 years of progressive accounting experience.',
+          'Proficient in accounting principles, financial reporting and taxation.',
+          'Strong Microsoft Excel skills.',
+          'Clear communication and good working relationships across teams.'],
+        nice: ['Hands-on experience with Odoo ERP.'],
+        apply: '' },
+      5: { title: 'Key Account Manager', team: 'Commercial · Perfect Vision', location: 'Dammam, Eastern Province', posted: 'Sep 01, 2026', num: 'PV-2026-005',
+        summary: ['You own a portfolio of customer accounts and the sales target that comes with it. You know every Perfect Vision product well enough to explain it clearly, match it to a customer\'s needs and present a proposal that holds up.',
+          'The relationship continues after the sale: regular visits, account support, timely collection and a CRM that reflects reality.'],
+        desc: ['Achieve the sales target set by management. Promote our products and solutions to current customers and bring in new ones.',
+          'Study customer requirements and present suitable solutions, proposals and presentations that show the value clearly.',
+          'Manage accounts end to end: follow up with internal departments on order processing and delivery, support the customer, and collect invoices and receivables on time.',
+          'Register and update every opportunity and prospect in the CRM. Report on visits, sales activity, market competition, prices and offers.',
+          'Prepare sales plans, identify new opportunities and meet the weekly, monthly and annual KPIs set by the sales policy.'],
+        quals: ['1 to 2 years of experience in sales.',
+          'Strong persuasion, negotiation and relationship-building skills, including with executives and decision makers.',
+          'Good English, good computer skills and the organisation to manage many accounts at once.',
+          'Analytical, adaptable and comfortable working under pressure.'],
+        nice: ['Bachelor\'s degree in telecommunications engineering, information technology or business administration.',
+          'Technical background in IT, telecommunications, computer systems or smart solutions.'],
+        apply: '' }
+    };
+  }
+  renderVals() {
+    // Job descriptions are published in English only — the page stays LTR/English in both languages.
+    const isAr = false;
+    const t = isAr ? {
+      back: 'العودة إلى الوظائف', summary: 'الملخص', description: 'الوصف', quals: 'المؤهلات الأساسية',
+      posted: 'تاريخ النشر', roleNo: 'رقم الوظيفة', location: 'الموقع', hiring: 'أين نوظف', submit: 'إرسال السيرة الذاتية', nice: 'مهارات إضافية مرغوبة', apply: 'كيف تتقدم', type: 'دوام كامل، دائم', inclusion: 'الفرص متكافئة في Perfect Vision. نرحب بطلبات ذوي الإعاقة الحركية؛ مرافقنا مجهزة بالكامل ومصممة للعمل بأريحية ومهنية.'
+    } : {
+      back: 'Back to all roles', summary: 'Summary', description: 'Description', quals: 'Minimum Qualifications',
+      posted: 'Posted', roleNo: 'Role number', location: 'Location', hiring: 'Where we’re hiring', submit: 'Submit Resume', nice: 'Nice to have', apply: 'How to apply', type: 'Full-time, permanent', inclusion: 'Perfect Vision is an equal opportunity employer. We welcome applications from people with motor disabilities; our facilities are fully equipped so everyone can do their work comfortably and professionally.'
+    };
+    const data = this.jobsData();
+    const job = data[this.state.id] || data[1];
+    return {
+      dir: isAr ? 'rtl' : 'ltr', startSide: isAr ? 'right' : 'left', t, job, hasApply: !!job.apply
+    };
+  }
+}
+</script>
+</body>
+</html>

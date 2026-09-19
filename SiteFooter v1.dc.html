@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  .pvf *{box-sizing:border-box;}
+  .pvf a{text-decoration:none;color:inherit;}
+  .pvf-link{transition:opacity .25s ease;opacity:.7;}
+  .pvf-link:hover{opacity:1;}
+  .pvf-social{transition:background .3s ease,transform .25s ease;}
+    .pvf-social-icon{filter:brightness(0) invert(1);}
+  .pvf-cta{transition:background .3s ease,transform .2s ease,box-shadow .3s ease;box-shadow:0 8px 30px -10px rgba(245,1,21,.6);}
+  .pvf-cta:hover{box-shadow:0 14px 48px -6px rgba(245,1,21,1),0 0 26px 2px rgba(245,1,21,.7);}
+  .pvf-input{background:transparent;border:1px solid rgba(255,255,255,.18);color:#fff;transition:border-color .25s ease;}
+  .pvf-input::placeholder{color:rgba(255,255,255,.6);}
+  .pvf-input:focus{outline:none;border-color:#fff;}
+  /* cinematic bottom-rising red beam backdrop */
+  .cf{position:relative;overflow:hidden;isolation:isolate;}
+  .cf-bg{position:absolute;inset:0;z-index:-2;background:#0a0a0a;}
+  .cf-beam{position:absolute;left:50%;bottom:-24%;transform:translateX(-50%);z-index:-1;
+    width:130%;height:124%;pointer-events:none;
+    background:radial-gradient(60% 132% at 50% 100%,rgba(245,1,21,.68) 0%,rgba(180,15,9,.40) 28%,rgba(145,12,7,.18) 50%,rgba(145,12,7,.07) 68%,transparent 84%);
+    -webkit-mask-image:radial-gradient(60% 132% at 50% 100%,#000 54%,transparent 90%);
+            mask-image:radial-gradient(60% 132% at 50% 100%,#000 54%,transparent 90%);
+    animation:beam 9s ease-in-out infinite;}
+  .cf-core{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:-1;
+    width:66%;height:2px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(245,1,21,.95),transparent);
+    filter:blur(1px);box-shadow:0 0 46px 10px rgba(245,1,21,.45);
+    animation:core 9s ease-in-out infinite;}
+  @keyframes beam{0%,100%{opacity:.82;transform:translateX(-50%) scaleY(1);}50%{opacity:1;transform:translateX(-50%) scaleY(1.06);}}
+  @keyframes core{0%,100%{opacity:.65;}50%{opacity:1;}}
+  @media(prefers-reduced-motion:reduce){ .cf-beam,.cf-core{animation:none;} }
+  /* responsive footer */
+  @media(max-width:1024px){
+    .pvf-cols{grid-template-columns:repeat(2,1fr)!important;gap:38px 24px!important;}
+    .pvf-cols>div:first-child{grid-column:1/-1;}
+  }
+  @media(max-width:440px){
+    .pvf-nlform{flex-direction:column;}
+    .pvf-nlform .pvf-cta{width:100%;}
+  }
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div class="pvf cf" dir="{{ dir }}" style="font-family:'Readex Pro',sans-serif;background:#0a0a0a;color:#fff;">
+
+  <!-- BACKDROP -->
+  <div class="cf-bg"></div>
+  <div class="cf-beam"></div>
+  <div class="cf-core"></div>
+
+  <!-- NEWSLETTER -->
+  <div style="padding:clamp(56px,7vw,90px) clamp(20px,6vw,80px) clamp(12px,1.5vw,18px);">
+    <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,4vw,64px);align-items:center;">
+      <div>
+        <h3 style="font-size: clamp(24px,3vw,38px); font-weight: 700;  margin: 0; line-height: 1.25; max-width: 20ch; text-wrap: balance">{{ t.nlTitle }}</h3>
+      </div>
+      <div style="width:100%;max-width:480px;margin-inline-start:auto;">
+        <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:12px;font-size:17px;color:#DDE379;"><span style="width:34px;height:34px;border-radius:50%;background:#019563;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;">\u2713</span>{{ t.nlThanks }}</div>
+        </sc-if>
+        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+          <form class="pvf-nlform" onSubmit="{{ onSubscribe }}" style="display:flex;gap:10px;">
+            <input class="pvf-input" type="email" required="" placeholder="{{ t.nlPh }}" dir="ltr" style="flex:1 1 auto;min-width:0;height:54px;box-sizing:border-box;border-radius:40px;padding:0 22px;font-family:'Readex Pro',sans-serif;font-size:15px;">
+            <button class="pvf-cta" type="submit" style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:54px;background:#F50115;color:#fff;border:none;border-radius:40px;padding:0 30px;font-family:'Readex Pro',sans-serif;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;">{{ t.nlBtn }}</button>
+          </form>
+          <p style="margin-top:14px;padding-inline-start:22px;font-size:12.5px;color:#777;font-weight:300;">{{ t.nlNote }}</p>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLUMNS -->
+  <div style="padding:clamp(24px,3vw,36px) clamp(20px,6vw,80px) 40px;">
+    <div class="pvf-cols" style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:40px;">
+      <div style="min-width:200px;">
+        <a href="index.html" style="display:flex;align-items:center;gap:11px;"><img src="assets/brand/perfect-vision-mark-white.webp" alt="" style="width:32px;height:32px;"><span style="font-size:18px;"><span style="font-weight:300;">Perfect</span> <span style="font-weight:700;">Vision</span></span></a>
+        <p style="margin-top:18px;font-size:14px;font-weight:300;line-height:1.65;color:#888;max-width:280px;">{{ t.tagline }}</p>
+        <div style="display:flex;gap:18px;margin-top:24px;">
+          <sc-for list="{{ socials }}" as="s" hint-placeholder-count="4">
+            <a class="pvf-social" href="{{ s.href }}" aria-label="{{ s.name }}" style="display:flex;align-items:center;justify-content:center;color:#fff;">
+              <img class="pvf-social-icon" src="{{ s.icon }}" alt="{{ s.name }}" style="width:18px;height:18px;object-fit:contain;">
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <sc-for list="{{ columns }}" as="col" hint-placeholder-count="4">
+        <div>
+          <div style="font-size:14.5px;font-weight:300;color:#F50115;">{{ col.title }}</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:18px;">
+            <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="4">
+              <a class="pvf-link" href="{{ l.href }}" style="font-size:14.5px;font-weight:300;">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div style="padding-inline:clamp(20px,6vw,80px);">
+    <div style="max-width:1240px;margin-inline:auto;height:2px;background:linear-gradient(90deg,rgba(245,1,21,.9),rgba(145,12,7,.5) 45%,transparent);box-shadow:0 0 22px rgba(245,1,21,.5);border-radius:4px;"></div>
+  </div>
+  <div style="padding:28px clamp(20px,6vw,80px) 48px;">
+    <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;">
+      <div style="display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:#999;font-weight:300;" dir="ltr">
+        <a class="pvf-link" href="mailto:info@perfectvisionksa.com">info@perfectvisionksa.com</a>
+        <span style="color:#333;">|</span>
+        <a class="pvf-link" href="tel:+966138933338">+966 13 893 3338</a>
+        <span style="color:#333;">|</span>
+        <span>{{ t.address }}</span>
+      </div>
+      <div style="font-family:'Readex Pro',sans-serif;font-size:12px;color:#666;" dir="ltr">© 2026 Perfect Vision</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:560}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang, subscribed: false };
+  }
+  componentDidMount() { this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang); }
+  componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); }
+  onSubscribe = (e) => { e.preventDefault(); this.setState({ subscribed: true }); };
+
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const en = {
+      tagline: 'Industrial safety technology, engineered in Dammam for the Kingdom and beyond.',
+      address: '5th Floor, Modon Tower, 1st Industrial City, Dammam',
+      nlKicker: 'Newsletter', nlTitle: 'Stay updated on industrial safety.', nlPh: 'Your work email', nlBtn: 'Subscribe',
+      nlNote: 'A quarterly letter on industrial safety. Unsubscribe anytime.', nlThanks: 'You\u2019re subscribed. Thank you.',
+      columns: [
+        { title: 'Solutions', links: [ { label: 'The View Family', href: 'Solutions.dc.html' }, { label: 'Industries', href: 'Industries.dc.html' }, { label: 'Base Line vs Blue Line', href: 'Solutions.dc.html' } ] },
+        { title: 'Fleetic', links: [ { label: 'Overview', href: 'Fleetic.dc.html' }, { label: 'Powered by Fleetic', href: 'Fleetic.dc.html' }, { label: 'Login', href: 'Fleetic.dc.html' } ] },
+        { title: 'Newsroom', links: [ { label: 'The Blog', href: 'Newsroom.dc.html#pr-news' }, { label: 'Photo Gallery', href: 'Newsroom.dc.html#pr-gallery' } ] },
+        { title: 'Company', links: [ { label: 'About', href: 'About.dc.html' }, { label: 'Careers', href: 'Careers.dc.html' }, { label: 'Contact', href: 'Contact.dc.html' } ] }
+      ]
+    };
+    const ar = {
+      tagline: '\u062a\u0642\u0646\u064a\u0629 \u0627\u0644\u0633\u0644\u0627\u0645\u0629 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629\u060c \u0645\u0647\u0646\u062f\u0633\u0629 \u0641\u064a \u0627\u0644\u062f\u0645\u0627\u0645 \u0644\u0644\u0645\u0645\u0644\u0643\u0629 \u0648\u0645\u0627 \u0628\u0639\u062f\u0647\u0627.',
+      address: '\u0627\u0644\u0637\u0627\u0628\u0642 \u0627\u0644\u062e\u0627\u0645\u0633\u060c \u0628\u0631\u062c \u0645\u062f\u0646\u060c \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629 \u0627\u0644\u0623\u0648\u0644\u0649\u060c \u0627\u0644\u062f\u0645\u0627\u0645',
+      nlKicker: '\u0627\u0644\u0646\u0634\u0631\u0629', nlTitle: '\u0627\u0628\u0642 \u0639\u0644\u0649 \u0627\u0637\u0644\u0627\u0639 \u0628\u0627\u0644\u0633\u0644\u0627\u0645\u0629 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u0629.', nlPh: '\u0628\u0631\u064a\u062f\u0643 \u0627\u0644\u0645\u0647\u0646\u064a', nlBtn: '\u0627\u0634\u062a\u0631\u0627\u0643',
+      nlNote: 'نشرة ربع سنوية عن السلامة الصناعية، ويمكنك إلغاء الاشتراك متى شئت.', nlThanks: 'تم اشتراكك، شكرًا لك.',
+      columns: [
+        { title: '\u0627\u0644\u062d\u0644\u0648\u0644', links: [ { label: 'The View Family', href: 'Solutions.dc.html' }, { label: '\u0627\u0644\u0642\u0637\u0627\u0639\u0627\u062a', href: 'Industries.dc.html' }, { label: 'Base Line vs Blue Line', href: 'Solutions.dc.html' } ] },
+        { title: 'Fleetic', links: [ { label: 'Overview', href: 'Fleetic.dc.html' }, { label: 'Powered by Fleetic', href: 'Fleetic.dc.html' }, { label: 'Login', href: 'Fleetic.dc.html' } ] },
+        { title: '\u0627\u0644\u0623\u062e\u0628\u0627\u0631', links: [ { label: '\u0627\u0644\u0645\u062f\u0648\u0646\u0629', href: 'Newsroom.dc.html#pr-news' }, { label: '\u0645\u0639\u0631\u0636 \u0627\u0644\u0635\u0648\u0631', href: 'Newsroom.dc.html#pr-gallery' } ] },
+        { title: '\u0627\u0644\u0634\u0631\u0643\u0629', links: [ { label: '\u0645\u0646 \u0646\u062d\u0646', href: 'About.dc.html' }, { label: '\u0627\u0644\u0648\u0638\u0627\u0626\u0641', href: 'Careers.dc.html' }, { label: '\u062a\u0648\u0627\u0635\u0644', href: 'Contact.dc.html' } ] }
+      ]
+    };
+    const t = isAr ? ar : en;
+    return {
+      dir: isAr ? 'rtl' : 'ltr',
+      t: { tagline: t.tagline, address: t.address, nlKicker: t.nlKicker, nlTitle: t.nlTitle, nlPh: t.nlPh, nlBtn: t.nlBtn, nlNote: t.nlNote, nlThanks: t.nlThanks },
+      columns: t.columns,
+      socials: [ { name: 'LinkedIn', icon: 'assets/social/icon-social-linkedin.svg', href: '#' }, { name: 'X', icon: 'assets/social/icon-social-x.svg', href: '#' }, { name: 'Instagram', icon: 'assets/social/icon-social-instagram.svg', href: '#' }, { name: 'YouTube', icon: 'assets/social/icon-social-youtube.svg', href: '#' } ],
+      onSubscribe: this.onSubscribe, subscribed: this.state.subscribed, notSubscribed: !this.state.subscribed
+    };
+  }
+}
+</script>
+</body>
+</html>

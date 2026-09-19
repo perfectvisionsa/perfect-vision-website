@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-v2/layer-3-vehicles.webp" fetchpriority="high">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Readex Pro',sans-serif;background:#fff;color:#0a0a0a;overflow-x:hidden;}
+  ::selection{background:#F50115;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  @keyframes pvFloat{0%{transform:translateY(0)}50%{transform:translateY(-14px)}100%{transform:translateY(0)}}
+  [data-reveal]{opacity:0;transform:translateY(32px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1);}
+  .pv-cta{transition:background .35s ease,color .35s ease,border-color .35s ease,transform .25s ease;}
+  .pv-desktop-only{display:inline-flex;}
+  .pv-bento{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,24px);grid-auto-rows:clamp(210px,25vw,330px);}
+  .pv-bcol-7{grid-column:span 7;}
+  .pv-bcol-5{grid-column:span 5;}
+  .pv-bcol-4{grid-column:span 4;}
+  .pv-bcard{position:relative;display:block;border-radius:24px;overflow:hidden;background:#0f0f0f;border:2px solid #E4E4E4;}
+  .pv-bcard-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+  .pv-bcard:hover .pv-bcard-img,.pv-bcard:focus-visible .pv-bcard-img,.pv-bcard.pv-touched .pv-bcard-img{transform:scale(1.05);}
+  .pv-bcard-scrim{display:none;}
+  .pv-bcard-name{position:absolute;bottom:16px;inset-inline-start:20px;color:#0a0a0a;font-size:13.5px;font-weight:500;text-shadow:none;}
+  .pv-bcard-light{background:#fff;}
+  .pv-bcard-fit{background:#fff;}
+  .pv-bcard-fit .pv-bcard-img{object-fit:contain;padding:clamp(16px,2.6vw,38px);}
+  .pv-bcard-light .pv-bcard-scrim{display:none;}
+  .pv-bcard-light .pv-bcard-name{color:#0a0a0a;text-shadow:none;}
+  .pv-bcard-veil{position:absolute;inset:0;border-radius:inherit;overflow:hidden;display:flex;align-items:center;justify-content:center;opacity:0;background:rgba(10,10,10,.4);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:opacity .45s cubic-bezier(.2,.7,.2,1);}
+  .pv-bcard:hover .pv-bcard-veil,.pv-bcard:focus-visible .pv-bcard-veil,.pv-bcard.pv-touched .pv-bcard-veil{opacity:1;}
+  .pv-bcard-pill{position:relative;display:inline-flex;border-radius:44px;transform:translateY(10px);transition:transform .45s cubic-bezier(.2,.7,.2,1),background .3s ease;background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.1),0 18px 44px -18px rgba(0,0,0,.55);overflow:hidden;}
+  .pv-bcard-pill::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-bcard:hover .pv-bcard-pill,.pv-bcard:focus-visible .pv-bcard-pill,.pv-bcard.pv-touched .pv-bcard-pill{transform:translateY(0);}
+  .pv-bcard-pill:hover{background:rgba(255,255,255,.14);}
+  .pv-bcard-pill:active{transform:translateY(0) scale(.98);}
+  .pv-bcard-pill-in{display:inline-flex;align-items:center;gap:10px;border-radius:inherit;padding:12px 26px;font-size:15px;color:#fff;background:transparent;white-space:nowrap;}
+  .pv-allbtn{position:relative;border-radius:44px;background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);overflow:hidden;transition:background .3s ease;}
+  .pv-allbtn::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-allbtn:hover{background:rgba(10,10,10,0.08);}
+  .pv-allbtn-light{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);}
+  .pv-allbtn-light::before{background:linear-gradient(180deg,rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.5) 100%);}
+  .pv-allbtn-light:hover{background:rgba(255,255,255,0.18);}
+  .pv-allbtn-light .pv-allbtn-in{color:#fff;}
+  .pv-allbtn-in{display:inline-flex;align-items:center;gap:10px;border-radius:inherit;background:transparent;color:#0a0a0a;padding:12px 26px;font-size:15px;font-weight:500;}
+  .pv-arr{transition:transform .3s ease;}
+  .pv-allbtn:hover .pv-arr{transform:translateX(4px);}
+  [dir="rtl"] .pv-arr{transform:scaleX(-1);}
+  [dir="rtl"] .pv-allbtn:hover .pv-arr{transform:scaleX(-1) translateX(4px);}
+  @media(max-width:840px){
+    .pv-desktop-only{display:none !important;}
+    .pv-bcol-7,.pv-bcol-5,.pv-bcol-4{grid-column:1/-1;}
+  }
+  .pv-tab{transition:color .3s ease,border-color .3s ease;cursor:pointer;}
+  .pv-news{transition:transform .4s ease,box-shadow .4s ease;}
+  .pv-news:hover{transform:translateY(-6px);box-shadow:0 30px 60px -28px rgba(0,0,0,.55);}
+  .pv-news:hover .pv-news-img{transform:scale(1.06);}
+  .pv-news-img{transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  .pr-ncard{flex:0 0 calc((100% - 48px)/3);}
+  @media(max-width:1000px){.pr-ncard{flex:0 0 calc((100% - 24px)/2);}}
+  @media(max-width:640px){.pr-ncard{flex:0 0 100%;}}
+  .pr-news-card:hover .pr-news-img{transform:scale(1.06);}
+  .pr-news-img{transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  .pr-arrow{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;line-height:1;transition:background .3s ease,transform .25s ease,opacity .3s ease;}
+  .pr-arrow:hover{background:#F50115;}
+  [dir="rtl"] .pr-arrow{transform:scaleX(-1);}
+  .pr-clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .liquid-glass{background:rgba(255,255,255,0.01);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden;}
+  .liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.15) 80%,rgba(255,255,255,0.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .liquid-glass-dark{background:rgba(10,10,10,0.035);background-blend-mode:luminosity;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,0.6);position:relative;overflow:hidden;}
+  .liquid-glass-dark::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.4px;background:linear-gradient(180deg,rgba(10,10,10,0.22) 0%,rgba(10,10,10,0.08) 20%,rgba(10,10,10,0) 40%,rgba(10,10,10,0) 60%,rgba(10,10,10,0.08) 80%,rgba(10,10,10,0.22) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1;}
+  .pv-jrow-img{transition:transform .5s cubic-bezier(.2,0,0,1);}
+  .pv-jrow.liquid-glass{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);background:rgba(8,8,8,.22);}
+  .pv-jrow:hover .pv-jrow-img{transform:scale(1.09);}
+  .pv-jrow-arrow{transition:background .25s ease,border-color .25s ease;}
+  .pv-jrow-arrow svg{transition:transform .3s cubic-bezier(.2,0,0,1);}
+  .pv-jrow:hover .pv-jrow-arrow{background:#fff;border-color:#fff;}
+  .pv-jrow:hover .pv-jrow-arrow svg{transform:translate(3px,-3px);stroke:#0a0a0a;}
+  [dir="rtl"] .pv-jrow-arrow svg{transform:scaleX(-1);}
+  [dir="rtl"] .pv-jrow:hover .pv-jrow-arrow svg{transform:scaleX(-1) translate(3px,-3px);stroke:#0a0a0a;}
+  @media(max-width:840px){
+    .pv-jrow{padding:10px !important;padding-inline-end:16px !important;gap:16px !important;}
+    .pv-jrow-thumb{width:56px !important;height:56px !important;}
+    .pv-jrow-excerpt,.pv-jrow-meta{display:none !important;}
+    .pv-jrow-arrow{width:40px !important;height:40px !important;}
+    .pv-jrow-title{font-size:16px !important;}
+  }
+  .pv-dot{transition:width .35s ease,background .35s ease;cursor:pointer;}
+  .pv-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .pv-marquee-track{display:flex;align-items:center;width:max-content;animation:pvMarquee 30s linear infinite;}
+  .pv-marquee:hover .pv-marquee-track{animation-play-state:paused;}
+  .pv-logo{height:clamp(42px,4.6vw,66px);width:auto;flex:none;margin:0 clamp(40px,5.6vw,84px);transition:transform .4s ease;}
+  .pv-logo:hover{transform:scale(1.06);}
+  @keyframes pvMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  /* HERO: layers hold their start pose until [data-hero-ready] (vehicles decoded) */
+  .pv-hero-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;will-change:transform,opacity,filter;}
+  .pv-hero-veil{position:absolute;inset:0;background:#fff;pointer-events:none;z-index:4;}
+  .pv-hero-sky{opacity:0;}
+  .pv-hero-name{opacity:0;transform:translateY(40px);filter:blur(14px);}
+  .pv-hero-header{opacity:0;}
+  .pv-hero-say{opacity:0;}
+  [data-hero-ready] .pv-hero-veil{animation:pvSkyVeil 1.8s cubic-bezier(.22,1,.36,1) .2s both;}
+  [data-hero-ready] .pv-hero-sky{animation:pvSkyIn 1.8s cubic-bezier(.22,1,.36,1) .2s both;}
+  [data-hero-ready] .pv-hero-name{animation:pvNameIn 2.2s cubic-bezier(.16,1,.3,1) .9s both;}
+  [data-hero-ready] .pv-hero-header{animation:pvHeaderIn .8s cubic-bezier(.22,1,.36,1) 2s both;}
+  [data-hero-ready] .pv-hero-say{animation:pvSayIn 2.2s cubic-bezier(.16,1,.3,1) .9s both;}
+  @keyframes pvSkyVeil{from{opacity:1}to{opacity:0}}
+  @keyframes pvSkyIn{from{opacity:0}to{opacity:1}}
+  @keyframes pvNameIn{from{opacity:0;transform:translateY(40px);filter:blur(14px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+  @keyframes pvHeaderIn{from{opacity:0}to{opacity:1}}
+  @keyframes pvSayIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){
+    .pv-hero-sky,.pv-hero-name,.pv-hero-header,.pv-hero-say{opacity:1;transform:none;filter:none;}
+    .pv-hero-veil{display:none;}
+    [data-hero-ready] .pv-hero-sky,[data-hero-ready] .pv-hero-name,[data-hero-ready] .pv-hero-header,[data-hero-ready] .pv-hero-say{animation:none;}
+  }
+  /* FLEETIC scrolly */
+  .flz-wrap{height:232vh;}
+  .flz-sticky{position:sticky;top:0;height:100svh;display:flex;overflow:hidden;}
+  .flz-inner{position:relative;z-index:1;width:100%;max-width:1240px;margin:auto;padding:clamp(16px,3vh,48px) clamp(20px,6vw,80px);display:flex;flex-direction:column;justify-content:center;gap:clamp(20px,4vh,40px);}
+  .flz-cols{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,80px);}
+  .flz-side{flex:1 1 44%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(18px,3vh,30px);min-height:min(66svh,580px);}
+  .flz-stage{position:relative;flex:1 1 56%;height:min(66svh,580px);}
+  .flz-svg{position:absolute;top:0;inset-inline-start:0;height:100%;width:auto;display:block;overflow:visible;}
+  [dir="rtl"] .flz-svg{transform:scaleX(-1);}
+  .flz-track{stroke:rgba(205,238,255,.18);}
+  .flz-line{stroke:#CDEEFF;}
+  .flz-pt{display:contents;}
+  .flz-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;border:2.5px solid #CDEEFF;box-shadow:0 0 0 5px rgba(205,238,255,.15),0 0 24px rgba(205,238,255,.45);transform:translate(-50%,-50%);transition:transform .5s cubic-bezier(.2,0,0,1),opacity .35s ease;}
+  [dir="rtl"] .flz-dot{transform:translate(50%,-50%);}
+  .flz-lab{position:absolute;inset-inline-end:0;transform:translateY(-50%);text-align:start;transition:opacity .6s ease .14s,transform .6s cubic-bezier(.2,0,0,1) .14s;}
+  .flz-lab p{margin-top:7px;font-size:13.5px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.85);max-width:52ch;}
+
+  @media(min-width:861px){
+    .flz-mobile,.flz-cta-mobile{display:none !important;}
+
+    [data-flz-armed] .flz-pt:not(.on) .flz-dot{opacity:0;transform:translate(-50%,-50%) scale(.2);}
+    [dir="rtl"] [data-flz-armed] .flz-pt:not(.on) .flz-dot{transform:translate(50%,-50%) scale(.2);}
+    [data-flz-armed] .flz-pt:not(.on) .flz-lab{opacity:0;transform:translateY(-50%) translateX(-16px);}
+    [dir="rtl"] [data-flz-armed] .flz-pt:not(.on) .flz-lab{transform:translateY(-50%) translateX(16px);}
+
+  }
+  @media(max-width:860px){
+    .flz-wrap{height:auto;}
+    .flz-sticky{position:relative;height:auto;}
+    .flz-stage{display:none;}
+    .flz-topcta{display:none;}
+    .flz-cols{flex-direction:column;}
+    .flz-side{min-height:0;}
+    .flz-inner{padding:clamp(64px,10vw,90px) clamp(20px,6vw,80px);}
+  }
+  .pv-carr{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s ease,opacity .3s ease;}
+  .pv-carr svg{transition:transform .3s ease;flex:none;}
+  .pv-carr-next:hover svg{transform:translateX(3px);}
+  .pv-carr-prev svg{transform:scaleX(-1);}
+  .pv-carr-prev:hover svg{transform:scaleX(-1) translateX(3px);}
+  [dir="rtl"] .pv-carr-next svg{transform:scaleX(-1);}
+  [dir="rtl"] .pv-carr-next:hover svg{transform:scaleX(-1) translateX(3px);}
+  [dir="rtl"] .pv-carr-prev svg{transform:none;}
+  [dir="rtl"] .pv-carr-prev:hover svg{transform:translateX(3px);}
+  /* pv-a11y-phase1 */
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #F50115;outline-offset:3px;border-radius:6px;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}[data-reveal]{opacity:1 !important;transform:none !important;}}
+  /* pv-ar-leading: Arabic (RTL) leading floor. Readex Pro bold/tight headings collide between lines; any bold or tight-leaded text gets >= 1.45 leading. Site-wide, do not remove. */
+  [dir="rtl"] :is(h1,h2,h3,h4,h5,h6,strong,b,[style*="font-weight: 600"],[style*="font-weight: 700"],[style*="font-weight: 800"],[style*="font-weight: bold"],[style*="font-weight:600"],[style*="font-weight:700"],[style*="font-weight:800"],[style*="font-weight:bold"],[style*="line-height: 1;"],[style*="line-height: 1.0"],[style*="line-height: 1.1"],[style*="line-height: 1.2"],[style*="line-height: 1.3"],[style*="line-height:1;"],[style*="line-height:1.0"],[style*="line-height:1.1"],[style*="line-height:1.2"],[style*="line-height:1.3"]):not(button):not(a):not(.pvh *):not([style*="nowrap"]){line-height:1.45 !important;}
+</style>
+</helmet>
+<div dir="{{ dir }}" ref="{{ rootRef }}" style="font-family:'Readex Pro',sans-serif;">
+
+  <div class="pv-hero-header" style="position:relative;z-index:5;">
+    <dc-import name="SiteHeader" active="" hint-size="100%,80px"></dc-import>
+  </div>
+
+  <!-- HERO (layered: sky / wordmark / vehicles) -->
+  <section data-screen-label="Hero" class="pv-hero" style="position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;background:#fff;">
+    <div class="pv-hero-stage" style="position:absolute;inset:0;">
+      <img class="pv-hero-layer pv-hero-sky" data-hero-layer="1" src="assets/hero-v2/layer-1-sky.webp" loading="eager" decoding="async" alt="" style="z-index:1;">
+      <img class="pv-hero-layer pv-hero-name" data-hero-layer="2" src="assets/hero-v2/layer-2-wordmark.webp" loading="eager" decoding="async" alt="Perfect Vision" style="z-index:2;">
+      <img class="pv-hero-layer" data-hero-layer="3" ref="{{ vehiclesRef }}" src="assets/hero-v2/layer-3-vehicles.webp" loading="eager" fetchpriority="high" decoding="sync" alt="" style="z-index:3;">
+      <div class="pv-hero-veil"></div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:40%;z-index:3;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.72) 100%);pointer-events:none;"></div>
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:-1px;">Perfect Vision</h1>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:27%;z-index:4;display:flex;align-items:center;justify-content:center;padding:0 clamp(20px,6vw,80px);">
+      <div class="pv-hero-say" style="flex:0 1 860px;max-width:860px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(16px,2vw,24px);text-align:center;color:#fff;">
+        <p style="margin:0;font-size:clamp(16px,1.35vw,19px);font-weight:300;line-height:1.55;color:rgba(255,255,255,.95);text-wrap:balance;text-shadow:0 1px 18px rgba(0,0,0,.4);">{{ t.heroPara }}</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:13px;">
+          <a class="liquid-glass pv-cta" href="Solutions.dc.html" style="display:inline-flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:13px 28px;border-radius:46px;font-size:14.5px;font-weight:600;white-space:nowrap;" style-hover="background:rgba(255,255,255,.14);">{{ t.heroCta }}</a>
+          <a class="liquid-glass pv-cta" href="Fleetic.dc.html" style="display:inline-flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:13px 28px;border-radius:46px;font-size:14.5px;font-weight:600;white-space:nowrap;" style-hover="background:rgba(255,255,255,.14);">{{ t.heroCta2 }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section style="background:#fff;padding:clamp(48px,6vw,76px) clamp(20px,6vw,80px);border-bottom:1px solid #eee;">
+    
+  <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; flex-direction: column; align-items: center; justify-content: center; gap: 28px; width: 100%; height: auto; position: static" data-reveal="">
+      
+      <div style="font-family: 'Readex Pro',sans-serif; font-size: clamp(16px,1.5vw,20px); font-weight: 700;   color: #111; line-height: 1.5; text-align: center">{{ t.trustLabel }}</div><div class="pv-marquee" style="width:100%;min-width:240px;">
+        <div class="pv-marquee-track">
+          <sc-for list="{{ clients }}" as="c" hint-placeholder-count="4">
+            <img class="pv-logo" src="{{ c.logo }}" loading="lazy" alt="{{ c.name }}" style="height:calc(clamp(42px,4.6vw,66px) * {{ c.scale }});">
+          </sc-for>
+          <sc-for list="{{ clients }}" as="c" hint-placeholder-count="4">
+            <img class="pv-logo" src="{{ c.logo }}" loading="lazy" alt="" aria-hidden="true" style="height:calc(clamp(42px,4.6vw,66px) * {{ c.scale }});">
+          </sc-for>
+        </div>
+      </div>
+    </div></section>
+
+  <!-- VALUES moved to About page (below Clients, above Certificates) -->
+
+  <section class="pv-family" style="background:#F4F4F4;color:#111;padding:clamp(80px,10vw,150px) clamp(20px,6vw,80px);">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px;">
+        <div>
+          <h2 style="margin:0;font-size:clamp(30px,4.4vw,58px);font-weight:700;line-height:1.04;">{{ t.familyTitleA }} <span style="font-weight:200;">{{ t.familyTitleB }}</span></h2>
+        </div>
+        <a class="pv-allbtn pv-desktop-only" href="Solutions.dc.html">
+          <span class="pv-allbtn-in" style="color:#111;">{{ t.solAll }}<svg class="pv-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+      </div>
+      <div class="pv-bento" style="margin-top:clamp(40px,5vw,60px);">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+          <a class="pv-bcard {{ p.cls }}" href="{{ p.href }}" data-reveal="" data-reveal-delay="{{ p.delay }}">
+            <img class="pv-bcard-img" src="{{ p.img }}" loading="lazy" alt="{{ p.name }}">
+            <div class="pv-bcard-scrim" aria-hidden="true"></div>
+            <div class="pv-bcard-name">{{ p.name }}</div>
+            <div class="pv-bcard-veil">
+              <span class="pv-bcard-pill">
+                <span class="pv-bcard-pill-in"><span style="font-weight:200;">{{ t.familyView }}</span><span style="font-weight:600;">{{ p.name }}</span></span>
+              </span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES moved: now sits between trust bar and product family -->
+
+  <!-- FLEETIC SCROLLY -->
+  <section data-screen-label="Fleetic" class="flz-wrap" ref="{{ flzWrapRef }}" style="position:relative;background:#050d33;color:#fff;">
+    <div class="flz-sticky">
+      <img src="assets/fleetic/backgrounds/fleetic-background-blue-drape.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,9,38,.55) 0%,rgba(4,9,38,.18) 30%,rgba(4,9,38,.18) 70%,rgba(4,9,38,.6) 100%);pointer-events:none;"></div>
+
+      <div class="flz-inner">
+        <div class="flz-cols">
+          <div class="flz-side" data-reveal="">
+            <img src="assets/fleetic/brand/fleetic-logo-white.webp" alt="Fleetic" style="width:min(460px,90%);height:auto;filter:drop-shadow(0 4px 26px rgba(0,0,0,.35));">
+          </div>
+          <div class="flz-stage">
+            <svg class="flz-svg" viewBox="0 0 220 800" fill="none" aria-hidden="true">
+              <path class="flz-track" d="M 30 20 Q 180 400 30 780" stroke-width="2" stroke-linecap="round"></path>
+              <path ref="{{ flzPathRef }}" class="flz-line" d="M 30 20 Q 180 400 30 780" stroke-width="2.5" stroke-linecap="round"></path>
+              <g ref="{{ flzTipRef }}" style="opacity:0;transition:opacity .3s ease;">
+                <circle r="11" fill="rgba(205,238,255,.22)"></circle>
+                <circle r="4.5" fill="#CDEEFF"></circle>
+              </g>
+            </svg>
+            <sc-for list="{{ flzPoints }}" as="fp" hint-placeholder-count="4">
+              <div class="flz-pt" data-flz-i="{{ fp.i }}">
+                <span class="flz-dot" style="inset-inline-start:{{ fp.dotLeft }};top:{{ fp.y }};"></span>
+                <div class="flz-lab" style="inset-inline-start:{{ fp.labLeft }};top:{{ fp.y }};">
+                  <sc-if value="{{ fp.reg }}" hint-placeholder-val="{{ true }}">
+                    <div style="font-size:16.5px;font-weight:600;color:#fff;line-height:1.3;text-shadow:0 1px 12px rgba(0,0,0,.3);">{{ fp.title }}</div>
+                    <p>{{ fp.text }}</p>
+                  </sc-if>
+                  <sc-if value="{{ fp.cta }}" hint-placeholder-val="{{ false }}">
+                    <a class="pv-allbtn pv-allbtn-light" href="Fleetic.dc.html" style="display:inline-block;">
+                      <span class="pv-allbtn-in" style="color:#fff;">{{ t.flDiscover }}<svg class="pv-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                    </a>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div class="flz-mobile" style="display:flex;flex-direction:column;gap:4px;">
+          <sc-for list="{{ flzPoints }}" as="fp" hint-placeholder-count="4">
+            <div data-reveal="" data-reveal-delay="{{ fp.mDelay }}" style="display:flex;gap:18px;align-items:stretch;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:5px;">
+                <span style="width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid #CDEEFF;box-shadow:0 0 0 4px rgba(205,238,255,.15);flex:none;"></span>
+                <span style="flex:1;width:1.5px;background:linear-gradient(180deg,rgba(205,238,255,.4),rgba(205,238,255,.05));display:{{ fp.mLine }};"></span>
+              </div>
+              <div style="padding-bottom:26px;">
+                <sc-if value="{{ fp.reg }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size:16px;font-weight:600;color:#fff;">{{ fp.title }}</div>
+                  <p style="margin-top:6px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.85);max-width:46ch;">{{ fp.text }}</p>
+                </sc-if>
+                <sc-if value="{{ fp.cta }}" hint-placeholder-val="{{ false }}">
+                  <a class="pv-allbtn pv-allbtn-light" href="Fleetic.dc.html" style="display:inline-block;">
+                    <span class="pv-allbtn-in" style="color:#fff;">{{ t.flDiscover }}<svg class="pv-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                  </a>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS + CEO (merged, shared background image + gradient) -->
+  <section data-screen-label="Newsroom" style="position:relative;z-index:1;background:#F0F0F0;color:#0a0a0a;overflow:hidden;padding:clamp(80px,10vw,150px) clamp(20px,6vw,80px);">
+    <div style="position:relative;max-width:1240px;margin:0 auto;">
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;">
+        <h2 style="font-size:clamp(30px,4.4vw,58px);font-weight:700;line-height:1.05;">{{ t.newsTitleA }}<span>{{ t.newsTitleB }}</span></h2>
+        <a class="pv-allbtn" href="Newsroom.dc.html" style="white-space:nowrap;"><span class="pv-allbtn-in" style="color:#0a0a0a;">{{ t.newsAll }}<svg class="pv-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a>
+      </div>
+      <div data-reveal="" style="overflow:hidden;margin-top:clamp(28px,3vw,44px);padding:4px 0 12px;">
+        <div style="display:flex;gap:24px;width:100%;">
+        <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+          <a class="pr-ncard pr-news-card" href="{{ n.href }}" style="aspect-ratio:3/4.05;border-radius:22px;overflow:hidden;position:relative;display:block;background:#161616;transform:{{ n.tf }};opacity:{{ n.op }};filter:{{ n.fl }};pointer-events:{{ n.pe }};transition:{{ n.tr }};">
+            <img class="pr-news-img" src="{{ n.img }}" loading="lazy" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ n.pos }};" />
+            <div style="position:absolute;left:0;right:0;bottom:0;height:52%;pointer-events:none;background:{{ n.scrim }};"></div>
+            <sc-if value="{{ n.hasLogo }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(closest-side at 50% 45%,rgba(255,255,255,.86) 0%,rgba(255,255,255,.5) 55%,rgba(255,255,255,0) 100%);">
+                <img src="{{ n.logo }}" alt="Saudi Aramco" style="width:58%;max-width:190px;height:auto;display:block;filter:drop-shadow(0 2px 8px rgba(255,255,255,.6));" />
+              </div>
+            </sc-if>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:20px;">
+              <h3 class="pr-clamp2" style="color:{{ n.ink }};font-size:20px;font-weight:600;line-height:1.25;">{{ n.title }}</h3>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:10px;"><span style="font-size:11px;font-weight:600;color:{{ n.chipInk }};background:{{ n.chipBg }};padding:3px 10px;border-radius:20px;">{{ n.cat }}</span><span style="color:{{ n.inkSoft }};font-size:12.5px;">{{ n.date }}</span></div>
+            </div>
+          </a>
+        </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:26px;">
+        <div style="flex:1;max-width:760px;height:2px;background:rgba(0,0,0,.12);border-radius:2px;overflow:hidden;"><div style="height:100%;width:{{ newsProg }};background:#F50115;border-radius:2px;transition:width .65s cubic-bezier(.2,.7,.2,1);"></div></div>
+        <div style="display:flex;gap:12px;">
+          <div class="pv-carr pv-allbtn pv-carr-prev" role="button" tabindex="0" onClick="{{ newsPrev }}" aria-label="Previous" style="opacity:{{ prevOp }};pointer-events:{{ prevPe }};color:#0a0a0a;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+          <div class="pv-carr pv-allbtn pv-carr-next" role="button" tabindex="0" onClick="{{ newsNext }}" aria-label="Next" style="opacity:{{ nextOp }};pointer-events:{{ nextPe }};color:#0a0a0a;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let lang = 'en';
+    try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
+    this.state = { lang, slide: 0, depTab: 0, ni: 0, vis: 3 };
+  }
+  componentDidMount() {
+    this._onLang = (e) => this.setState({ lang: e.detail });
+    window.addEventListener('pv-langchange', this._onLang);
+    this._mqs = [window.matchMedia('(max-width:640px)'), window.matchMedia('(max-width:1000px)')];
+    this._updVis = () => {
+      const vis = this._mqs[0].matches ? 1 : this._mqs[1].matches ? 2 : 3;
+      const maxNi = Math.max(0, (this._nn || 6) - vis);
+      this.setState(s => ({ vis, ni: Math.min(s.ni, maxNi) }));
+    };
+    this._mqs.forEach(m => m.addEventListener('change', this._updVis));
+    this._updVis();
+    this._armWhenVehiclesReady();
+    this._clockTimer = setInterval(this.updateClock, 1000);
+    this.updateClock();
+    this.initReveal();
+    this.initAnimGate('.pv-marquee-track,.pv-pulse');
+    this.initHeroGate();
+    this._onCardTap = (e) => {
+      if (!window.matchMedia('(hover: none)').matches) return;
+      const card = e.target.closest ? e.target.closest('.pv-bcard') : null;
+      if (!card) { document.querySelectorAll('.pv-bcard.pv-touched').forEach(c => c.classList.remove('pv-touched')); return; }
+      if (!card.classList.contains('pv-touched')) {
+        e.preventDefault();
+        document.querySelectorAll('.pv-bcard.pv-touched').forEach(c => c.classList.remove('pv-touched'));
+        card.classList.add('pv-touched');
+      }
+    };
+    document.addEventListener('click', this._onCardTap, true);
+    this._onScroll = () => {
+      if (this._pTick) return; this._pTick = true;
+      requestAnimationFrame(() => {
+        this._pTick = false;
+        this._flzTick();
+        const img = document.querySelector('[data-parallax]');
+        if (!img || !img.parentElement) return;
+        const r = img.parentElement.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (r.bottom < -80 || r.top > vh + 80) return;
+        const p = (r.top + r.height / 2 - vh / 2) / (vh + r.height);
+        const max = r.height * 0.17;
+        img.style.transform = 'translate3d(0,' + (-2 * max * p).toFixed(1) + 'px,0)';
+      });
+    };
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.addEventListener('scroll', this._onScroll, { passive: true });
+      window.addEventListener('resize', this._onScroll, { passive: true });
+      this._flzArm();
+      this._onScroll();
+    }
+  }
+  measureTone(src) {
+    if (!src) return;
+    this._tones = this._tones || {};
+    if (src in this._tones) return;
+    this._tones[src] = null;
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const W = 24, H = 12, c = document.createElement('canvas');
+        c.width = W; c.height = H;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, Math.round(img.naturalHeight * 0.58), img.naturalWidth, Math.round(img.naturalHeight * 0.42), 0, 0, W, H);
+        const d = ctx.getImageData(0, 0, W, H).data;
+        let sum = 0, n = 0;
+        for (let k = 0; k < d.length; k += 4) { sum += 0.2126 * d[k] + 0.7152 * d[k + 1] + 0.0722 * d[k + 2]; n++; }
+        this._tones[src] = (sum / n) > 150 ? 'light' : 'dark';
+      } catch (e) { this._tones[src] = 'dark'; }
+      this.forceUpdate();
+    };
+    img.onerror = () => { this._tones[src] = 'dark'; };
+    img.src = src;
+  }
+  componentDidUpdate() { this.initReveal(); this.initAnimGate('.pv-marquee-track,.pv-pulse'); }
+  componentWillUnmount() { if (this._agIo) this._agIo.disconnect(); if (this._hgIo) this._hgIo.disconnect(); if (this._heroSync) document.removeEventListener('visibilitychange', this._heroSync); if (this._mqs) this._mqs.forEach(m => m.removeEventListener('change', this._updVis)); clearTimeout(this._heroFallback); clearInterval(this._slideTimer); clearInterval(this._clockTimer); window.removeEventListener('pv-langchange', this._onLang); if (this._io) this._io.disconnect(); document.removeEventListener('click', this._onCardTap, true); if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); } }
+  initAnimGate(sel) {
+    if (!('IntersectionObserver' in window)) return;
+    if (!this._agIo) this._agIo = new IntersectionObserver((es) => es.forEach(e => { e.target.style.animationPlayState = e.isIntersecting ? '' : 'paused'; }), { rootMargin: '80px' });
+    document.querySelectorAll(sel).forEach(el => { if (!el._ag) { el._ag = true; this._agIo.observe(el); } });
+  }
+  initHeroGate() {
+    if (this._hgIo || !('IntersectionObserver' in window)) return;
+    const hero = document.querySelector('.pv-hero'); if (!hero) return;
+    this._heroVis = true;
+    this._heroSync = () => {
+      const on = this._heroVis && !document.hidden;
+      if (on) {
+        if (!this._clockTimer) { this._clockTimer = setInterval(this.updateClock, 1000); this.updateClock(); }
+      } else {
+        if (this._clockTimer) { clearInterval(this._clockTimer); this._clockTimer = null; }
+      }
+    };
+    this._hgIo = new IntersectionObserver((es) => { this._heroVis = es[0].isIntersecting; this._heroSync(); }, { rootMargin: '0px' });
+    this._hgIo.observe(hero);
+    document.addEventListener('visibilitychange', this._heroSync);
+  }
+  initReveal() {
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); return; }
+    if (!this._io) {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { const d = parseInt(e.target.getAttribute('data-reveal-delay') || '0', 10); e.target.style.transitionDelay = d + 'ms'; e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; this._io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    }
+    document.querySelectorAll('[data-reveal]').forEach(el => { if (!el._pvObserved) { el._pvObserved = true; this._io.observe(el); } });
+  }
+  _flzArm = () => {
+    const w = this._flzWrap, path = this._flzPath;
+    if (!w || !path || this._flzL) return;
+    try { this._flzL = path.getTotalLength(); } catch (e) { return; }
+    path.style.strokeDasharray = this._flzL + ' ' + this._flzL;
+    path.style.strokeDashoffset = String(this._flzL);
+    w.setAttribute('data-flz-armed', '');
+    this._flzTick();
+  };
+  _flzTick = () => {
+    const w = this._flzWrap, path = this._flzPath;
+    if (!w || !path || !this._flzL) return;
+    const vh = window.innerHeight;
+    const r = w.getBoundingClientRect();
+    if (r.bottom < -40 || r.top > vh + 40) return;
+    const total = r.height - vh;
+    const p = total > 40 ? Math.max(0, Math.min(1, -r.top / total)) : 1;
+    const d = Math.max(0, Math.min(1, (p - 0.04) / 0.58));
+    path.style.strokeDashoffset = String(this._flzL * (1 - d));
+    const tip = this._flzTip;
+    if (tip) {
+      const pt = path.getPointAtLength(this._flzL * d);
+      tip.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')');
+      tip.style.opacity = (d > 0.01 && d < 0.99) ? '1' : '0';
+    }
+    const T = [0.12, 0.37, 0.6, 0.86];
+    w.querySelectorAll('[data-flz-i]').forEach(el => { el.classList.toggle('on', d >= T[+el.getAttribute('data-flz-i')]); });
+    const sw = w.querySelector('[data-flz-swap]');
+    if (sw) sw.classList.toggle('on', p >= 0.78);
+  };
+  _trailImages = ['assets/photos/perfect-vision-photo-excavator.webp', 'assets/photos/perfect-vision-photo-fleet-row.webp', 'assets/photos/perfect-vision-photo-truck-dust.webp', 'assets/photos/perfect-vision-photo-worker-column.webp', 'assets/fleetic/hero/fleetic-hero-truck-silhouette-blue.webp', 'assets/products/shared/perfect-vision-monitor-display-7in.webp', 'assets/photos/perfect-vision-photo-fleet-yard-aerial.webp', 'assets/photos/perfect-vision-photo-earthworks-site.webp', 'assets/photos/perfect-vision-photo-truck-row-bw.webp', 'assets/photos/perfect-vision-photo-loader-night-bw.webp'];
+  ctaSpawn(clientX, clientY) {
+    const zone = this._ctaZone, layer = this._ctaLayer;
+    if (!zone || !layer) return;
+    if (!this._trailPreloaded) { this._trailPreloaded = true; this._trailIdx = 0; this._trailLast = 0; this._trailX = -999; this._trailY = -999; this._trailImages.forEach(s => { const i = new Image(); i.src = s; }); }
+    const now = performance.now();
+    if (now - this._trailLast < 80) return;
+    if (Math.hypot(clientX - this._trailX, clientY - this._trailY) < 24) return;
+    this._trailLast = now; this._trailX = clientX; this._trailY = clientY;
+    const rect = zone.getBoundingClientRect();
+    const x = clientX - rect.left, y = clientY - rect.top;
+    const rot = (Math.random() * 2 - 1) * 10;
+    const img = document.createElement('img');
+    img.src = this._trailImages[this._trailIdx % this._trailImages.length];
+    this._trailIdx++;
+    img.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:180px;height:130px;object-fit:cover;border-radius:12px;pointer-events:none;background:rgba(255,255,255,.12);box-shadow:0 16px 40px rgba(0,0,0,.35);will-change:transform,opacity;filter:grayscale(1) contrast(1.08);';
+    layer.appendChild(img);
+    const anim = img.animate([
+      { transform: 'translate(-50%,-50%) scale(.35) rotate(' + rot + 'deg)', opacity: 0 },
+      { transform: 'translate(-50%,-50%) scale(1) rotate(' + rot + 'deg)', opacity: 1, offset: 0.18 },
+      { transform: 'translate(-50%,-50%) scale(1) rotate(' + rot + 'deg)', opacity: 1, offset: 0.6 },
+      { transform: 'translate(-50%,-52%) scale(.7) rotate(' + rot + 'deg)', opacity: 0 }
+    ], { duration: 2200, easing: 'cubic-bezier(.2,0,0,1)', fill: 'forwards' });
+    anim.onfinish = () => img.remove();
+    while (layer.children.length > 14) layer.firstChild.remove();
+  }
+  _armWhenVehiclesReady() {
+    const img = this._vehicles, root = this._root;
+    if (!img || !root) return;
+    const go = () => { if (this._heroArmed) return; this._heroArmed = true; root.setAttribute('data-hero-ready', ''); };
+    const ready = img.complete && img.naturalWidth > 0;
+    const p = ready ? Promise.resolve() : new Promise(r => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
+    p.then(() => (img.decode ? img.decode().catch(() => {}) : Promise.resolve())).then(go);
+    this._heroFallback = setTimeout(go, 4000);
+  }
+  updateClock = () => { if (!this._clockEl) return; try { this._clockEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Riyadh', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }); } catch (e) { this._clockEl.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false }); } };
+  clockRef = (el) => { this._clockEl = el; if (el) this.updateClock(); };
+  goSlide = (i) => () => this.setState({ slide: i });
+  goDep = (i) => () => this.setState({ depTab: i });
+
+  renderVals() {
+    const isAr = this.state.lang === 'ar';
+    const P = 'assets/photos/perfect-vision-photo-truck-dust.webp', P2 = 'assets/photos/perfect-vision-photo-fleet-row.webp', P3 = 'assets/photos/perfect-vision-photo-excavator.webp';
+    const PX = 'assets/products/proxview/perfect-vision-proxview-kit-monitor-cameras-alarm.webp';
+    const baseB = { label: 'BASE', bg: '#e9eaec', fg: '#5f6368' };
+    const blueB = { label: 'BLUE', bg: 'rgba(205,238,255,.9)', fg: '#293EDC' };
+    const en = {
+      heroEyebrow: 'AI + IoT industrial safety', heroSubName: '\u0645\u0635\u0646\u0639 \u0627\u0644\u0631\u0624\u064a\u0629 \u0627\u0644\u0645\u062b\u0627\u0644\u064a\u0629 \u00b7 \u0635\u0646\u0627\u0639\u0629 \u0633\u0639\u0648\u062f\u064a\u0629', heroStatus: 'Trusted across 500+ facilities', heroPara: 'Perfect Vision builds AI and IoT safety systems for heavy machinery. They fit onto the trucks, cranes and loaders you already run, and warn people before danger reaches them.', eyeFont: "'JetBrains Mono',monospace", eyeLS: '.16em', eyeTT: 'uppercase', heroScenes: [ { label: 'Fleet & Vehicle Safety', tag: '' }, { label: 'Site & Facility Safety', tag: '' }, { label: 'Worker Safety in the Field', tag: '' } ],
+      heroKicker: 'AI + IoT Industrial Safety', heroHead: 'Safety, Intelligently Built.',
+      heroSub: 'AI and IoT safety systems built for the Kingdom\u2019s hardest industrial environments, from giga-projects to heavy equipment in the field.',
+      heroCta: 'Download Company Profile', heroCta2: 'Discover Fleetic', scroll: 'Scroll to explore',
+      highlights: [
+        { kicker: 'The View Family', title: 'Meet the View Family', text: 'Five systems under one name: ProxView, LiftView, FleetView, AirView and TrackView.', cta: 'Explore Solutions', href: 'Solutions.dc.html', img: P, accent: '#fff', btnBg: '#F50115', btnFg: '#fff' },
+        { kicker: 'Powered by Fleetic', title: 'Every Journey, Under Control', text: 'The intelligence layer that turns connected devices into decisions you can act on, across every site.', cta: 'Discover Fleetic', href: 'Fleetic.dc.html', img: 'assets/fleetic/hero/fleetic-hero-truck-silhouette-blue.webp', accent: '#CDEEFF', btnBg: '#293EDC', btnFg: '#fff' },
+        { kicker: 'A customer journey', title: 'Base Line \u2192 Blue Line', text: 'Start with rugged standalone devices, then grow into a safety network connected through one platform.', cta: 'See the journey', href: 'Solutions.dc.html', img: P2, accent: '#DDE379', btnBg: '#fff', btnFg: '#0a0a0a' }
+      ],
+      trustLabel: 'Trusted across the Kingdom',
+      solKicker: 'Solutions', solTitle: 'A unified line that sees what matters.', solAll: 'All solutions',
+      familyKicker: 'The View Family', familyTitleA: 'The View', familyTitleB: 'Family', familyView: 'View',
+      familySub: 'Five products, one promise: the worker knows about danger before it reaches them. Each watches a different risk, and all report to the same platform.',
+      products: [
+        { name: 'ProxView', system: 'Proximity Warning', tag: 'PWAS', value: 'Alerts the instant a person enters a danger zone around moving equipment.', img: PX, href: 'ProxView.dc.html', badges: [baseB, blueB] },
+        { name: 'TrackView', system: 'Vehicle Positioning & Tracking', tag: 'GPS', value: 'Every vehicle located, routed and fuel-audited in real time.', img: 'assets/products/trackview/perfect-vision-trackview-unit.jpg', href: 'TrackView.dc.html', badges: [blueB] },
+        { name: 'FleetView', system: 'Vehicle Monitoring', tag: 'IVMS', value: 'Driver behaviour, location and vehicle health, streamed live.', img: P2, href: 'FleetView.dc.html', badges: [blueB] },
+        { name: 'AirView', system: 'Air Quality Monitoring', tag: 'AQMS', value: 'Detects gas, dust and air risk before it reaches the lungs.', img: P, href: 'AirView.dc.html', badges: [baseB, blueB] },
+        { name: 'LiftView', system: 'Load Monitoring · Cranes', tag: 'LMI', value: 'Keeps every crane lift inside its safe load envelope.', img: P3, href: 'LiftView.dc.html', badges: [baseB, blueB] }
+      ],
+      valuesTitle: 'Three principles, engineered into every system.',
+      values: [
+        { num: '01', title: 'Precision', desc: 'Sensors and AI tuned to read a worksite the way an expert would: early and accurate, without false alarms.' },
+        { num: '02', title: 'Protection', desc: 'Every system exists for one outcome: the worker is aware of danger before it ever arrives.' },
+        { num: '03', title: 'Performance', desc: 'Rugged hardware that keeps working for years through heat, dust and vibration.' }
+      ],
+      philA: 'Specs don\u2019t protect people.', philB: 'Awareness does.', ceoName: 'Saleh Al-Omar', ceoTitle: 'Chief Executive Officer',
+      philSub: 'Technology serves human safety, never the other way around. We judge every system by one question: did the worker know before the danger arrived?',
+      depKicker: 'Latest Deployments', depTitle: 'Live across the Kingdom.',
+      depTabs: ['All', 'Construction', 'Heavy Equipment', 'Mega-Projects', 'Petrochemical'],
+      deployments: [
+        { cat: 'Mega-Projects', date: 'Jun 2026', title: 'ProxView rollout across NEOM logistics corridor', desc: 'Proximity warning deployed on the primary haul routes of a flagship giga-project.', stat: '1,200', statLabel: 'devices live', catColor: '#F50115', tab: 3 },
+        { cat: 'Petrochemical', date: 'May 2026', title: 'AirView monitoring at a SABIC complex', desc: 'Real-time gas and dust monitoring integrated into the plant safety control room.', stat: '38', statLabel: 'zones covered', catColor: '#019563', tab: 4 },
+        { cat: 'Heavy Equipment', date: 'Apr 2026', title: 'LiftView on the Eastern Province crane fleet', desc: 'Load monitoring retrofitted across a heavy-lift contractor\u2019s mobile cranes.', stat: '74', statLabel: 'cranes equipped', catColor: '#F50115', tab: 2 },
+      ],
+      flKicker: 'The Fleetic Platform', fl1: 'Devices see.', fl2: 'Fleetic understands.', fl3: 'You decide.',
+      flSub: 'One platform for every Perfect Vision device across 500+ facilities. It turns what the devices see into decisions you can trust.',
+      flTagline: 'Every Journey, Under Control.', flCta: 'Enter Fleetic', flDiscover: 'Learn more about Fleetic',
+      flPts: [
+        { title: 'One platform', text: 'Every device, vehicle and worker reports to a single live screen.' },
+        { title: 'AI that understands', text: 'Camera and sensor streams become ranked alerts, not raw footage.' },
+        { title: 'Built in the Kingdom', text: 'Engineered in Dammam. Your operations data stays in Saudi Arabia.' },
+        { title: 'Grows with you', text: 'From one vehicle to 500+ facilities on the same platform.' }
+      ],
+      newsKicker: 'Newsroom', newsTitleA: 'Signals from ', newsTitleB: 'the field..\n', newsSub: 'What 500+ connected facilities are telling us.', newsAll: 'View all',
+      news: [
+        { date: '27 Apr 2026', title: 'Perfect Vision crosses 500 connected facilities', excerpt: 'A milestone for industrial safety adoption across the Kingdom.', read: '4 min read', img: 'assets/photos/perfect-vision-photo-megaproject-aerial.webp' },
+        { date: '19 Apr 2026', title: 'AirView goes live at a SABIC complex', excerpt: 'Real-time gas and dust monitoring, wired into the control room.', read: '3 min read', img: 'assets/products/airview/perfect-vision-airview-station-angle.webp' },
+        { date: '22 Jan 2026', title: 'ProxView rollout across a NEOM logistics corridor', excerpt: 'Proximity warning live on the primary haul routes.', read: '5 min read', img: 'assets/photos/perfect-vision-photo-fleet-yard-aerial.webp' }
+      ],
+      appKicker: 'The Platform', appTitle: 'Access the Fleetic platform.',
+      appSub: 'From the in-cab monitor to the control room, one live view of every site, vehicle and worker.',
+      appLogin: 'Platform Login', appDemo: 'Request a Demo',
+      finalHead: 'Build safety in from the start.', finalSub: 'Talk to the team trusted by NEOM, Qiddiya, SABIC and Saudi Aramco.', finalCta: 'Request a Demo'
+    };
+    const ar = {
+      heroEyebrow: 'أنظمة السلامة الصناعية', heroSubName: 'تقنية السلامة الصناعية · صنع في المملكة', heroStatus: 'محل ثقة أكثر من 500 منشأة', heroPara: 'Perfect Vision تطوّر أنظمة سلامة بالذكاء الاصطناعي وإنترنت الأشياء للمعدات الثقيلة. تُركَّب على الشاحنات والرافعات والمعدات التي تعمل بها اليوم، وتنبّه العاملين قبل أن يصل الخطر إليهم.', eyeFont: "'Readex Pro',sans-serif", eyeLS: '0', eyeTT: 'none', heroScenes: [ { label: 'سلامة الأساطيل والمركبات', tag: '' }, { label: 'سلامة المواقع والمنشآت', tag: '' }, { label: 'سلامة العاملين في الميدان', tag: '' } ],
+      heroKicker: 'سلامة صناعية بالذكاء وإنترنت الأشياء', heroHead: 'سلامة تُبنى بذكاء.',
+      heroSub: 'أنظمة سلامة بالذكاء الاصطناعي وإنترنت الأشياء، مصممة لأصعب البيئات الصناعية في المملكة.',
+      heroCta: 'تحميل الملف التعريفي للشركة', heroCta2: 'اكتشف Fleetic', scroll: 'مرّر للأسفل',
+      highlights: [
+        { kicker: 'عائلة View', title: 'تعرف على عائلة View', text: 'خمسة أنظمة تحت اسم واحد: ProxView وLiftView وFleetView وAirView وTrackView.', cta: 'استكشف الحلول', href: 'Solutions.dc.html', img: P, accent: '#fff', btnBg: '#F50115', btnFg: '#fff' },
+        { kicker: 'Powered by Fleetic', title: 'كل رحلة، تحت السيطرة', text: 'طبقة الذكاء التي تحول الأجهزة المتصلة إلى قرارات عبر كل موقع.', cta: 'اكتشف Fleetic', href: 'Fleetic.dc.html', img: 'assets/fleetic/hero/fleetic-hero-truck-silhouette-blue.webp', accent: '#CDEEFF', btnBg: '#293EDC', btnFg: '#fff' },
+        { kicker: 'رحلة العميل', title: 'Base Line → Blue Line', text: 'ابدأ بأجهزة مستقلة متينة، ثم توسّع إلى شبكة سلامة متصلة بالكامل.', cta: 'شاهد الرحلة', href: 'Solutions.dc.html', img: P2, accent: '#DDE379', btnBg: '#fff', btnFg: '#0a0a0a' }
+      ],
+      trustLabel: 'محل ثقة في أنحاء المملكة',
+      solKicker: 'الحلول', solTitle: 'منظومة واحدة ترى ما يهم.', solAll: 'صفحة الحلول',
+      familyKicker: 'عائلة View', familyTitleA: 'The View', familyTitleB: 'Family', familyView: 'عرض',
+      familySub: 'خمسة منتجات ووعد واحد: أن يعرف العامل بالخطر قبل أن يصل إليه. كل منتج يراقب خطرًا مختلفًا، وكلها ترفع بياناتها إلى المنصة نفسها.',
+      products: [
+        { name: 'ProxView', system: 'التحذير من الاقتراب', tag: 'PWAS', value: 'ينبه لحظة دخول شخص إلى منطقة خطر حول المعدات.', img: PX, href: 'ProxView.dc.html', badges: [baseB, blueB] },
+        { name: 'TrackView', system: 'تتبع مواقع المركبات', tag: 'GPS', value: 'كل مركبة على الخريطة: الموقع والمسار والوقود لحظيًا.', img: 'assets/products/trackview/perfect-vision-trackview-unit.jpg', href: 'TrackView.dc.html', badges: [blueB] },
+        { name: 'FleetView', system: 'مراقبة المركبات والسائقين', tag: 'IVMS', value: 'سلوك السائق وموقع المركبة وحالتها، مباشرة.', img: P2, href: 'FleetView.dc.html', badges: [blueB] },
+        { name: 'AirView', system: 'مراقبة جودة الهواء', tag: 'AQMS', value: 'يرصد الغازات والغبار قبل أن تصل إلى العاملين.', img: P, href: 'AirView.dc.html', badges: [baseB, blueB] },
+        { name: 'LiftView', system: 'مؤشر عزم الحمولة · الرافعات', tag: 'LMI', value: 'يبقي كل عملية رفع داخل حدودها الآمنة.', img: P3, href: 'LiftView.dc.html', badges: [baseB, blueB] }
+      ],
+      valuesTitle: 'ثلاثة مبادئ في صميم كل نظام.',
+      values: [
+        { num: '01', title: 'الدقة', desc: 'حساسات وذكاء اصطناعي معايَران لقراءة الموقع كما يقرأه الخبير: مبكرًا، وبدقة، ودون إنذارات كاذبة.' },
+        { num: '02', title: 'الحماية', desc: 'كل نظام موجود لغاية واحدة: أن يعرف العامل بالخطر قبل أن يصل إليه.' },
+        { num: '03', title: 'الأداء', desc: 'أجهزة متينة تواصل العمل لسنوات في الحرارة والغبار والاهتزاز.' }
+      ],
+      philA: 'المواصفات لا تحمي الناس.', philB: 'الوعي بالخطر هو ما يحميهم.', ceoName: 'صالح العمر', ceoTitle: 'الرئيس التنفيذي',
+      philSub: 'التقنية في خدمة سلامة الإنسان، لا العكس. ونقيس كل نظام بسؤال واحد: هل عرف العامل بالخطر قبل أن يصل إليه؟',
+      depKicker: 'أحدث المشاريع', depTitle: 'تعمل الآن في أنحاء المملكة.',
+      depTabs: ['الكل', 'الإنشاءات', 'المعدات الثقيلة', 'المشاريع العملاقة', 'البتروكيماويات'],
+      deployments: [
+        { cat: 'المشاريع العملاقة', date: 'Jun 2026', title: 'تركيب ProxView على الممر اللوجستي في نيوم', desc: 'تحذير من الاقتراب على طرق النقل الرئيسية في مشروع عملاق.', stat: '1,200', statLabel: 'جهاز يعمل', catColor: '#F50115', tab: 3 },
+        { cat: 'البتروكيماويات', date: 'May 2026', title: 'مراقبة AirView في مجمع سابك', desc: 'مراقبة فورية للغازات والغبار مرتبطة بغرفة التحكم.', stat: '38', statLabel: 'منطقة', catColor: '#019563', tab: 4 },
+        { cat: 'المعدات الثقيلة', date: 'Apr 2026', title: 'LiftView على أسطول رافعات الشرقية', desc: 'أنظمة مؤشر عزم الحمولة مركّبة على رافعات متحركة.', stat: '74', statLabel: 'رافعة', catColor: '#F50115', tab: 2 },
+      ],
+      flKicker: 'منصة Fleetic', fl1: 'الأجهزة ترى.', fl2: 'Fleetic يفهم.', fl3: 'وأنت تقرر.',
+      flSub: 'منصة واحدة لكل أجهزة Perfect Vision في أكثر من 500 منشأة، تحوّل ما تراه الأجهزة إلى قرارات تثق بها.',
+      flTagline: 'كل رحلة، تحت السيطرة.', flCta: 'ادخل إلى Fleetic', flDiscover: 'اعرف المزيد عن Fleetic',
+      flPts: [
+        { title: 'منصة واحدة', text: 'كل جهاز ومركبة وعامل يرفع بياناته إلى شاشة حية واحدة.' },
+        { title: 'ذكاء يفهم الميدان', text: 'بث الكاميرات وقراءات الحساسات تتحول إلى تنبيهات واضحة، لا مقاطع خام.' },
+        { title: 'صناعة سعودية', text: 'هندسة وتطوير في الدمام، وبيانات عملياتك تبقى داخل المملكة.' },
+        { title: 'تنمو معك', text: 'من مركبة واحدة إلى أكثر من 500 منشأة على المنصة نفسها.' }
+      ],
+      newsKicker: 'غرفة الأخبار', newsTitleA: 'إشارات من ', newsTitleB: 'الميدان.', newsSub: 'ما تخبرنا به أكثر من 500 منشأة متصلة.', newsAll: 'عرض الكل',
+      news: [
+        { date: '27 Apr 2026', title: 'Perfect Vision تتجاوز 500 منشأة متصلة', excerpt: 'محطة مهمة في مسيرة السلامة الصناعية عبر المملكة.', read: 'قراءة 4 دقائق', img: 'assets/photos/perfect-vision-photo-megaproject-aerial.webp' },
+        { date: '19 Apr 2026', title: 'AirView يبدأ العمل في مجمع سابك', excerpt: 'مراقبة فورية للغاز والغبار متصلة بغرفة التحكم.', read: 'قراءة 3 دقائق', img: 'assets/products/airview/perfect-vision-airview-station-angle.webp' },
+        { date: '22 Jan 2026', title: 'تركيب ProxView على ممر لوجستي في نيوم', excerpt: 'تحذير الاقتراب يعمل على طرق النقل الرئيسية.', read: 'قراءة 5 دقائق', img: 'assets/photos/perfect-vision-photo-fleet-yard-aerial.webp' },
+      ],
+      appKicker: 'المنصة', appTitle: 'ادخل إلى منصة Fleetic.',
+      appSub: 'من شاشة السائق إلى غرفة التحكم: صورة حية واحدة لكل موقع ومركبة وعامل.',
+      appLogin: 'دخول المنصة', appDemo: 'اطلب عرضًا',
+      finalHead: 'ابدأ بالسلامة من الأساس.', finalSub: 'تحدث إلى الفريق الذي تثق به نيوم والقدية وسابك وأرامكو السعودية.', finalCta: 'اطلب عرضًا'
+    };
+    const t = isAr ? ar : en;
+    // 12-col bento that closes into a true rectangle: row 1 = 7 + 5, row 2 = 4 + 4 + 4
+    const bentoSpans = [7, 5, 4, 4, 4];
+    const bentoImgs = [
+      'assets/products/proxview/perfect-vision-proxview-kit-monitor-cameras-alarm.webp',
+      'assets/products/trackview/perfect-vision-trackview-plus-unit.jpg',
+      'assets/products/fleetview/perfect-vision-fleetview-mdvr-camera-kit.webp',
+      'assets/products/airview/perfect-vision-airview-station-front-and-side.webp',
+      'https://www.perfectvisionksa.com/web/image/50809-d7e16074/Mobile%20crane%20lmi.png' // LiftView: LMI kit product shot
+    ];
+    const bentoOrder = [0, 2, 1, 3, 4]; // ProxView, FleetView, TrackView, AirView, LiftView
+    const products = bentoOrder.map((pi, slot) => ({ ...t.products[pi], img: bentoImgs[pi] || t.products[pi].img, delay: (slot % 3) * 110, cls: 'pv-bcol-' + (bentoSpans[slot] || 4) + (pi === 4 ? ' pv-bcard-light pv-bcard-fit' : ' pv-bcard-light') }));
+    const values = t.values.map((v, i) => ({ ...v, delay: i * 110 }));
+    const depTabs = t.depTabs.map((label, i) => ({ label, go: this.goDep(i), weight: i === this.state.depTab ? 600 : 400, color: i === this.state.depTab ? '#0a0a0a' : '#6b6b6b', border: i === this.state.depTab ? '#F50115' : 'transparent' }));
+    const deployments = t.deployments.filter(d => this.state.depTab === 0 || d.tab === this.state.depTab).map((d, i) => ({ ...d, delay: (i % 4) * 80 }));
+    const extraPosts = [
+      { cat: isAr ? 'أخبار' : 'News', date: '8 Jul 2026', title: isAr ? 'شعار جديد. مرحلة جديدة. الوعد نفسه.' : 'New mark. New era. Same promise.', img: 'assets/news/perfect-vision-news-brand-launch-portrait.webp', href: 'Article-Brand.dc.html' },
+      { cat: isAr ? 'مقال' : 'Article', date: '25 Aug 2025', title: isAr ? 'لماذا تراقب المملكة الهواء، من المدن إلى مواقع العمل' : 'Why the Kingdom is monitoring the air, from cities to worksites', img: 'assets/photos/perfect-vision-photo-crew-gas-plant.webp', href: 'Article-AirView.dc.html' },
+      { cat: isAr ? 'أخبار' : 'News', date: '1 Jul 2026', title: isAr ? 'ثلاث شهادات آيزو. منهجية واحدة.' : 'Three ISO certificates. One discipline.', img: 'assets/news/perfect-vision-news-iso-certification-portrait.webp', href: 'Article-ISO.dc.html' },
+      { cat: isAr ? 'مقال' : 'Article', date: '25 Feb 2026', title: isAr ? 'لماذا يستوفي ProxView متطلبات السلامة المعتمدة من أرامكو' : 'Why ProxView meets Aramco-approved safety requirements', img: 'assets/photos/perfect-vision-photo-construction-site-aerial.webp', logo: 'assets/clients/client-logo-saudi-aramco.png', href: 'Article-ProxView-Aramco.dc.html' },
+      { cat: isAr ? 'أخبار' : 'News', date: '19 Apr 2026', title: isAr ? 'AirView يبدأ العمل في مجمع سابك' : 'AirView goes live at a SABIC complex', img: 'assets/products/airview/perfect-vision-airview-station-angle.webp', href: 'Article.dc.html' }
+    ];
+    const mon = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11 };
+    const dv = (d) => { const p = (d || '').split(' '); return new Date(+p[2] || 0, mon[(p[1] || '').toUpperCase()] || 0, +p[0] || 1).getTime(); };
+    const posts = extraPosts.slice();
+    const N = posts.length; this._nn = N;
+    const vis = this.state.vis || 3;
+    const maxNi = Math.max(0, N - vis);
+    const ni = Math.min(this.state.ni, maxNi);
+    const nsign = isAr ? 1 : -1;
+    const NDUR = '.65s';
+    const news = posts.map((n, idx) => {
+      const p = idx - ni; const on = p >= 0 && p < vis;
+      const d = (Math.max(0, Math.min(p, vis - 1)) * 70) + 'ms';
+      this.measureTone(n.img);
+      const tone = (this._tones || {})[n.img] === 'light' ? 'light' : 'dark';
+      return { ...n,
+        pos: n.pos || 'center',
+        hasLogo: !!n.logo,
+        scrim: tone === 'light'
+          ? 'linear-gradient(0deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.72) 45%,rgba(255,255,255,0) 100%)'
+          : 'linear-gradient(0deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.5) 45%,rgba(0,0,0,0) 100%)',
+        ink: tone === 'light' ? '#0a0a0a' : '#fff',
+        inkSoft: tone === 'light' ? 'rgba(10,10,10,.72)' : 'rgba(255,255,255,.86)',
+        chipInk: tone === 'light' ? '#0a0a0a' : '#fff',
+        chipBg: tone === 'light' ? 'rgba(10,10,10,.10)' : 'rgba(255,255,255,.22)',
+        tf: 'translateX(calc(' + (ni * nsign) + ' * (100% + 24px))) scale(' + (on ? 1 : 0.86) + ')',
+        op: on ? 1 : 0,
+        fl: on ? 'none' : 'blur(10px)',
+        pe: on ? 'auto' : 'none',
+        tr: 'transform ' + NDUR + ' cubic-bezier(.2,.7,.2,1) ' + d + ',opacity ' + NDUR + ' ease ' + d + ',filter ' + NDUR + ' ease ' + d
+      };
+    });
+    const flY = ['14.85%', '38.6%', '61.4%', '85.2%'];
+    const flXF = [0.29, 0.458, 0.458, 0.29];
+    const flSW = 'min(66svh,580px) * 0.275';
+    const flzPoints = (t.flPts || []).map((pt, i) => ({
+      ...pt, i, y: flY[i], cta: i === 3, reg: i !== 3,
+      dotLeft: 'calc(' + flSW + ' * ' + flXF[i] + ')',
+      labLeft: 'calc(' + flSW + ' * ' + flXF[i] + ' + 30px)',
+      mLine: i === 3 ? 'none' : 'block', mDelay: i * 90
+    }));
+    return {
+      dir: isAr ? 'rtl' : 'ltr', t,
+      flzPoints,
+      flzWrapRef: (el) => { this._flzWrap = el; },
+      flzPathRef: (el) => { this._flzPath = el; },
+      flzTipRef: (el) => { this._flzTip = el; },
+      ctaZoneRef: (el) => { this._ctaZone = el; },
+      ctaLayerRef: (el) => { this._ctaLayer = el; },
+      ctaTrailMove: (e) => this.ctaSpawn(e.clientX, e.clientY),
+      ctaTrailTouch: (e) => { const p = e.touches && e.touches[0]; if (p) this.ctaSpawn(p.clientX, p.clientY); },
+      rootRef: (el) => { this._root = el; },
+      vehiclesRef: (el) => { this._vehicles = el; if (el && this._root && !this._heroArmed) this._armWhenVehiclesReady(); },
+      clockRef: this.clockRef, subNameDir: isAr ? 'ltr' : 'rtl',
+      startEdge: isAr ? 'right' : 'left', endEdge: isAr ? 'left' : 'right',
+      clients: [ { name: 'NEOM', logo: 'assets/clients/client-logo-neom.webp', scale: 1 }, { name: 'Qiddiya', logo: 'assets/clients/client-logo-qiddiya.png', scale: 1.02 }, { name: 'SABIC', logo: 'assets/clients/client-logo-sabic.png', scale: 0.72 }, { name: 'Saudi Aramco', logo: 'assets/clients/client-logo-saudi-aramco.png', scale: 0.62 }, { name: 'Maaden', logo: 'assets/clients/client-logo-maaden.png', scale: 0.98 }, { name: 'Jeddah Central', logo: 'assets/clients/client-logo-jeddah-central.png', scale: 1.04 }, { name: 'New Murabba', logo: 'assets/clients/client-logo-new-murabba.png', scale: 0.86 }, { name: 'Royal Commission for Jubail & Yanbu', logo: 'assets/clients/client-logo-rcjy.png', scale: 0.95 }, { name: 'Sadara', logo: 'assets/clients/client-logo-sadara.png', scale: 0.6 }, { name: 'Saudi Energy', logo: 'assets/clients/client-logo-saudi-energy.png', scale: 0.9 } ],
+      products, values, depTabs, deployments, news,
+      newsProg: (16 + (maxNi ? ni / maxNi : 1) * 84) + '%',
+      prevOp: ni === 0 ? 0.35 : 1, prevPe: ni === 0 ? 'none' : 'auto',
+      nextOp: ni >= maxNi ? 0.35 : 1, nextPe: ni >= maxNi ? 'none' : 'auto',
+      newsPrev: () => this.setState(s => ({ ni: Math.max(0, s.ni - 1) })),
+      newsNext: () => this.setState(s => { const mx = Math.max(0, (this._nn || 6) - (s.vis || 3)); return { ni: Math.min(mx, s.ni + 1) }; })
+    };
+  }
+}
+</script>
+</body>
+</html>
