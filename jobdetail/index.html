@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <base href="/">
 <link rel="icon" type="image/png" href="assets/brand/favicon.png">
+<title>Job Details - Perfect Vision</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
@@ -153,7 +154,10 @@ class Component extends DCLogic {
     try { const m = (window.location.search || '').match(/[?&]id=(\d+)/); if (m) id = parseInt(m[1], 10); } catch (e) {}
     this.state = { lang, id };
   }
-  componentDidMount() { this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang); this.initReveal(); }
+  componentDidMount() {
+    this._onLang = (e) => this.setState({ lang: e.detail }); window.addEventListener('pv-langchange', this._onLang); this.initReveal();
+    try { const data = this.jobsData(); document.title = (data[this.state.id] || data[1]).title + ' - Perfect Vision'; } catch (e) {}
+  }
   componentDidUpdate() { this.initReveal(); }
   componentWillUnmount() { window.removeEventListener('pv-langchange', this._onLang); if (this._io) this._io.disconnect(); }
   initReveal() {
