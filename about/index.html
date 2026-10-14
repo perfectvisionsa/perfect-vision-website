@@ -457,8 +457,7 @@ class Component extends DCLogic {
         { name: 'Patent SA 24047', issuer: 'Saudi Authority for Intellectual Property. AI-Based Proximity Warning and Alert System' },
         { name: 'ISO 9001:2015', issuer: 'Quality Management System' },
         { name: 'ISO 45001:2018', issuer: 'Occupational Health & Safety' },
-        { name: 'ISO 14001:2015', issuer: 'Environmental Management' },
-        { name: 'ISO/IEC 27001:2013', issuer: 'Information Security Management' }
+        { name: 'ISO 14001:2015', issuer: 'Environmental Management' }
       ]
     };
     const ar = {
@@ -509,8 +508,7 @@ class Component extends DCLogic {
         { name: 'براءة اختراع SA 24047', issuer: 'الهيئة السعودية للملكية الفكرية. نظام التحذير والإنذار من الاقتراب القائم على الذكاء الاصطناعي' },
         { name: 'ISO 9001:2015', issuer: '\u0646\u0638\u0627\u0645 \u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u062c\u0648\u062f\u0629' },
         { name: 'ISO 45001:2018', issuer: '\u0627\u0644\u0635\u062d\u0629 \u0648\u0627\u0644\u0633\u0644\u0627\u0645\u0629 \u0627\u0644\u0645\u0647\u0646\u064a\u0629' },
-        { name: 'ISO 14001:2015', issuer: '\u0627\u0644\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0628\u064a\u0626\u064a\u0629' },
-        { name: 'ISO/IEC 27001:2013', issuer: '\u0625\u062f\u0627\u0631\u0629 \u0623\u0645\u0646 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a' }
+        { name: 'ISO 14001:2015', issuer: '\u0627\u0644\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0628\u064a\u0626\u064a\u0629' }
       ]
     };
     const t = isAr ? ar : en;
@@ -519,9 +517,9 @@ class Component extends DCLogic {
       const digits = m ? m[2].replace(/,/g, '') : '0';
       return { ...s, delay: i * 110, prefix: m ? m[1] : '', suffix: m ? m[3] : '', num: parseInt(digits, 10) || 0, pad: (m && /^0\d/.test(m[2])) ? digits.length : 0 };
     });
-    const certImgs = ['perfect-vision-certificate-local-content-badge.webp', 'perfect-vision-certificate-patent-saip-badge.webp', 'perfect-vision-certificate-iso-9001-badge.webp', 'perfect-vision-certificate-iso-45001-badge.webp', 'perfect-vision-certificate-iso-14001-badge.webp', 'perfect-vision-certificate-iso-27001-badge.webp'];
-    const certDocs = ['perfect-vision-certificate-local-content.webp', 'perfect-vision-certificate-patent-saip.webp', 'perfect-vision-certificate-iso-9001.webp', 'perfect-vision-certificate-iso-45001.webp', 'perfect-vision-certificate-iso-14001.webp', 'perfect-vision-certificate-iso-27001.webp'];
-    const rots = [-4, 5, 3.5, -5, 4, -3.5];
+    const certImgs = ['perfect-vision-certificate-local-content-badge.webp', 'perfect-vision-certificate-patent-saip-badge.webp', 'perfect-vision-certificate-iso-9001-badge.webp', 'perfect-vision-certificate-iso-45001-badge.webp', 'perfect-vision-certificate-iso-14001-badge.webp'];
+    const certDocs = ['perfect-vision-certificate-local-content.webp', 'perfect-vision-certificate-patent-saip.webp', 'perfect-vision-certificate-iso-9001.webp', 'perfect-vision-certificate-iso-45001.webp', 'perfect-vision-certificate-iso-14001.webp'];
+    const rots = [-4, 5, 3.5, -5, 4];
     const tilt = (this.props.certTilt != null ? this.props.certTilt : 5) / 5;
     const certs = t.certs.map((c, i) => ({
       ...c,
