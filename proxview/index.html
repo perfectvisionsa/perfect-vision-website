@@ -424,7 +424,7 @@ class Component extends DCLogic {
       nightTitle: ['Day and night', 'ليلًا ونهارًا'],
       nightCopy: ['Night vision on every camera', 'رؤية ليلية في كل كاميرا'],
       rainTitle: ['Rain, dust, heat', 'مطر وغبار وحرارة'],
-      rainCopy: ['IP69 rated, operating in temperatures up to 70°C', 'بتصنيف IP69، ويعمل في حرارة تصل إلى 70 درجة مئوية'],
+      rainCopy: ['IP68 rated, operating in temperatures up to 70°C', 'بتصنيف IP68، ويعمل في حرارة تصل إلى 70 درجة مئوية'],
       broHeroTitle: ['The machine now sees\neveryone around it', 'المعدة الآن ترى\nكل من حولها'],
       broHeroSub: ['ProxView fits AI-powered cameras around the machine, so nothing beside it or behind it stays hidden. When someone enters the danger zone, the driver sees it on the screen and hears the alarm in time to react.', 'يركّب ProxView كاميرات ذكية حول المعدة، فلا يبقى شيء بجانبها أو خلفها مخفيًا. وعندما يدخل أحد منطقة الخطر، يراه المشغّل على الشاشة ويسمع الإنذار في وقت يكفي للتصرف.'],
       bro360Sub: ['Blind-spot coverage, all the way around', 'تغطية النقاط العمياء، في كل الاتجاهات'],
@@ -525,7 +525,7 @@ class Component extends DCLogic {
       { v: ['ProxView: 4 · ProxView Plus: 6', 'ProxView: ‏4 · ProxView Plus: ‏6'], vDir: 'ltr', l: ['Cameras, the only Plus difference', 'الكاميرات، الفرق الوحيد في Plus'], icon: 'camera-light.svg' },
       { v: ['10.1&quot; HD'.replace('&quot;', String.fromCharCode(34)), 'شاشة 10.1 بوصة'], vDir: null, l: ['Operator display', 'شاشة المشغل'], icon: 'touch-display-light.svg' },
       { v: ['Adjustable alerts', 'تنبيهات قابلة للضبط'], vDir: null, l: ['Audio and light', 'صوت وضوء'], icon: 'siren-light.svg' },
-      { v: ['IP69', 'IP69'], vDir: 'ltr', l: ['Waterproof', 'مقاومة الماء'], icon: 'ip68-light.svg' },
+      { v: ['IP68', 'IP68'], vDir: 'ltr', l: ['Waterproof', 'مقاومة الماء'], icon: 'ip68-light.svg' },
       { v: ['−20°C to +70°C', '−20° إلى +70° م'], vDir: 'ltr', l: ['Operating range', 'نطاق التشغيل'], icon: 'temp-range-light.svg' },
       { v: ['Less than 10 W', 'أقل من 10 واط'], vDir: null, l: ['Power draw', 'استهلاك الطاقة'], icon: 'power-dc-light.svg' }
     ];
@@ -568,7 +568,7 @@ class Component extends DCLogic {
         copy: ['The field build. Detection, alerts and decisions all happen on the machine, with no network needed.', 'الإصدار الميداني. الرصد والتنبيه والقرار يحدث كله على المعدة، دون الحاجة إلى شبكة.'],
         vals: [
           { v: ['4 cameras', '4 كاميرات'], dir: null },
-          { v: ['10.1' + "\u0022" + ' HD', '10.1\u0022 HD'], dir: null },
+          { v: ['9' + "\u0022" + ' HD', '9\u0022 HD'], dir: null },
           { v: ['Offline', 'بلا إنترنت'], dir: null },
           { v: ['Up to 256GB', 'حتى 256GB'], dir: null },
           { v: ['Local', 'محليًا'], dir: null },
@@ -579,7 +579,7 @@ class Component extends DCLogic {
         copy: ['Two extra cameras for the angles a large body hides, still with no network dependency.', 'كاميرتان إضافيتان للزوايا التي يحجبها حجم المعدة الكبير، ودون أي اعتماد على الشبكة.'],
         vals: [
           { v: ['6 cameras', '6 كاميرات'], dir: null },
-          { v: ['10.1' + "\u0022" + ' HD', '10.1\u0022 HD'], dir: null },
+          { v: ['9' + "\u0022" + ' HD', '9\u0022 HD'], dir: null },
           { v: ['Offline', 'بلا إنترنت'], dir: null },
           { v: ['Up to 256GB', 'حتى 256GB'], dir: null },
           { v: ['Local', 'محليًا'], dir: null },
@@ -654,11 +654,11 @@ class Component extends DCLogic {
       { q: ['What is the difference between ProxView and ProxView Plus?', 'ما الفرق بين ProxView و ProxView Plus؟'],
         a: ['The camera set. ProxView carries 4 cameras for full 360° coverage. ProxView Plus carries 6, with the two extra cameras placed where the machine needs them, which suits the largest equipment. Everything else is identical.', 'الفرق في طقم الكاميرات. يحمل ProxView أربع كاميرات لتغطية 360° كاملة، ويحمل ProxView Plus ست كاميرات، مع وضع الكاميرتين الإضافيتين حيث تحتاجهما المعدة، وهو ما يناسب أكبر المعدات. كل ما عدا ذلك متطابق.'] },
       { q: ['What is the difference between BaseLine and BlueLine?', 'ما الفرق بين BaseLine و BlueLine؟'],
-        a: ['BaseLine is the standalone product. It runs with no cloud and no network, which makes it the right choice for remote worksites with limited coverage. BlueLine connects the same protection to the Fleetic platform: every detection arrives as an alarm with the date, location and image attached, every machine reports its live GPS position, and onboard storage grows to 5 TB, enough for half a year of continuous footage.', 'BaseLine هو المنتج المستقل؛ يعمل دون سحابة ودون شبكة، ما يجعله الخيار الصحيح للمواقع النائية ذات التغطية المحدودة. أما BlueLine فيوصل الحماية نفسها بمنصة Fleetic: كل كشف يصل كإنذار ومعه التاريخ والموقع والصورة، وكل معدة تبث موقعها الحي عبر GPS، ويتسع التخزين المدمج إلى 5 TB، بما يكفي لنصف سنة من التسجيل المتواصل.'] },
+        a: ['BaseLine is the standalone product. featuring a 9" monitor. It runs with no cloud and no network, which makes it the right choice for remote worksites with limited coverage. BlueLine upgrades to a larger 10.1" monitor and connects the same protection to the Fleetic platform: every detection arrives as an alarm with the date, location and image attached, every machine reports its live GPS position, and onboard storage grows to 5 TB, enough for half a year of continuous footage.', 'BaseLine هو المنتج المستقل، وتأتي شاشته بمقاس 9 بوصات؛ يعمل دون سحابة ودون شبكة، ما يجعله الخيار الصحيح للمواقع النائية ذات التغطية المحدودة. أما BlueLine فيُرَقى إلى شاشة أكبر بمقاس 10.1 بوصة ويوصل الحماية نفسها بمنصة Fleetic: كل كشف يصل كإنذار ومعه التاريخ والموقع والصورة، وكل معدة تبث موقعها الحي عبر GPS، ويتسع التخزين المدمج إلى 5 TB، بما يكفي لنصف سنة من التسجيل المتواصل.'] },
       { q: ['How does ProxView tell a person from an object?', 'كيف يميز ProxView الشخص من الأجسام الأخرى؟'],
         a: ['Detection runs on AI algorithms that cover people, vehicles and equipment. The AI sensor replaced the older radar generation, so the system reads the whole scene up to 15 meters out, monitors behavior around the machine and sends the operator a critical alert the moment risk appears.', 'يعمل الكشف بخوارزميات ذكاء اصطناعي تغطي الأشخاص والمركبات والمعدات. حل حساس الذكاء الاصطناعي محل جيل الرادار الأقدم، فيقرأ النظام المشهد كاملًا حتى 15 مترًا، ويراقب السلوك حول المعدة، ويرسل للمشغل تنبيهًا عاجلًا لحظة ظهور الخطر.'] },
       { q: ['What does the operator see and hear when something gets close?', 'ماذا يرى المشغل ويسمع عند اقتراب شيء؟'],
-        a: ['A 10.1 inch HD display shows the camera view clearly, and an adjustable audio alert sounds inside the cab. The warning arrives early enough to leave real stopping distance, in any weather; the hardware is waterproof to IP69 and works from −20°C to +70°C.', 'تعرض شاشة HD مقاس 10.1 بوصة مشهد الكاميرا بوضوح، ويصدر تنبيه صوتي قابل للضبط داخل الكابينة. يصل التحذير مبكرًا بما يترك مسافة توقف حقيقية وفي أي طقس؛ فالجهاز مقاوم للماء بتصنيف IP69 ويعمل من −20° إلى +70° مئوية.'] }
+        a: ['A 9 inch HD Display (or 10.1 inch on BlueLine) shows the camera view clearly, and an adjustable audio alert sounds inside the cab. The warning arrives early enough to leave real stopping distance, in any weather; the hardware is waterproof to IP68 and works from −20°C to +70°C.', 'تعرض شاشة HD مقاس 9 بوصة(أو 10.1 بوصة في فئة BlueLine) مشهد الكاميرا بوضوح، ويصدر تنبيه صوتي قابل للضبط داخل الكابينة. يصل التحذير مبكرًا بما يترك مسافة توقف حقيقية وفي أي طقس؛ فالجهاز مقاوم للماء بتصنيف IP68 ويعمل من −20° إلى +70° مئوية.'] }
     ];
     const faqItems = faqData.map((it, idx) => {
       const open = this.state.faqOpen === idx;
