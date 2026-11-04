@@ -34,7 +34,8 @@ assets/
 ├─ photos/         الفوتوغرافيا الميدانية العامة (مواقع، معدات، عمال)
 ├─ products/       صور المنتجات، مجلد لكل منتج
 │  ├─ proxview/  airview/  fleetview/  trackview/  shared/
-│  └─ liftview/  helmview/  firesuppression/   ← فارغة، جاهزة للإضافة
+│  ├─ liftview/
+│  └─ helmview/  firesuppression/   ← فارغة، جاهزة للإضافة
 ├─ fleetic/        كل ما يخص منصة Fleetic
 │  ├─ brand/  hero/  alarms/  platform/  packaging/  backgrounds/
 ├─ clients/        شعارات كبار العملاء (سلايدر "يثق بنا")
@@ -144,7 +145,14 @@ assets/
 |---|---|
 | `perfect-vision-monitor-display-7in.webp` | شاشة 7" بشعار Perfect Vision (Home, Newsroom, Blogs) |
 
-`liftview/`, `helmview/`, `firesuppression/` فارغة (فيها `.gitkeep` فقط). أضف الصور بنفس النمط: `perfect-vision-liftview-<subject>.webp`.
+**liftview/**
+| الملف | الوصف |
+|---|---|
+| `perfect-vision-liftview-articulated-boom-installation-diagram.webp` | مخطط تركيب نظام LMI على الرافعة ذات الذراع المفصلي (LiftView Art) |
+| `perfect-vision-liftview-telescopic-boom-installation-diagram.webp` | مخطط تركيب نظام LMI على الرافعة ذات الذراع التلسكوبي (LiftView Tel) |
+| `perfect-vision-liftview-side-boom-installation-diagram.webp` | مخطط تركيب نظام LMI على رافعة الأنابيب الجانبية (LiftView Side) |
+
+`helmview/`, `firesuppression/` فارغة (فيها `.gitkeep` فقط). أضف الصور بنفس النمط: `perfect-vision-<product>-<subject>.webp`.
 
 ## fleetic/ — منصة Fleetic
 **brand/**: `fleetic-logo-full-white.svg`, `fleetic-logo-color.webp`, `fleetic-logo-white.webp`, `fleetic-mark-blue.svg`, `fleetic-mark.svg` (احتياطي، غير مستخدم حاليًا), `fleetic-menu-thumbnail.webp` (صورة القائمة في الهيدر), `fleetic-profile.pdf` (الملف التعريفي لـ Fleetic — Fleetic، زر "{{ t.heroCta }}").

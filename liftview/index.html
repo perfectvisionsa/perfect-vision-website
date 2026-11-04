@@ -182,13 +182,13 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultDevice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;art&quot;,&quot;tel&quot;,&quot;side&quot;,&quot;fork&quot;,&quot;craw&quot;,&quot;mobile&quot;,&quot;man&quot;,&quot;exv&quot;],&quot;default&quot;:&quot;art&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Device&quot;},&quot;defaultFaqOpen&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:-1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;FAQ&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultDevice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;art&quot;,&quot;tel&quot;,&quot;side&quot;,&quot;fork&quot;,&quot;craw&quot;,&quot;mobile&quot;,&quot;man&quot;],&quot;default&quot;:&quot;art&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Device&quot;},&quot;defaultFaqOpen&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:-1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;FAQ&quot;}}">
 class Component extends DCLogic {
   constructor(props) {
     super(props);
     let lang = 'en';
     try { lang = localStorage.getItem('pv-lang') || 'en'; } catch (e) {}
-    const dev = ['art','tel','side','fork','craw','mobile','man','exv'].indexOf(props.defaultDevice) >= 0 ? props.defaultDevice : 'art';
+    const dev = ['art','tel','side','fork','craw','mobile','man'].indexOf(props.defaultDevice) >= 0 ? props.defaultDevice : 'art';
     const fq = parseInt(props.defaultFaqOpen, 10);
     this.state = { lang, gIdx: 0, faqOpen: isNaN(fq) ? 0 : fq, device: dev };
   }
@@ -310,14 +310,13 @@ class Component extends DCLogic {
     };
     const OLD = 'https://www.perfectvisionksa.com/web/image/';
     const lmiSlides = {
-      art: [{ src: OLD + '49161-a76f8681/Articulated-Boom-truck-1-1-e1710322950902.png', label: ['Articulated Crane LMI kit', 'نظام LMI للرافعة ذات الذراع المفصلي'], alt: 'Articulated crane LMI system components' }],
-      tel: [{ src: OLD + '50809-d7e16074/Mobile%20crane%20lmi.png', label: ['Telescopic Boom Truck LMI kit', 'نظام LMI للرافعة ذات الذراع التلسكوبي'], alt: 'Telescopic boom truck LMI system components' }],
-      side: [{ src: OLD + '49184-c477212e/side-boom-lmi-e1710917857595.png', label: ['Side Boom LMI kit', 'نظام LMI لرافعة الأنابيب الجانبية (سايد بوم)'], alt: 'Side boom LMI system components' }],
+      art: [{ src: 'assets/products/liftview/perfect-vision-liftview-articulated-boom-installation-diagram.webp', scale: 1, label: ['Articulated Crane LMI kit', 'نظام LMI للرافعة ذات الذراع المفصلي'], alt: 'Articulated crane LMI system components' }],
+      tel: [{ src: 'assets/products/liftview/perfect-vision-liftview-telescopic-boom-installation-diagram.webp', scale: 1, label: ['Telescopic Boom Truck LMI kit', 'نظام LMI للرافعة ذات الذراع التلسكوبي'], alt: 'Telescopic boom truck LMI system components' }],
+      side: [{ src: 'assets/products/liftview/perfect-vision-liftview-side-boom-installation-diagram.webp', scale: 1, label: ['Side Boom LMI kit', 'نظام LMI لرافعة الأنابيب الجانبية (سايد بوم)'], alt: 'Side boom LMI system components' }],
       fork: [{ src: OLD + '49128-a0bfe543/Forklift%20lmi.png', label: ['Forklift LMI kit', 'نظام LMI للرافعة الشوكية'], alt: 'Forklift LMI system components' }],
       craw: [{ src: OLD + '49177-fa513e2c/Crawler-Crane-LMI--e1710425379989.png', label: ['Crawler Crane LMI kit', 'نظام LMI للرافعة الزاحفة'], alt: 'Crawler crane LMI system components' }],
       mobile: [{ src: OLD + '49183-6cccc77f/Mobile%20crane%20lmi.png', label: ['Mobile Crane LMI kit', 'نظام LMI للرافعة المتحركة'], alt: 'Mobile crane LMI system components' }],
-      man: [{ src: OLD + '47524-733b3f92/MANLIFT.png', scale: 1.55, label: ['Manlift LMI kit', 'نظام LMI لمنصة رفع الأفراد (مان لفت)'], alt: 'Manlift LMI system components' }],
-      exv: [{ src: OLD + '49182-54030a94/Excvator-LMI-1-e1710857250224.png', label: ['Excavator LMI kit', 'نظام LMI للحفار'], alt: 'Excavator LMI system components' }]
+      man: [{ src: OLD + '47524-733b3f92/MANLIFT.png', scale: 1.55, label: ['Manlift LMI kit', 'نظام LMI لمنصة رفع الأفراد (مان لفت)'], alt: 'Manlift LMI system components' }]
     };
     const slides = lmiSlides[this.state.device] || lmiSlides.art;
     const gi = this.state.gIdx;
@@ -341,16 +340,16 @@ class Component extends DCLogic {
     const devices = [
       { key: 'art', label: 'Art', desc: 'Articulated Boom Truck',
         sub: ['Load moment indicator for articulated boom trucks. Two hydraulic pressure sensors and two angle sensors follow both booms, warn the operator before the limit, and log every lift.', 'مؤشر عزم الحمولة للرافعات ذات الذراع المفصلي. حساسان للضغط الهيدروليكي وحساسان للزاوية يتابعان الذراعين معًا، وينبّهان المشغّل قبل الوصول إلى الحد الأقصى، ويسجّلان كل عملية رفع.'],
-        kit: [['Display Unit', 'شاشة العرض'], ['Control Unit', 'وحدة التحكم'], ['Inclinometer', 'حساس الميل'], ['Load Cells', 'حساسات الوزن (لود سيل)'], ['Length & Angle Sensor', 'حساس الطول والزاوية']] },
+        kit: [['Display & Control Unit', 'شاشة العرض والتحكم'], ['Angle Sensor', 'حساس الزاوية'], ['Pressure Sensor', 'حساس الضغط'], ['Length & Angle Sensor', 'حساس الطول والزاوية']] },
       { key: 'tel', label: 'Tel', desc: 'Telescopic Boom Truck',
         sub: ['Load moment indicator for telescopic boom trucks. Boom length, angle and load are read live, so the operator knows the safe working load at every extension.', 'مؤشر عزم الحمولة للرافعات ذات الذراع التلسكوبي. يقرأ طول الذراع وزاويته والحمل لحظيًا، فيعرف المشغّل الحمل الآمن عند كل طول للذراع.'],
-        kit: [['Display & Control Unit', 'شاشة العرض والتحكم'], ['Load Cell', 'حساس الوزن (لود سيل)'], ['Length & Angle Sensor', 'حساس الطول والزاوية'], ['A2B Switch', 'مفتاح الحد العلوي A2B']] },
+        kit: [['Display Unit', 'شاشة العرض'], ['Pulley Load Sensor', 'حساس حمل البكرة'], ['Length & Angle Sensor', 'حساس الطول والزاوية'], ['A2B Switch', 'مفتاح الحد العلوي A2B']] },
       { key: 'side', label: 'Side', desc: 'Side Boom',
-        sub: ['Load moment indicator for side booms. Boom angle and load pin readings keep pipe lifts inside the stability envelope, with an alert the moment tipping risk rises.', 'مؤشر عزم الحمولة لرافعات الأنابيب الجانبية (سايد بوم). قراءات زاوية الذراع ومسمار قياس الحمل تُبقي رفع الأنابيب ضمن حدود الاستقرار، مع تنبيه فوري عند ارتفاع خطر الانقلاب.'],
-        kit: [['Display & Control Unit', 'شاشة العرض والتحكم'], ['Boom Angle Sensor', 'حساس زاوية الذراع'], ['Load Pin Cell', 'مسمار قياس الحمل'], ['A2B Switch', 'مفتاح الحد العلوي A2B'], ['Junction Box 1 & 2', 'صندوقا التوصيلات 1 و2']] },
+        sub: ['Load moment indicator for side booms. Boom angle and load cell readings keep pipe lifts inside the stability envelope, with an alert the moment tipping risk rises.', 'مؤشر عزم الحمولة لرافعات الأنابيب الجانبية (سايد بوم). قراءات زاوية الذراع وحساس الوزن (لود سيل) تُبقي رفع الأنابيب ضمن حدود الاستقرار، مع تنبيه فوري عند ارتفاع خطر الانقلاب.'],
+        kit: [['Display Unit', 'شاشة العرض'], ['Boom Angle Sensor', 'حساس زاوية الذراع'], ['Load Sensor', 'حساس الحمل'], ['A2B Switch', 'مفتاح الحد العلوي A2B'], ['Junction Box 1 & 2', 'صندوقا التوصيلات 1 و2']] },
       { key: 'fork', label: 'Fork', desc: 'Forklift',
-        sub: ['Load moment indicator for forklifts. Weight and mast tilt are checked on every lift, shown on a sunlight-readable 5.6-inch screen, and saved even if power drops.', 'مؤشر عزم الحمولة للرافعات الشوكية. يفحص الوزن وميل الصاري في كل عملية رفع، ويعرضهما على شاشة 5.6 بوصة واضحة تحت أشعة الشمس، ويحفظ البيانات حتى عند انقطاع الكهرباء.'],
-        kit: [['Display Unit', 'شاشة العرض'], ['Control Unit', 'وحدة التحكم'], ['Tilt Angle Sensor', 'حساس زاوية الميل'], ['Weight Sensors', 'حساسات الوزن'], ['Cables & Installation Kit', 'الكابلات وطقم التركيب']] },
+        sub: ['Load moment indicator for forklifts. Two compress sensors read the load and an angle sensor tracks the mast on every lift. Readings show on a sunlight-readable 4.3-inch display unit.', 'مؤشر عزم الحمولة للرافعات الشوكية. يقرأ حساسا ضغط الحمل ويتابع حساس الزاوية الصاري في كل عملية رفع، وتُعرض القراءات على شاشة عرض 4.3 بوصة واضحة تحت أشعة الشمس.'],
+        kit: [['Display Unit', 'شاشة العرض'], ['Angle Sensor', 'حساس الزاوية'], ['2 Compress Sensors', 'حساسا ضغط (2)']] },
       { key: 'craw', label: 'Craw', desc: 'Crawler Crane',
         sub: ['Load moment indicator for crawler cranes. Rope tension, boom angle and wind speed feed one touch-screen display, so every lift stays inside its rated chart.', 'مؤشر عزم الحمولة للرافعات الزاحفة. شدّ الحبل وزاوية الذراع وسرعة الرياح تُعرض معًا على شاشة لمس واحدة، لتبقى كل عملية رفع ضمن جدول الحمولة المعتمد.'],
         kit: [['Display Unit', 'شاشة العرض'], ['Angle Sensor', 'حساس الزاوية'], ['Rope Clamp Load Cell', 'حساس حمل الحبل (مشبك)'], ['A2B Switch', 'مفتاح الحد العلوي A2B'], ['Anemometer', 'مقياس سرعة الرياح']] },
@@ -359,10 +358,7 @@ class Component extends DCLogic {
         kit: [['Display & Control Unit', 'شاشة العرض والتحكم'], ['Load Cell', 'حساس الوزن (لود سيل)'], ['Length & Angle Sensor', 'حساس الطول والزاوية'], ['A2B Switch', 'مفتاح الحد العلوي A2B']] },
       { key: 'man', label: 'Man', desc: 'Manlift',
         sub: ['Load moment indicator for manlifts. Platform load and boom position are watched together, so the basket never leaves its rated envelope with people on board.', 'مؤشر عزم الحمولة لمنصات رفع الأفراد (مان لفت). يراقب حمل المنصة وموضع الذراع معًا، فلا تخرج السلة عن حدودها الآمنة وفيها أشخاص.'],
-        kit: [['Display Unit', 'شاشة العرض'], ['Control Unit', 'وحدة التحكم'], ['Angle Sensor', 'حساس الزاوية'], ['Load Cell', 'حساس الوزن (لود سيل)']] },
-      { key: 'exv', label: 'Exv', desc: 'Excavator',
-        sub: ['Load moment indicator for excavators used as lifting machines. Hydraulic pressure and boom and chassis tilt give the operator the real load and a warning before tipping.', 'مؤشر عزم الحمولة للحفارات المستخدمة في أعمال الرفع. الضغط الهيدروليكي وميل الذراع والهيكل يعطيان المشغّل الحمل الفعلي وتحذيرًا قبل الانقلاب.'],
-        kit: [['Display Unit', 'شاشة العرض'], ['Control Unit', 'وحدة التحكم'], ['Hydraulic Pressure Sensor', 'حساس الضغط الهيدروليكي'], ['Electric Inclinometer', 'حساس ميل إلكتروني'], ['Cables & Installation Kit', 'الكابلات وطقم التركيب']] }
+        kit: [['Display Unit', 'شاشة العرض'], ['Control Unit', 'وحدة التحكم'], ['Angle Sensor', 'حساس الزاوية'], ['Load Cell', 'حساس الوزن (لود سيل)']] }
     ];
     const curDev = devices.find(d => d.key === device) || devices[0];
     const names = {}; const names2 = {}; const descriptors = {}; const heroSubs = {};
@@ -438,7 +434,7 @@ class Component extends DCLogic {
       { q: ['What does a load moment indicator actually do?', 'ما الذي يفعله مؤشر عزم الحمولة فعلًا؟'],
         a: ['It watches the load moment: the weight being lifted together with its distance from the center of rotation. Sensors read the load, the boom angle and the machine tilt during the whole lift, and the display shows the operator where the machine stands against its rated chart. When the limit gets close, the alarm sounds before the load becomes a problem.', 'يراقب عزم الحمولة: وزن الحمل مع بعده عن مركز الدوران. تقرأ الحساسات الحمل وزاوية الذراع وميل المعدة طوال عملية الرفع، وتعرض الشاشة للمشغّل موضع المعدة بالنسبة لجدول حمولتها. وعند الاقتراب من الحد يصدر الإنذار قبل أن يصبح الحمل مشكلة.'] },
       { q: ['Which LiftView fits my machine?', 'أي إصدار من LiftView يناسب معدتي؟'],
-        a: ['One per machine type: articulated boom truck, telescopic boom truck, side boom, forklift, crawler crane, mobile crane, manlift and excavator. The reading principle is the same in all of them. What changes is the sensor kit, because a forklift is measured by mast tilt and weight while a side boom is measured by boom angle and a load pin.', 'إصدار لكل نوع من المعدات: الرافعة ذات الذراع المفصلي، والذراع التلسكوبي، ورافعة الأنابيب الجانبية (سايد بوم)، والرافعة الشوكية، والرافعة الزاحفة، والرافعة المتحركة، ومنصة رفع الأفراد (مان لفت)، والحفار. مبدأ القياس واحد في جميعها، والذي يتغير هو طقم الحساسات: فالرافعة الشوكية تُقاس بميل الصاري والوزن، بينما تُقاس رافعة الأنابيب الجانبية بزاوية الذراع ومسمار قياس الحمل.'] },
+        a: ['One per machine type: articulated boom truck, telescopic boom truck, side boom, forklift, crawler crane, mobile crane and manlift. The reading principle is the same in all of them. What changes is the sensor kit, because a forklift is measured by mast tilt and weight while a side boom is measured by boom angle and a load pin.', 'إصدار لكل نوع من المعدات: الرافعة ذات الذراع المفصلي، والذراع التلسكوبي، ورافعة الأنابيب الجانبية (سايد بوم)، والرافعة الشوكية، والرافعة الزاحفة، والرافعة المتحركة، ومنصة رفع الأفراد (مان لفت). مبدأ القياس واحد في جميعها، والذي يتغير هو طقم الحساسات: فالرافعة الشوكية تُقاس بميل الصاري والوزن، بينما تُقاس رافعة الأنابيب الجانبية بزاوية الذراع ومسمار قياس الحمل.'] },
       { q: ['What comes in the kit?', 'ما مكونات الطقم؟'],
         a: ['A display unit and a control unit in every kit, then the sensors the machine needs: angle or inclinometer sensors, load cells or a hydraulic pressure sensor, an A2B switch on the crane builds, an anemometer on crawler cranes, and the cables and installation kit. The kit list for the machine you selected is shown at the top of this page.', 'شاشة عرض ووحدة تحكم في كل طقم، ثم الحساسات التي تحتاجها المعدة: حساسات الزاوية أو الميل، وحساسات الوزن أو حساس الضغط الهيدروليكي، ومفتاح الحد العلوي A2B في إصدارات الرافعات، ومقياس سرعة الرياح في الرافعات الزاحفة، والكابلات وطقم التركيب. وقائمة مكونات المعدة التي اخترتها معروضة أعلى هذه الصفحة.'] },
       { q: ['What happens when the load crosses the limit?', 'ماذا يحدث عند تجاوز الحمل للحد المسموح؟'],
