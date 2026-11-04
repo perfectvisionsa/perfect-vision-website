@@ -151,6 +151,7 @@ assets/
 | `perfect-vision-liftview-articulated-boom-installation-diagram.webp` | مخطط تركيب نظام LMI على الرافعة ذات الذراع المفصلي (LiftView Art) |
 | `perfect-vision-liftview-telescopic-boom-installation-diagram.webp` | مخطط تركيب نظام LMI على الرافعة ذات الذراع التلسكوبي (LiftView Tel) |
 | `perfect-vision-liftview-side-boom-installation-diagram.webp` | مخطط تركيب نظام LMI على رافعة الأنابيب الجانبية (LiftView Side) |
+| `perfect-vision-liftview-forklift-installation-diagram.webp` | مخطط تركيب نظام LMI على الرافعة الشوكية (LiftView Fork) |
 
 `helmview/`, `firesuppression/` فارغة (فيها `.gitkeep` فقط). أضف الصور بنفس النمط: `perfect-vision-<product>-<subject>.webp`.
 
